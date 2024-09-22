@@ -8,6 +8,7 @@ import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
 import 'APIHelper/Apihelper.dart';
 import 'HomeScreen/HomeScreen.dart';
+import 'HomeScreen/MainScreen.dart';
 import 'HomeScreen/Maincubit/main_cubit.dart';
 import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
@@ -81,7 +82,7 @@ class _MyAppState extends State<MyApp> {
             bodyMedium: const TextStyle(color: kBodyTextColor),
           ),
         ),
-        home: isUserSignedIn! ? Homescreen() :  onboardingScreen(),
+        home: isUserSignedIn! ? Mainscreen() :  onboardingScreen(),
       ),
     );
   }

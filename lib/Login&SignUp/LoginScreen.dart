@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jobscout/HomeScreen/MainScreen.dart';
 import 'package:jobscout/Login&SignUp/SignUpScreen.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import '../HomeScreen/HomeScreen.dart';
@@ -21,7 +22,7 @@ class Loginscreen extends StatelessWidget {
       print("1111111111111111111111111111");
      Navigator.pushReplacement(
        context,
-       MaterialPageRoute(builder: (context) => Homescreen()),
+       MaterialPageRoute(builder: (context) => Mainscreen()),
      );
 
      // Obtain the auth details from the request
@@ -46,7 +47,7 @@ class Loginscreen extends StatelessWidget {
      try {
        Navigator.pushReplacement(
          context,
-         MaterialPageRoute(builder: (context) => Homescreen()),
+         MaterialPageRoute(builder: (context) => Mainscreen()),
        );
        // Trigger the sign-in flow Not working
        final LoginResult loginResult = await FacebookAuth.instance.login();

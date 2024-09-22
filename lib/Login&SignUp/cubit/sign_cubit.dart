@@ -10,6 +10,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/HomeScreen.dart';
 import 'package:meta/meta.dart';
 
+import '../../HomeScreen/MainScreen.dart';
 import '../VerificationScreen.dart';
 
 part 'sign_state.dart';
@@ -40,7 +41,7 @@ class SignCubit extends Cubit<SignState> {
             {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Homescreen()),
+            MaterialPageRoute(builder: (context) => Mainscreen()),
           );
             }
           else {

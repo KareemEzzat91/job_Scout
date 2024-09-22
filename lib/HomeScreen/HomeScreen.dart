@@ -49,20 +49,7 @@ class Homescreen extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: kPrimaryColor,
-        appBar: AppBar(
-            backgroundColor: kDarkColor,
-            title: const Text("Welcome To JobScout"),
-            actions: [
-              IconButton(onPressed: (){
-                GoogleSignIn().disconnect();
-                FirebaseAuth.instance.signOut();
-                Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context)=> onboardingScreen()),);
-
-              }, icon: const Icon(Icons.logout))
-            ]
-        ),
-
+        body: Center(child: Text("HELLLLLLO"),),
       ),
     );
   }
