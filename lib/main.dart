@@ -6,12 +6,15 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
+import 'APIHelper/Apihelper.dart';
 import 'HomeScreen/HomeScreen.dart';
+import 'HomeScreen/Maincubit/main_cubit.dart';
 import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ApiHelper.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -45,7 +48,7 @@ class _MyAppState extends State<MyApp> {
         });
       } else {
         print('User is signed in!');
-        print ( ":::::::::::::::::${user?.email.toString()}");
+        print ( ":::::::::::::::::${user.email.toString()}");
         setState(() {
           isUserSignedIn = true;
         });
@@ -62,6 +65,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SignCubit()),
+        BlocProvider(create: (context) => MainCubit()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

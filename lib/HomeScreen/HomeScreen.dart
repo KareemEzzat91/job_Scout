@@ -1,30 +1,69 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:jobscout/kconstnt/constants.dart';
-import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
+
+import '../onboardingScreen/onboardingScreen.dart';
 
 class Homescreen extends StatelessWidget {
-//  final User user ;
   const Homescreen({super.key});
+  String truncateHtml(String html, {int length = 200}) {
+    // Remove HTML tags
+    final RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+    String plainText = html.replaceAll(exp, '');
+
+    // Truncate if necessary
+    return (plainText.length > length) ? plainText.substring(0, length) + '...' : plainText;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kPrimaryColor,
-      appBar: AppBar(
-        title: Text("Welcome To JobScout"),
-      ),
-      body:Center(child: TextButton(style :ButtonStyle(backgroundColor:WidgetStatePropertyAll(Colors.white) ) ,onPressed: (){
-        GoogleSignIn().disconnect();
-        FirebaseAuth.instance.signOut();
-        Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context)=> onboardingScreen()),
-        );
+    final bloc = context.read<MainCubit>();
+    return BlocListener<MainCubit,MainState>(
 
-      }, child: Text("Sign Out",style: GoogleFonts.agbalumo(color: Colors.red,fontSize: 60),)),)
+      listener: (BuildContext context, MainState state) {
+        if (state is FailedState)
+        {
+          Get.snackbar(
+            "Error",
+            state.error,
+            backgroundColor: Colors.red,
+            colorText: Colors.white,
+          );
+
+        }
+        if (state is SuccessState)
+          {
+            Get.snackbar(
+              "Hello",
+              "Welcome MR ${FirebaseAuth.instance.currentUser?.email}",
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+            );
+
+          }
+      },
+      child: Scaffold(
+        backgroundColor: kPrimaryColor,
+        appBar: AppBar(
+            backgroundColor: kDarkColor,
+            title: const Text("Welcome To JobScout"),
+            actions: [
+              IconButton(onPressed: (){
+                GoogleSignIn().disconnect();
+                FirebaseAuth.instance.signOut();
+                Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context)=> onboardingScreen()),);
+
+              }, icon: const Icon(Icons.logout))
+            ]
+        ),
+
+      ),
     );
   }
 }

@@ -46,7 +46,7 @@ dependencies:
   firebase_auth: ^5.3.0
   flutter_facebook_auth: ^7.1.1
   google_sign_in: ^6.2.1
-
+  flutter_html:
   carousel_slider: ^5.0.0
 
   dio: ^5.6.0
