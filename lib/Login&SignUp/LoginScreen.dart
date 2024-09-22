@@ -8,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/MainScreen.dart';
 import 'package:jobscout/Login&SignUp/SignUpScreen.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
+import '../Hivehelper.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../customtextfiled/customtextfiled.dart';
 import '../kconstnt/constants.dart';
@@ -15,11 +16,15 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 // helllo
 import 'ResetPasswordScreen.dart';
 class Loginscreen extends StatelessWidget {
-   Loginscreen({super.key});
+   Loginscreen({super.key,});
+   bool issignedin =false;
+
    Future signInWithGoogle(BuildContext context) async {
      // Trigger the authentication flow
+
      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       print("1111111111111111111111111111");
+     Hivehelper.init();
      Navigator.pushReplacement(
        context,
        MaterialPageRoute(builder: (context) => Mainscreen()),
@@ -45,7 +50,8 @@ class Loginscreen extends StatelessWidget {
 
    Future  signInWithFacebook(BuildContext context) async {
      try {
-       Navigator.pushReplacement(
+       Hivehelper.init();
+        Navigator.pushReplacement(
          context,
          MaterialPageRoute(builder: (context) => Mainscreen()),
        );

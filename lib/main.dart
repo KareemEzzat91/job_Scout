@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
 import 'APIHelper/Apihelper.dart';
+import 'Hivehelper.dart';
 import 'HomeScreen/HomeScreen.dart';
 import 'HomeScreen/MainScreen.dart';
 import 'HomeScreen/Maincubit/main_cubit.dart';
@@ -14,8 +16,11 @@ import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
 
 void main() async {
+  await Hive.initFlutter();
+
   WidgetsFlutterBinding.ensureInitialized();
   ApiHelper.init();
+  var Box = await Hive.openBox(Hivehelper.Boxname);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -41,7 +46,7 @@ class _MyAppState extends State<MyApp> {
 
   void checkUserSignedIn() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      if (user == null) {
+      if (user == null && Hivehelper.checkfirst() ) {
         print('User is currently signed out!');
         print ( ":::::::::::::::::${user?.email.toString()}");
         setState(() {
@@ -49,7 +54,7 @@ class _MyAppState extends State<MyApp> {
         });
       } else {
         print('User is signed in!');
-        print ( ":::::::::::::::::${user.email.toString()}");
+        print ( ":::::::::::::::::${user?.email.toString()}");
         setState(() {
           isUserSignedIn = true;
         });

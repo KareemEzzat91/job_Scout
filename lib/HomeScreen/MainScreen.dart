@@ -9,6 +9,7 @@ import 'package:jobscout/HomeScreen/HomeScreen.dart';
 import 'package:jobscout/kconstnt/constants.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
+import '../Hivehelper.dart';
 import '../onboardingScreen/onboardingScreen.dart';
 import 'SavedScreen/SavedScreen.dart';
 import 'SearchScreen/SearchScreen.dart';
@@ -18,7 +19,7 @@ import 'SearchScreen/SearchScreen.dart';
 class Mainscreen extends StatefulWidget {
   static final String routename = "Mainscreen";
 
-  const Mainscreen({super.key});
+  const Mainscreen({super.key,});
 
   @override
   State<Mainscreen> createState() => _MainscreenState();
@@ -46,6 +47,7 @@ class _MainscreenState extends State<Mainscreen> {
           actions: [
             IconButton(onPressed: (){
               GoogleSignIn().disconnect();
+              Hivehelper.logout();
               FirebaseAuth.instance.signOut();
               Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context)=> onboardingScreen()),);
