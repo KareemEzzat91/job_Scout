@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "364145859843",
+    "project_id": "jobscouttesting",
+    "storage_bucket": "jobscouttesting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364145859843:android:595ff4d854059b64939d36",
+        "android_client_info": {
+          "package_name": "com.kareemtech.jobscout"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl7Gyjs1RQtxOBDQscigKcYNZyh5kV2qg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
