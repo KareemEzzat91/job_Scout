@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:jobscout/HomeScreen/HomeScreen.dart';
+import 'package:jobscout/HomeScreen/MainScreen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final User user;
@@ -29,7 +30,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       if (!isEmailVerified) {  // إذا لم يتم التحقق، انتقل بعد 6 ثوانٍ
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Homescreen()),
+          MaterialPageRoute(builder: (context) => Mainscreen()),
         );
         timer?.cancel();  // تأكد من إلغاء المؤقت عند الخروج من الشاشة
         super.dispose();
@@ -47,7 +48,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       timer?.cancel();  // إلغاء المؤقت إذا تم التحقق
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Homescreen()),
+        MaterialPageRoute(builder: (context) => Mainscreen()),
       );
     }
   }
