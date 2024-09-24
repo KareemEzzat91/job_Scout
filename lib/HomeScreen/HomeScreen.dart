@@ -29,9 +29,11 @@ class Homescreen extends StatelessWidget {
         : plainText;
   }
   Color _color = Colors.grey;
+
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<MainCubit>();
+
     return BlocListener<MainCubit, MainState>(
       listener: (BuildContext context, MainState state) {
         if (state is FailedState) {
@@ -80,7 +82,7 @@ class Homescreen extends StatelessWidget {
                 Container(
                     padding: EdgeInsets.only(right: 30, top: 10),
                     width: double.infinity,
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -102,7 +104,7 @@ class Homescreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       'Featured Jobs',
@@ -129,7 +131,7 @@ class Homescreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Column(
                                 children: [
-                                  Row(
+                                  const Row(
                                     children: [
                                       SizedBox(
                                         height: 15,
@@ -189,7 +191,7 @@ class Homescreen extends StatelessWidget {
                                             color: Color(0xff7ebdf8),
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        child: Row(
+                                        child: const Row(
                                           children: [
                                             Icon(Icons.work_outline,
                                                 color: Colors.white),
@@ -210,7 +212,7 @@ class Homescreen extends StatelessWidget {
                                             color: Color(0xff7ebdf8),
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        child: Row(
+                                        child: const Row(
                                           children: [
                                             Icon(
                                                 Icons
@@ -230,7 +232,7 @@ class Homescreen extends StatelessWidget {
                                             color: Color(0xff7ebdf8),
                                             borderRadius:
                                                 BorderRadius.circular(15)),
-                                        child: Row(
+                                        child: const Row(
                                           children: [
                                             Icon(Icons.location_on_outlined,
                                                 color: Colors.white),
@@ -366,14 +368,20 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       BlocBuilder<MainCubit, MainState>(
                                         builder: (context, state) {
+                                          Color iconColor;
+                                          if (state is ColorChangedState) {
+                                            iconColor = state.color;
+                                          } else {
+                                            iconColor = Colors.grey;
+                                          }
+
                                           return IconButton(
                                             onPressed: () {
-                                              bloc2.changepressed(_color);
+                                              context.read<MainCubit>().changecolor();
                                             },
                                             icon: Icon(
                                               Icons.bookmark,
-                                              color: _color
-                                                 ,
+                                              color: iconColor,
                                               size: 30,
                                             ),
                                           );
