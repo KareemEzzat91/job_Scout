@@ -12,7 +12,20 @@
           "package_name": "com.kareemtech.jobscout"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "364145859843-ovjuhimjl27s0uvfdi2pn7rh1rrkgrlt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kareemtech.jobscout",
+            "certificate_hash": "0fb8068ae73dc2ef0c36dcbe1606c5d34e35244c"
+          }
+        },
+        {
+          "client_id": "364145859843-iv15m4js67levr3agtgkle1lbktsm4hq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBl7Gyjs1RQtxOBDQscigKcYNZyh5kV2qg"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364145859843-iv15m4js67levr3agtgkle1lbktsm4hq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "364145859843-nuo03c4hl19ll1l9m8cmbcshpq1kpi1m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.jobscout"
+              }
+            }
+          ]
         }
       }
     }

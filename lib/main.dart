@@ -8,6 +8,8 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
 import 'APIHelper/Apihelper.dart';
+import 'Firebasenotofication/Notofication.dart';
+import 'Firebasenotofication/NotoficationScreen.dart';
 import 'Hivehelper.dart';
 import 'HomeScreen/HomeScreen.dart';
 import 'HomeScreen/MainScreen.dart';
@@ -19,13 +21,16 @@ void main() async {
   await Hive.initFlutter();
 
   WidgetsFlutterBinding.ensureInitialized();
-  ApiHelper.init();
-  var Box = await Hive.openBox(Hivehelper.Boxname);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+    ApiHelper.init();
+  var Box = await Hive.openBox(Hivehelper.Boxname);
+  NotificationService().initNotification();
+
   runApp(const MyApp());
 }
+final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -70,10 +75,15 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SignCubit()),
         BlocProvider(create: (context) => MainCubit()),
+        BlocProvider(create: (context) => SignCubit()),
       ],
       child: GetMaterialApp(
+        routes:{
+          NotoficationScreen.routeName : (context)=> NotoficationScreen(),
+
+        },
+        navigatorKey: navigatorkey,
         debugShowCheckedModeBanner: false,
         title: 'Real Estate',
         theme: ThemeData.dark().copyWith(

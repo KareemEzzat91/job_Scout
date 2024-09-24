@@ -7,6 +7,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:jobscout/kconstnt/constants.dart';
 
+import '../Firebasenotofication/NotoficationScreen.dart';
+import '../main.dart';
 import '../onboardingScreen/onboardingScreen.dart';
 
 class Homescreen extends StatelessWidget {
@@ -26,6 +28,7 @@ class Homescreen extends StatelessWidget {
     return BlocListener<MainCubit,MainState>(
 
       listener: (BuildContext context, MainState state) {
+
         if (state is FailedState)
         {
           Get.snackbar(
@@ -36,6 +39,23 @@ class Homescreen extends StatelessWidget {
           );
 
         }
+        if (state is SuccessNotoficationState) {
+          Get.snackbar(
+            state.msg,              // Title of the snackbar
+            state.details,           // Description/details of the snackbar
+            backgroundColor: Colors.cyan,
+            colorText: Colors.white,
+            onTap: (snack) {
+              navigatorkey.currentState!.pushNamed(
+                NotoficationScreen.routeName,
+                arguments: state.message,
+              );
+            },
+            duration: Duration(seconds: 5), // How long the snackbar will be visible
+            snackPosition: SnackPosition.BOTTOM, // Snackbar position
+          );
+        }
+
         if (state is SuccessState)
           {
             Get.snackbar(
