@@ -37,5 +37,12 @@ class MainCubit extends Cubit<MainState> {
         message                       // The full RemoteMessage object
     ));
   }
-
+   void changepressed(Color color )
+  {
+    if (Colors.grey==color)
+      {
+        color=Colors.blue;
+      }else color=Colors.grey;
+    emit(SavedChanger());
+  }
 }
