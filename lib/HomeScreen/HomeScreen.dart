@@ -185,8 +185,8 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       Spacer(),
                                       Icon(
-                                        Icons.bookmark,
-                                        color: Colors.white70,
+                                        Icons.favorite,
+                                        color: Colors.red,
                                       )
                                     ],
                                   ),

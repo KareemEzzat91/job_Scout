@@ -105,7 +105,7 @@ class _MainscreenState extends State<Mainscreen> {
         items: const <Widget>[
           Icon(Icons.home, size: 30),
           Icon(Icons.search, size: 30),
-          Icon(Icons.save, size: 30),
+          Icon(Icons.bookmarks_outlined, size: 30),
         ],
         color: Colors.blue.withOpacity(.85),
         buttonBackgroundColor: Colors.blue[400],
