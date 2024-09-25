@@ -72,6 +72,7 @@ class Homescreen extends StatelessWidget {
         }
       },
       child: Scaffold(
+
         backgroundColor: Color(0xfff7faff),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
@@ -267,7 +268,7 @@ class Homescreen extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                Row(
+                const Row(
                   children: [
                     Text(
                       "Recent Jobs",
@@ -300,18 +301,17 @@ class Homescreen extends StatelessWidget {
 
                     return ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         final bloc2 = context.read<MainCubit>();
                         final item = data[index];
-//
+
                         return GestureDetector(
                           onTap: () {},
                           child: Container(
                             width: double.infinity,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 5),
+                            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
@@ -327,9 +327,9 @@ class Homescreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                // عرض الصورة
                                 ClipRRect(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(20)),
+                                  borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                                   child: Image.network(
                                     item.companyLogo ?? '',
                                     fit: BoxFit.cover,
@@ -339,19 +339,13 @@ class Homescreen extends StatelessWidget {
                                       if (progress == null) return child;
                                       return Center(
                                         child: CircularProgressIndicator(
-                                          value: progress.expectedTotalBytes !=
-                                                  null
-                                              ? progress.cumulativeBytesLoaded /
-                                                  (progress
-                                                          .expectedTotalBytes ??
-                                                      1)
+                                          value: progress.expectedTotalBytes != null
+                                              ? progress.cumulativeBytesLoaded / (progress.expectedTotalBytes ?? 1)
                                               : null,
                                         ),
                                       );
                                     },
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            Icon(Icons.error, size: 50),
+                                    errorBuilder: (context, error, stackTrace) => Icon(Icons.error, size: 50),
                                   ),
                                 ),
                                 Padding(
@@ -361,87 +355,67 @@ class Homescreen extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           item.position ?? 'No Position',
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
+                                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                       BlocBuilder<MainCubit, MainState>(
                                         builder: (context, state) {
-                                          Color iconColor;
-                                          if (state is ColorChangedState) {
-                                            iconColor = state.color;
-                                          } else {
-                                            iconColor = Colors.grey;
-                                          }
-
                                           return IconButton(
                                             onPressed: () {
-                                              context.read<MainCubit>().changecolor();
+                                              final newColor = item.savedColor == Colors.grey
+                                                  ? Colors.blue
+                                                  : Colors.grey;
+                                              context.read<MainCubit>().changeColor(index, newColor);
                                             },
                                             icon: Icon(
                                               Icons.bookmark,
-                                              color: iconColor,
+                                              color: item.savedColor, // اللون المحفوظ للعنصر
                                               size: 30,
                                             ),
                                           );
                                         },
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
+                                // باقي مكونات العنصر
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Text(
                                     item.company ?? 'No Company',
-                                    style: const TextStyle(
-                                        fontSize: 16, color: Colors.grey),
+                                    style: const TextStyle(fontSize: 16, color: Colors.grey),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Text(
                                     item.location ?? 'No Location',
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Colors.grey),
+                                    style: const TextStyle(fontSize: 14, color: Colors.grey),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                                   child: Html(
                                     data: truncateHtml(item.description),
-                                    // Use the truncated HTML content here
                                     style: {
-                                      "p": Style(
-                                          fontSize: FontSize(16), maxLines: 3),
+                                      "p": Style(fontSize: FontSize(16), maxLines: 3),
                                     },
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         '\$${item.salaryMin.toStringAsFixed(1)} - \$${item.salaryMax.toStringAsFixed(1)}',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green),
+                                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.green),
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          // Open the apply URL in a web view or external browser
-                                          // Implement this using url_launcher or similar package
+                                          // فتح الرابط للتقديم
                                         },
-                                        child: const Text(
-                                          'Apply',
-                                          style: TextStyle(color: Colors.blue),
-                                        ),
+                                        child: const Text('Apply', style: TextStyle(color: Colors.blue)),
                                       ),
                                     ],
                                   ),
@@ -451,7 +425,8 @@ class Homescreen extends StatelessWidget {
                           ),
                         );
                       },
-                    );
+                    )
+                    ;
                   },
                 ),
               ],

@@ -12,6 +12,7 @@ part 'main_state.dart';
 
 class MainCubit extends Cubit<MainState> {
   MainCubit() : super(MainInitial());
+     List<Job> JobModels =[];
   Future<List<Job>?> getJobs ()
   async{
     emit(LoadingState());
@@ -19,7 +20,7 @@ class MainCubit extends Cubit<MainState> {
       final response = await ApiHelper.getData();
       if (response.statusCode == 200)
     {
-     final JobModels = (response.data as List ).skip(1).map((e) => Job.fromJson(e)).toList();
+      JobModels = (response.data as List ).skip(1).map((e) => Job.fromJson(e)).toList();
       return JobModels;
     }
       emit(SuccessState());
@@ -39,10 +40,9 @@ class MainCubit extends Cubit<MainState> {
   }
   Color _currentColor = Colors.grey; // اللون الافتراضي
 
-  void changecolor() {
-    _currentColor = _currentColor == Colors.grey ? Colors.blue : Colors.grey;
-    emit(ColorChangedState(_currentColor));
+  void changeColor(int index, Color newColor) {
+    JobModels[index].savedColor = newColor;
+    emit(ColorChangedState());
   }
-
   Color get currentColor => _currentColor;
 }

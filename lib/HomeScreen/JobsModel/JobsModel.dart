@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:flutter/material.dart';
+
 class Job {
   final String id;
   final String position;
@@ -8,8 +12,9 @@ class Job {
   final String description;
   final String applyUrl;
   final String companyLogo;
-
+  Color savedColor; // خاصية اللون
   Job({
+    this.savedColor = Colors.grey, // اللون الافتراضي
     required this.id,
     required this.position,
     required this.company,

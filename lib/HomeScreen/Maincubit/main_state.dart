@@ -3,9 +3,7 @@ part of 'main_cubit.dart';
 @immutable
 sealed class MainState {}
 class ColorChangedState extends MainState {
-  final Color color;
 
-  ColorChangedState(this.color);
 }final class MainInitial extends MainState {}
 final class LoadingState extends MainState {}
 final class SuccessState extends MainState {}
