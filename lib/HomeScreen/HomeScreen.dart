@@ -98,7 +98,7 @@ class Homescreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Hello ,',
+                          'Hello ',
                           textAlign: TextAlign.start,
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
@@ -195,66 +195,76 @@ class Homescreen extends StatelessWidget {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 40,
-                                        width: 90,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff7ebdf8),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: const Row(
-                                          children: [
-                                            Icon(Icons.work_outline,
-                                                color: Colors.white),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text('On Site',
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ],
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          width: 90,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff7ebdf8),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: const Row(
+                                            children: [
+                                              Icon(Icons.work_outline,
+                                                  color: Colors.white),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text('On Site',
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 40,
-                                        width: 90,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff7ebdf8),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: const Row(
-                                          children: [
-                                            Icon(
-                                                Icons
-                                                    .local_fire_department_outlined,
-                                                color: Colors.white),
-                                            Text('Part Time',
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ],
+                                      SizedBox(width: 5,),
+
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          width: 90,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff7ebdf8),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: const Row(
+                                            children: [
+                                              Icon(
+                                                  Icons
+                                                      .local_fire_department_outlined,
+                                                  color: Colors.white),
+                                              Text('Part Time',
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ],
+                                          ),
                                         ),
                                       ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        height: 40,
-                                        width: 90,
-                                        decoration: BoxDecoration(
-                                            color: Color(0xff7ebdf8),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: const Row(
-                                          children: [
-                                            Icon(Icons.location_on_outlined,
-                                                color: Colors.white),
-                                            SizedBox(
-                                              width: 7,
-                                            ),
-                                            Text('Cairo',
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ],
+                                      SizedBox(width: 5,),
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          width: 90,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xff7ebdf8),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: const Row(
+                                            children: [
+                                              Icon(Icons.location_on_outlined,
+                                                  color: Colors.white),
+                                              SizedBox(
+                                                width: 7,
+                                              ),
+                                              Text('Cairo',
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ],
+                                          ),
                                         ),
                                       )
                                     ],
@@ -424,6 +434,7 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () {
+
                                           _launchUrl(item.applyUrl);
 /*
                                           _launchUrl("https://www.google.com");
