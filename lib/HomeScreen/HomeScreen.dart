@@ -43,7 +43,20 @@ class Homescreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = context.read<MainCubit>();
+    final bloc = context.read<MainCubit>()..getJobs();
+    List<Job> JobBanners = [];
+    int count = 0;
+
+    for (var s in bloc.JobModels) {
+      if (count == 10) {
+        break; // Stop if we have added 10 jobs
+      }
+
+      JobBanners.add(s); // Use add() to append the job to the list
+      count++; // Increment the count
+    }
+
+
 
     return BlocListener<MainCubit, MainState>(
       listener: (BuildContext context, MainState state) {
@@ -143,32 +156,32 @@ class Homescreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15)),
                               child: Column(
                                 children: [
-                                  const Row(
+                                  Row(
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 15,
                                       ),
-                                      CircleAvatar(
+                                      const CircleAvatar(
                                         backgroundImage: NetworkImage(
                                             "https://th.bing.com/th/id/OIP.1cqb9FuTBVMfBMvyhRTvPwHaL1?w=124&h=199&c=7&r=0&o=5&pid=1.7"),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 10,
                                       ),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 10,
                                           ),
                                           Text(
-                                            'IBM',
-                                            style: TextStyle(
+                                            JobBanners[i].company,
+                                            style: const TextStyle(
                                               color: Colors.white,
                                             ),
                                           ),
-                                          Row(
+                                          const Row(
                                             children: [
                                               Icon(Icons.access_time,
                                                   color: Colors.white70),
@@ -183,8 +196,8 @@ class Homescreen extends StatelessWidget {
                                           )
                                         ],
                                       ),
-                                      Spacer(),
-                                      Icon(
+                                      const Spacer(),
+                                      const Icon(
                                         Icons.bookmark,
                                         color: Colors.white70,
                                       )
@@ -218,8 +231,7 @@ class Homescreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 5,),
-
+                                      SizedBox(width:5 ,),
                                       Expanded(
                                         child: Container(
                                           alignment: Alignment.center,
@@ -243,7 +255,7 @@ class Homescreen extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 5,),
+                                      SizedBox(width:5 ,),
                                       Expanded(
                                         child: Container(
                                           alignment: Alignment.center,
@@ -434,7 +446,6 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () {
-
                                           _launchUrl(item.applyUrl);
 /*
                                           _launchUrl("https://www.google.com");
