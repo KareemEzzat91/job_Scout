@@ -9,6 +9,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:jobscout/kconstnt/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../Firebasenotofication/NotoficationScreen.dart';
 import '../main.dart';
@@ -28,7 +29,17 @@ class Homescreen extends StatelessWidget {
         ? plainText.substring(0, length) + '...'
         : plainText;
   }
-  Color _color = Colors.grey;
+
+
+   Future<void> _launchUrl(String url) async {
+     final Uri _url = Uri.parse(url); // Convert the string URL to a Uri
+     if (!await launchUrl(_url)) {
+       throw Exception('Could not launch $_url');
+     }
+   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +276,7 @@ class Homescreen extends StatelessWidget {
                       enlargeFactor: 0.3,
                       scrollDirection: Axis.horizontal,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 const Row(
@@ -277,7 +288,7 @@ class Homescreen extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 FutureBuilder<List<Job>?>(
@@ -413,7 +424,12 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       TextButton(
                                         onPressed: () {
-                                          // فتح الرابط للتقديم
+                                          _launchUrl(item.applyUrl);
+/*
+                                          _launchUrl("https://www.google.com");
+*/
+
+                                          print("222222222222222222222222${item.applyUrl}");
                                         },
                                         child: const Text('Apply', style: TextStyle(color: Colors.blue)),
                                       ),
