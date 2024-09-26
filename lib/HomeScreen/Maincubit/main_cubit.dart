@@ -39,7 +39,7 @@ class MainCubit extends Cubit<MainState> {
       final response = await ApiHelper.getData();
       if (response.statusCode == 200)
       {
-        JobModels = (response.data as List).skip(10).take(10).map((e) => Job.fromJson(e)).toList();
+        JobModels = (response.data as List).skip(10).map((e) => Job.fromJson(e)).toList();
         return JobModels;
       }
       emit(SuccessState());

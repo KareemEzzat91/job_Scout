@@ -117,9 +117,10 @@ class Homescreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hello ${FirebaseAuth.instance.currentUser?.displayName??"Guest"}",
+                          "HI ${FirebaseAuth.instance.currentUser?.displayName??"Guest"}",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
+                            color: Color(0xff3c6EAE),
                               fontStyle: FontStyle.italic,
                               fontSize: 25,
                               fontWeight: FontWeight.w900),
@@ -128,6 +129,7 @@ class Homescreen extends StatelessWidget {
                           'Find Your Dream Job',
                           textAlign: TextAlign.start,
                           style: TextStyle(
+                              color: Color(0xff3c6EAE),
                               fontSize: 25, fontWeight: FontWeight.w900),
                         ),
                       ],
@@ -263,7 +265,6 @@ class Homescreen extends StatelessWidget {
                         ),
                       );
                     }
-
                     if (snapshot.hasError) {
                       return Center(
                         child: Text(
@@ -278,7 +279,7 @@ class Homescreen extends StatelessWidget {
                       return const Center(child: Text("No jobs found."));
                     }
 
-                    final jobBanners = jobData.take(10).toList();
+                    final jobBanners = jobData.toList();
 
                     return CarouselSlider(
                       items: List.generate(
@@ -291,14 +292,23 @@ class Homescreen extends StatelessWidget {
                             height: 150,
                             width: double.infinity,
                             decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Color(0xff62cff4),
+                                  Color(0xff2c67f2),
+                                ],
+                              ),
                               color: Colors.blue[400],
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: Column(
                               children: [
                                 Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const SizedBox(height: 15),
+                                    // const SizedBox(height: 15),
                                     Container(
                                   decoration: BoxDecoration(
                                     color: Colors.white,
@@ -337,12 +347,16 @@ class Homescreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const SizedBox(height: 10),
+                                        // const SizedBox(height: 5),
                                         Text(
                                           jobBanners[i].company,
-                                          style: const TextStyle(
-                                              color: Colors.white),
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
+                                        const SizedBox(height: 4),
                                         const Row(
                                           children: [
                                             Icon(Icons.access_time,
@@ -381,10 +395,11 @@ class Homescreen extends StatelessWidget {
                                               BorderRadius.circular(15),
                                         ),
                                         child: const Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Icon(Icons.work_outline,
                                                 color: Colors.white),
-                                            SizedBox(width: 8),
+                                            // SizedBox(width: 8),
                                             Text('On Site',
                                                 style: TextStyle(
                                                     color: Colors.white)),
@@ -392,7 +407,7 @@ class Homescreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 5),
+                                    const SizedBox(width: 7),
                                     Expanded(
                                       child: Container(
                                         alignment: Alignment.center,
@@ -403,6 +418,7 @@ class Homescreen extends StatelessWidget {
                                               BorderRadius.circular(15),
                                         ),
                                         child: const Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Icon(
                                               Icons
@@ -419,7 +435,7 @@ class Homescreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(width: 5),
+                                    const SizedBox(width: 7),
                                     Expanded(
                                       child: Container(
                                         alignment: Alignment.center,
@@ -430,11 +446,11 @@ class Homescreen extends StatelessWidget {
                                               BorderRadius.circular(15),
                                         ),
                                         child: const Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Icon(Icons.location_on_outlined,
                                                 color: Colors.white),
-                                            SizedBox(width: 7),
-                                            Text('Cairo',
+                                            Text('Remote',
                                                 style: TextStyle(
                                                     color: Colors.white)),
                                           ],
@@ -601,7 +617,6 @@ class Homescreen extends StatelessWidget {
                         },
                       );
                     }
-
                     if (snapshot.hasError) {
                       return Center(
                         child: Text(
@@ -651,7 +666,7 @@ class Homescreen extends StatelessWidget {
                                       top: Radius.circular(20)),
                                   child: Image.network(
                                     item.companyLogo ?? '',
-                                    fit: BoxFit.cover,
+                                    fit: BoxFit.scaleDown,
                                     height: 200,
                                     width: double.infinity,
                                     loadingBuilder: (context, child, progress) {
@@ -755,9 +770,19 @@ class Homescreen extends StatelessWidget {
                                         onPressed: () {
                                           _launchUrl(item.applyUrl);
                                         },
-                                        child: const Text('Apply',
-                                            style:
-                                                TextStyle(color: Colors.blue)),
+                                        child: Container(
+                        alignment: Alignment.center,
+                        height: 40,
+                        width: 70,
+                        decoration: BoxDecoration(
+                        color: Color(0xff09555c),
+                        borderRadius:
+                        BorderRadius.circular(18),
+                        ),
+                                          child: const Text('Apply',
+                                              style:
+                                                  TextStyle(color: Colors.white)),
+                                        ),
                                       ),
                                     ],
                                   ),

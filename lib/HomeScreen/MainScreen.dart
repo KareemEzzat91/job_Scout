@@ -94,7 +94,12 @@ class _MainscreenState extends State<Mainscreen> {
                     "logout",
                     style: TextStyle(color: Colors.redAccent),
                   ),
-                  onTap: () {}),
+                  onTap: () {
+                    GoogleSignIn().disconnect();
+                    FirebaseAuth.instance.signOut();
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context)=> onboardingScreen()));
+                  }),
             )
           ],
         ),
