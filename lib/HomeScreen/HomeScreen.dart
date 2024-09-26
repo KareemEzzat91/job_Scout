@@ -117,7 +117,7 @@ class Homescreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "HI ${FirebaseAuth.instance.currentUser?.displayName??"Guest"}",
+                          "Hi ${FirebaseAuth.instance.currentUser?.displayName??"Guest"}",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
                             color: Color(0xff3c6EAE),
@@ -164,7 +164,14 @@ class Homescreen extends StatelessWidget {
                               height: 150,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: Colors.grey[300],
+                                backgroundBlendMode: BlendMode.dst,
+                                image:DecorationImage(
+                                    image: AssetImage('assets/images/black.avif'), // Your image URL
+                                    fit: BoxFit.cover, // Adjusts how the image fits inside the container
+                                    colorFilter: ColorFilter.mode(
+                                      Colors.black.withOpacity(0.2), // Adjust the transparency here
+                                      BlendMode.dstATop,)),
+                                color: Colors.grey[400],
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Column(
@@ -287,11 +294,18 @@ class Homescreen extends StatelessWidget {
                         (i) => Skeletonizer(
                           enabled: false,
                           // Skeleton loading disabled when data is ready
+                          //------------> Banner Container <------------------
                           child: Container(
                             padding: EdgeInsets.all(10),
-                            height: 150,
+                            height: 170,
                             width: double.infinity,
                             decoration: BoxDecoration(
+                              image:DecorationImage(
+                                  image: AssetImage('assets/images/black.avif'), // Your image URL
+                              fit: BoxFit.cover, // Adjusts how the image fits inside the container
+                              colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.2), // Adjust the transparency here
+                                BlendMode.dstATop,)),
                               gradient: LinearGradient(
                                 begin: Alignment.centerLeft,
                                 end: Alignment.centerRight,

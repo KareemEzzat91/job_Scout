@@ -53,6 +53,7 @@ class _MainscreenState extends State<Mainscreen> {
             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900,color: Colors.blue),
           ),
         ),
+        actions: [GestureDetector( onTap: (){}, child: Icon(Icons.notifications_active_outlined,color: Colors.blue,)), SizedBox(width: 18,)],
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
