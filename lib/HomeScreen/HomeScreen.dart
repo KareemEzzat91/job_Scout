@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -298,11 +299,39 @@ class Homescreen extends StatelessWidget {
                                 Row(
                                   children: [
                                     const SizedBox(height: 15),
-                                    const CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                        "https://th.bing.com/th/id/OIP.1cqb9FuTBVMfBMvyhRTvPwHaL1?w=124&h=199&c=7&r=0&o=5&pid=1.7",
-                                      ),
+                                    Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                    BorderRadius.circular(50),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius:
+                                    BorderRadius.circular(50),
+                                    child: CachedNetworkImage(
+                                      imageUrl:
+                                      jobBanners[i].companyLogo,
+                                      // color: Colors.blue,
+                                      width: 55,
+                                      height: 55,
+                                      alignment: Alignment.center,
+                                      maxHeightDiskCache: 75,
+                                      fit: BoxFit.contain,
+                                      // للصور اللى لسه بتحمل
+                                      placeholder: (c, u) =>
+                                          const CircleAvatar(
+                                            backgroundImage: AssetImage(
+                                                "assets/images/reddit.png"),
+                                          ),
+                                      // للصور البايظة
+                                      errorWidget: (c, u, e) =>
+                                          const CircleAvatar(
+                                            backgroundImage: AssetImage(
+                                                "assets/images/linkedin.png"),
+                                          ),
                                     ),
+                                  ),
+                                  ),
                                     const SizedBox(width: 10),
                                     Column(
                                       crossAxisAlignment:
