@@ -45,8 +45,8 @@ class _MainscreenState extends State<Mainscreen> {
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.blue[400]),
         backgroundColor: Colors.white,
-        title: Padding(
-          padding: const EdgeInsets.all(50.0),
+        title: const Padding(
+          padding: EdgeInsets.all(50.0),
           child: Text(
             'Job Finder',
             textAlign: TextAlign.center,
@@ -66,8 +66,8 @@ class _MainscreenState extends State<Mainscreen> {
                 decoration: BoxDecoration(
                   color: Color(0xff2CAEE2),
                 ),
-                accountName: Text("Ahmed Ashraf"),
-                accountEmail: Text("ahmedashraf417@gmail.com")),
+                accountName: Text(FirebaseAuth.instance.currentUser?.displayName??"Guest "),
+                accountEmail: Text(FirebaseAuth.instance.currentUser?.email??"Guset@gmail.com")),
             ListTile(
               leading: Icon(Icons.person_3_outlined),
               title: Text("Profile"),

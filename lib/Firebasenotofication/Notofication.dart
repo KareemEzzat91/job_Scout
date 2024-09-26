@@ -47,6 +47,7 @@ class NotificationService {
       bloc.showNotification(message);  // Dispatch to the cubit
       print("Notification Title: ${message.notification?.title}");
       print("Notification Body: ${message.notification?.body}");
+      navigatorkey.currentState!.pushNamed(NotoficationScreen.routeName , arguments: message);
     }
 
     // Check for data part
@@ -56,7 +57,11 @@ class NotificationService {
   }
 
   // Background message handler
-  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+   Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print("Handling a background message: ${message.messageId}");
-  }
+    FirebaseMessaging.instance.getInitialMessage().then(HandleMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(HandleMessage);
+
+
+   }
 }

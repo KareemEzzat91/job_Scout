@@ -31,6 +31,41 @@ class MainCubit extends Cubit<MainState> {
     return null;
 
   }
+
+  Future<List<Job>?> getJobsAndSetBanners ()
+  async{
+    emit(LoadingState());
+    try {
+      final response = await ApiHelper.getData();
+      if (response.statusCode == 200)
+      {
+        JobModels = (response.data as List).skip(10).take(10).map((e) => Job.fromJson(e)).toList();
+        return JobModels;
+      }
+      emit(SuccessState());
+
+    }catch (e){
+      emit(FailedState(e.toString()));
+    }
+    return null;
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   void showNotification(RemoteMessage message) {
     emit(SuccessNotoficationState(
         message.notification!.title??"",  // Title of the notification
@@ -38,6 +73,19 @@ class MainCubit extends Cubit<MainState> {
         message                       // The full RemoteMessage object
     ));
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
   Color _currentColor = Colors.grey; // اللون الافتراضي
 
   void changeColor(int index, Color newColor) {
@@ -45,4 +93,7 @@ class MainCubit extends Cubit<MainState> {
     emit(ColorChangedState());
   }
   Color get currentColor => _currentColor;
+  List<Job> getjobs (){
+    return JobModels;
+  }
 }

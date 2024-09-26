@@ -26,8 +26,7 @@ void main() async {
   );
     ApiHelper.init();
   var Box = await Hive.openBox(Hivehelper.Boxname);
-  NotificationService().initNotification();
-
+  await  NotificationService().initNotification();
   runApp(const MyApp());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
