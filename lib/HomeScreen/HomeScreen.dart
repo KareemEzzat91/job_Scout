@@ -137,6 +137,16 @@ class Homescreen extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
+                Container(color: Colors.red,height: 50,width:double.infinity,child: ListView.builder(
+                    itemCount:50,scrollDirection: Axis.horizontal,shrinkWrap: true,itemBuilder: (c,i)=>
+                    Row(
+                  children: [
+                    Container(child: Text('data   ',style: TextStyle(color: Colors.black),),),
+                    Container(child: Text('data   ',style: TextStyle(color: Colors.black),),),
+                    Container(child: Text('data   ',style: TextStyle(color: Colors.black),),)
+                    ,
+                  ],
+                ))),
                 const Row(
                   children: [
                     Text(
@@ -285,7 +295,6 @@ class Homescreen extends StatelessWidget {
                     if (jobData.isEmpty) {
                       return const Center(child: Text("No jobs found."));
                     }
-
                     final jobBanners = jobData.toList();
 
                     return CarouselSlider(
@@ -295,185 +304,211 @@ class Homescreen extends StatelessWidget {
                           enabled: false,
                           // Skeleton loading disabled when data is ready
                           //------------> Banner Container <------------------
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            height: 170,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              image:DecorationImage(
-                                  image: AssetImage('assets/images/black.avif'), // Your image URL
-                              fit: BoxFit.cover, // Adjusts how the image fits inside the container
-                              colorFilter: ColorFilter.mode(
-                                Colors.black.withOpacity(0.2), // Adjust the transparency here
-                                BlendMode.dstATop,)),
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [
-                                  Color(0xff62cff4),
-                                  Color(0xff2c67f2),
+                          child: GestureDetector(
+                            onTap: (){
+                              // زرار هيحول على ال detales page
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              height: 170,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                image:DecorationImage(
+                                    image: AssetImage('assets/images/black.avif'), // Your image URL
+                                fit: BoxFit.cover, // Adjusts how the image fits inside the container
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.2), // Adjust the transparency here
+                                  BlendMode.dstATop,)),
+                                gradient: LinearGradient(
+                                  begin: Alignment.centerLeft,
+                                  end: Alignment.centerRight,
+                                  colors: [
+                                    Color(0xff62cff4),
+                                    Color(0xff2c67f2),
+                                  ],
+                                ),
+                                color: Colors.blue[400],
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      // const SizedBox(height: 15),
+                                      Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                      BorderRadius.circular(50),
+                                    ),
+                                    child: ClipRRect(
+                                      borderRadius:
+                                      BorderRadius.circular(50),
+                                      child: CachedNetworkImage(
+                                        imageUrl:
+                                        jobBanners[i].companyLogo,
+                                        // color: Colors.blue,
+                                        width: 55,
+                                        height: 55,
+                                        alignment: Alignment.center,
+                                        maxHeightDiskCache: 75,
+                                        fit: BoxFit.contain,
+                                        // للصور اللى لسه بتحمل
+                                        placeholder: (c, u) =>
+                                            const CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "assets/images/reddit.png"),
+                                            ),
+                                        // للصور البايظة
+                                        errorWidget: (c, u, e) =>
+                                            const CircleAvatar(
+                                              backgroundImage: AssetImage(
+                                                  "assets/images/linkedin.png"),
+                                            ),
+                                      ),
+                                    ),
+                                    ),
+                                      const SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          // const SizedBox(height: 5),
+                                          Text(
+                                            jobBanners[i].company,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 4),
+                                          const Row(
+                                            children: [
+                                              Icon(Icons.access_time,
+                                                  color: Colors.white70),
+                                              Text(
+                                                " October 9 ,  ",
+                                                style: TextStyle(
+                                                    color: Colors.white70),
+                                              ),
+                                              Text(
+                                                "2022",
+                                                style: TextStyle(
+                                                    color: Colors.white70),
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      const Spacer(),
+                                      BlocBuilder<MainCubit, MainState>(
+                                        builder: (context, state) {
+                                          return IconButton(
+                                            onPressed: () {
+                                              final newColor =
+                                              jobBanners[i].savedColor == Colors.grey
+                                                  ? Colors.redAccent
+                                                  : Colors.grey;
+                                              context
+                                                  .read<MainCubit>()
+                                                  .changeColor(i, newColor);
+                                            },
+                                            icon: Icon(
+                                              Icons.bookmark,
+                                              color:  jobBanners[i].savedColor,
+                                              // Saved color
+                                              size: 30,
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                      // const Icon(Icons.bookmark,
+                                      //     color: Colors.white70),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff7ebdf8),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: const Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Icon(Icons.work_outline,
+                                                  color: Colors.white),
+                                              // SizedBox(width: 8),
+                                              Text('On Site',
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 7),
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff7ebdf8),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: const Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Icon(
+                                                Icons
+                                                    .local_fire_department_outlined,
+                                                color: Colors.white,
+                                              ),
+                                              Text(
+                                                'Part Time',
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 7),
+                                      Expanded(
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff7ebdf8),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          child: const Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Icon(Icons.location_on_outlined,
+                                                  color: Colors.white),
+                                              Text('Remote',
+                                                  style: TextStyle(
+                                                      color: Colors.white)),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
-                              color: Colors.blue[400],
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // const SizedBox(height: 15),
-                                    Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius:
-                                    BorderRadius.circular(50),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius:
-                                    BorderRadius.circular(50),
-                                    child: CachedNetworkImage(
-                                      imageUrl:
-                                      jobBanners[i].companyLogo,
-                                      // color: Colors.blue,
-                                      width: 55,
-                                      height: 55,
-                                      alignment: Alignment.center,
-                                      maxHeightDiskCache: 75,
-                                      fit: BoxFit.contain,
-                                      // للصور اللى لسه بتحمل
-                                      placeholder: (c, u) =>
-                                          const CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                "assets/images/reddit.png"),
-                                          ),
-                                      // للصور البايظة
-                                      errorWidget: (c, u, e) =>
-                                          const CircleAvatar(
-                                            backgroundImage: AssetImage(
-                                                "assets/images/linkedin.png"),
-                                          ),
-                                    ),
-                                  ),
-                                  ),
-                                    const SizedBox(width: 10),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // const SizedBox(height: 5),
-                                        Text(
-                                          jobBanners[i].company,
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 4),
-                                        const Row(
-                                          children: [
-                                            Icon(Icons.access_time,
-                                                color: Colors.white70),
-                                            Text(
-                                              " October 9 ,  ",
-                                              style: TextStyle(
-                                                  color: Colors.white70),
-                                            ),
-                                            Text(
-                                              "2022",
-                                              style: TextStyle(
-                                                  color: Colors.white70),
-                                            )
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    const Spacer(),
-                                    const Icon(Icons.bookmark,
-                                        color: Colors.white70),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xff7ebdf8),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                        child: const Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Icon(Icons.work_outline,
-                                                color: Colors.white),
-                                            // SizedBox(width: 8),
-                                            Text('On Site',
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 7),
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xff7ebdf8),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                        child: const Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Icon(
-                                              Icons
-                                                  .local_fire_department_outlined,
-                                              color: Colors.white,
-                                            ),
-                                            Text(
-                                              'Part Time',
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 7),
-                                    Expanded(
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xff7ebdf8),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                        ),
-                                        child: const Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Icon(Icons.location_on_outlined,
-                                                color: Colors.white),
-                                            Text('Remote',
-                                                style: TextStyle(
-                                                    color: Colors.white)),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
                             ),
                           ),
                         ),
