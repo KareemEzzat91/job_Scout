@@ -1,10 +1,13 @@
-# jobscout
+# JobScout
 
-A new Flutter project.
+**JobScout** is a mobile application built with Flutter, designed to help users efficiently search and filter job listings. It provides an intuitive interface where users can browse jobs by category, such as 'Software' or 'Marketing', and see relevant job postings based on their preferences. The app integrates sorting functionality, allowing users to quickly find jobs that match their desired criteria. 
 
-## Getting Started
+## Features:
+- Browse job listings by category
+- Sorting options for more relevant job results
+- Smooth, responsive user experience
+- Built with Flutter for cross-platform support
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
