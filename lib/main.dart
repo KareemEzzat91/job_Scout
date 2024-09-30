@@ -16,6 +16,8 @@ import 'HomeScreen/MainScreen.dart';
 import 'HomeScreen/Maincubit/main_cubit.dart';
 import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
+import 'job_search_screen.dart';
+
 
 void main() async {
   await Hive.initFlutter();
@@ -28,6 +30,7 @@ void main() async {
   var Box = await Hive.openBox(Hivehelper.Boxname);
   await  NotificationService().initNotification();
   runApp(const MyApp());
+  runApp(MyAPP());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
 
@@ -98,6 +101,18 @@ class _MyAppState extends State<MyApp> {
         ),
         home: isUserSignedIn! ? Mainscreen() :  onboardingScreen(),
       ),
+    );
+  }
+}
+class MyAPP extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Job Scout',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: JobSearchScreen(),
     );
   }
 }
