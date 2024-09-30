@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class Job {
   final String id;
+  final String date;
   final String position;
   final String company;
   final String location;
@@ -16,6 +17,7 @@ class Job {
   Job({
     this.savedColor = Colors.grey, // اللون الافتراضي
     required this.id,
+    required this.date,
     required this.position,
     required this.company,
     required this.location,
@@ -29,6 +31,7 @@ class Job {
   factory Job.fromJson(Map<String, dynamic> json) {
     return Job(
       id: json['id'],
+      date :json['date'],
       position: json['position'],
       company: json['company'],
       location: json['location'],

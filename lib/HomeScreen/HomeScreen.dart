@@ -144,6 +144,7 @@ class Homescreen extends StatelessWidget {
                 FutureBuilder<List<Job>?>(
                   future: bloc.getJobsAndSetBanners(),
                   builder: (context, snapshot) {
+
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Show SkeletonLoader while loading
                       return CarouselSlider(
@@ -366,6 +367,7 @@ class Homescreen extends StatelessWidget {
                                           // const SizedBox(height: 5),
                                           Text(
                                             jobBanners[i].company,
+                                            overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                                 color: Colors.white,
                                               fontSize: 15,
@@ -373,22 +375,40 @@ class Homescreen extends StatelessWidget {
                                             ),
                                           ),
                                           const SizedBox(height: 4),
-                                          const Row(
+                                           Row(
                                             children: [
                                               Icon(Icons.access_time,
                                                   color: Colors.white70),
                                               Text(
-                                                " October 9 ,  ",
+                                                jobBanners[i].date.length > 10
+                                                    ? '${jobBanners[i].date.substring(0, 10)}...'
+                                                    : jobBanners[i].date,
+                                                overflow: TextOverflow.ellipsis,
                                                 style: TextStyle(
-                                                    color: Colors.white70),
+                                                  fontSize: 16,
+                                                  color: Colors.white,
+                                                ),
+                                              ),                                            ],
+                                          ),
+
+/*
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Text(
+                                              jobBanners[i].position.length > 20
+                                                  ? '${jobBanners[i].position.substring(0, 10)}...'
+                                                  : jobBanners[i].position,
+                                              overflow: TextOverflow.fade,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                              Text(
-                                                "2022",
-                                                style: TextStyle(
-                                                    color: Colors.white70),
-                                              )
-                                            ],
-                                          )
+                                            ),
+                                          ),
+*/
+
+
                                         ],
                                       ),
                                       const Spacer(),
