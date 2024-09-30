@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'dart:convert';
 
-import 'HomeScreen/JobsModel/JobsModel.dart';
+import '../JobsModel/JobsModel.dart';
 import 'job_details_screen.dart';
 
 class JobLocationInputScreen extends StatefulWidget {

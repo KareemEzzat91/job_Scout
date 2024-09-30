@@ -16,7 +16,7 @@ import 'HomeScreen/MainScreen.dart';
 import 'HomeScreen/Maincubit/main_cubit.dart';
 import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
-import 'job_search_screen.dart';
+import 'HomeScreen/SearchScreen/job_search_screen.dart';
 
 
 void main() async {

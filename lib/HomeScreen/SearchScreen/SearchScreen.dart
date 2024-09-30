@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../../job_details_screen.dart';
-import '../../job_location_screen.dart';
-import '../../job_role_screen.dart';
-import '../../job_search_screen.dart';
+import 'job_details_screen.dart';
+import 'job_location_screen.dart';
+import 'job_role_screen.dart';
+import 'job_search_screen.dart';
 import '../JobsModel/JobsModel.dart';
 
 

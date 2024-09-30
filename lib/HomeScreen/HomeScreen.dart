@@ -14,7 +14,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Firebasenotofication/NotoficationScreen.dart';
-import '../job_details_screen.dart';
+import 'SearchScreen/job_details_screen.dart';
 import '../main.dart';
 import '../onboardingScreen/onboardingScreen.dart';
 import 'JobsModel/JobsModel.dart';
