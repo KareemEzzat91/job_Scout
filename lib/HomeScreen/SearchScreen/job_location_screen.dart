@@ -197,6 +197,8 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                             ),
                             Text(
                               "\$${_filteredSuggestions[index].salaryMin} - \$${_filteredSuggestions[index].salaryMax}",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 color: Colors.white60,
                                 fontSize: 12,
