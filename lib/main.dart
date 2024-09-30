@@ -30,7 +30,7 @@ void main() async {
   var Box = await Hive.openBox(Hivehelper.Boxname);
   await  NotificationService().initNotification();
   runApp(const MyApp());
-  runApp(MyAPP());
+  runApp(MyApp());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
 
@@ -104,6 +104,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+/*
 class MyAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -115,4 +116,4 @@ class MyAPP extends StatelessWidget {
       home: JobSearchScreen(),
     );
   }
-}
+}*/

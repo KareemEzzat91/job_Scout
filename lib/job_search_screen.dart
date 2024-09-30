@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'HomeScreen/JobsModel/JobsModel.dart';
 import 'job_role_screen.dart';
 import 'job_location_screen.dart';
 import 'job_details_screen.dart';
@@ -23,7 +24,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
       isLoading = true;
     });
 
-    final response = await http.get(Uri.parse('https://api.example.com/jobs?search=$searchQuery&location=$locationQuery'));
+    /*final response = await http.get(Uri.parse('https://api.example.com/jobs?search=$searchQuery&location=$locationQuery'));
 
     if (response.statusCode == 200) {
       List<dynamic> jsonData = json.decode(response.body);
@@ -39,7 +40,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Failed to load jobs. Please try again later.'),
       ));
-    }
+    }*/
 
     setState(() {
       isLoading = false;
@@ -49,7 +50,6 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('JobScout')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
@@ -124,23 +124,15 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 child: ListView.builder(
                   itemCount: jobResults.length,
                   itemBuilder: (context, index) {
+                    final item = jobResults[index];
                     return ListTile(
-                      title: Text(jobResults[index].title),
+                      title: Text(jobResults[index].position),
                       subtitle: Text('${jobResults[index].company} - ${jobResults[index].location}'),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => JobDetailsScreen(
-                              title: jobResults[index].title,
-                              company: jobResults[index].company,
-                              location: jobResults[index].location,
-                              description: jobResults[index].description,
-                              position: '',
-                              salaryMin: 0,
-                              salaryMax: 0,
-                              applyUrl: '',
-                              logoUrl: '',
+                            builder: (context) => JobDetailsScreen(item:item ,
                             ),
                           ),
                         );
@@ -157,11 +149,3 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
   }
 }
 
-class Job {
-  final String title;
-  final String company;
-  final String location;
-  final String description;
-
-  Job({required this.title, required this.company, required this.location, required this.description});
-}

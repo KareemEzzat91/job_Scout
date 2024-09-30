@@ -32,6 +32,24 @@ class MainCubit extends Cubit<MainState> {
 
   }
 
+  Future<List<Job>?> getSearchJobs(String positionName) async {
+    emit(LoadingState());
+    try {
+      final response = await ApiHelper.getData();
+      if (response.statusCode == 200) {
+        final List<Job> searchResults = (response.data as List).skip(1).where((e) => e['position'].toString().contains(positionName)) // Example condition
+            .map((e) => Job.fromJson(e))
+            .toList();
+        emit(SuccessState());
+        return searchResults;
+      }
+    } catch (e) {
+      emit(FailedState(e.toString()));
+    }
+    return null;
+  }
+
+
   Future<List<Job>?> getJobsAndSetBanners ()
   async{
     emit(LoadingState());

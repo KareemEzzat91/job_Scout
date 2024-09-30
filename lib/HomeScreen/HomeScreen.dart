@@ -14,6 +14,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../Firebasenotofication/NotoficationScreen.dart';
+import '../job_details_screen.dart';
 import '../main.dart';
 import '../onboardingScreen/onboardingScreen.dart';
 import 'JobsModel/JobsModel.dart';
@@ -41,25 +42,6 @@ class Homescreen extends StatelessWidget {
 
   List<Job> JobBanners = [];
 
-/*
-    bool isloading =false ;
-
-  Future <void> getNotes(MainCubit bloc) async {
-    try {
-      int count = 1;
-      await bloc.getJobs();
-      for (var s in bloc.JobModels ) {
-        if (count == 10) {
-          break;
-        }
-
-        JobBanners.add(s);
-        count++;
-      }
-      isloading =true ;
-    } catch (e) {}
-
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +158,7 @@ class Homescreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 backgroundBlendMode: BlendMode.dst,
                                 image:DecorationImage(
-                                    image: AssetImage('assets/images/black.avif'), // Your image URL
+                                    image: AssetImage('assets/images/black.jpg'), // Your image URL
                                     fit: BoxFit.cover, // Adjusts how the image fits inside the container
                                     colorFilter: ColorFilter.mode(
                                       Colors.black.withOpacity(0.2), // Adjust the transparency here
@@ -305,8 +287,15 @@ class Homescreen extends StatelessWidget {
                           // Skeleton loading disabled when data is ready
                           //------------> Banner Container <------------------
                           child: GestureDetector(
-                            onTap: (){
-                              // زرار هيحول على ال detales page
+                            onTap:  (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => JobDetailsScreen(item:jobBanners[i] ,
+                                  ),
+                                ),
+                              );
+
                             },
                             child: Container(
                               padding: EdgeInsets.all(10),
@@ -319,7 +308,7 @@ class Homescreen extends StatelessWidget {
                                 colorFilter: ColorFilter.mode(
                                   Colors.black.withOpacity(0.2), // Adjust the transparency here
                                   BlendMode.dstATop,)),
-                                gradient: LinearGradient(
+                                gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
                                   colors: [
@@ -358,7 +347,7 @@ class Homescreen extends StatelessWidget {
                                         placeholder: (c, u) =>
                                             const CircleAvatar(
                                               backgroundImage: AssetImage(
-                                                  "assets/images/reddit.png"),
+                                                  "assets/images/photo_2024-09-16_15-28-23-removebg-preview.png"),
                                             ),
                                         // للصور البايظة
                                         errorWidget: (c, u, e) =>
@@ -377,7 +366,7 @@ class Homescreen extends StatelessWidget {
                                           // const SizedBox(height: 5),
                                           Text(
                                             jobBanners[i].company,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 color: Colors.white,
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold,
@@ -529,7 +518,7 @@ class Homescreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ),//Banners
                 const SizedBox(
                   height: 30,
                 ),
@@ -689,7 +678,16 @@ class Homescreen extends StatelessWidget {
                         final item = data[index];
 
                         return GestureDetector(
-                          onTap: () {},
+                          onTap:  (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => JobDetailsScreen(item:item ,
+                                ),
+                              ),
+                            );
+
+                          },
                           child: Container(
                             width: double.infinity,
                             margin: const EdgeInsets.symmetric(
@@ -843,7 +841,7 @@ class Homescreen extends StatelessWidget {
                       },
                     );
                   },
-                ),
+                ),//Home
               ],
             ),
           ),

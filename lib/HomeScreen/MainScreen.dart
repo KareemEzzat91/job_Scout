@@ -31,7 +31,7 @@ class _MainscreenState extends State<Mainscreen> {
     // Populate this with your screen widgets
     /* Center(child: Text('Home Screen'))*/
     Homescreen(),//AhmedAshraf
-    Searchscreen(),//Farah
+    JobSearchScreen(),//Farah
     Savedscreen(),//AhmedAshraf
   ];
 
