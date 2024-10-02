@@ -53,6 +53,9 @@ dependencies:
   flutter_html:
   carousel_slider: ^5.0.0
   flutter_native_splash: ^2.4.1
+  chips_choice: ^3.0.1
+  chips_choice_null_safety: ^2.0.6
+
 
 
   dio: ^5.6.0

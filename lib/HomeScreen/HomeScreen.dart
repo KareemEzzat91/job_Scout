@@ -12,6 +12,10 @@ import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:jobscout/kconstnt/constants.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
+//------------------------------------
+// import 'custom_chip.dart';
+// import 'package:chips_choice_null_safety/chips_choice_null_safety.dart';
+//-------------------------------------------
 
 import '../Firebasenotofication/NotoficationScreen.dart';
 import 'SearchScreen/job_details_screen.dart';
@@ -41,7 +45,6 @@ class Homescreen extends StatelessWidget {
   }
 
   List<Job> JobBanners = [];
-
 
   @override
   Widget build(BuildContext context) {
@@ -99,10 +102,10 @@ class Homescreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Hi ${FirebaseAuth.instance.currentUser?.displayName??"Guest"}",
+                          "Hi ${FirebaseAuth.instance.currentUser?.displayName ?? "Guest"}",
                           textAlign: TextAlign.start,
                           style: const TextStyle(
-                            color: Color(0xff3c6EAE),
+                              color: Color(0xff3c6EAE),
                               fontStyle: FontStyle.italic,
                               fontSize: 25,
                               fontWeight: FontWeight.w900),
@@ -112,23 +115,118 @@ class Homescreen extends StatelessWidget {
                           textAlign: TextAlign.start,
                           style: TextStyle(
                               color: Color(0xff3c6EAE),
-                              fontSize: 25, fontWeight: FontWeight.w900),
+                              fontSize: 25,
+                              fontWeight: FontWeight.w900),
                         ),
                       ],
                     )),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(color: Colors.red,height: 50,width:double.infinity,child: ListView.builder(
-                    itemCount:50,scrollDirection: Axis.horizontal,shrinkWrap: true,itemBuilder: (c,i)=>
-                    Row(
-                  children: [
-                    Container(child: Text('data   ',style: TextStyle(color: Colors.black),),),
-                    Container(child: Text('data   ',style: TextStyle(color: Colors.black),),),
-                    Container(child: Text('data   ',style: TextStyle(color: Colors.black),),)
-                    ,
-                  ],
-                ))),
+                //-----------------------------------------------------------------------------------
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                   children: [
+                  Container(
+                  alignment: Alignment.center,
+                  height: 40,
+                  width: 70,
+                  decoration: BoxDecoration(
+                    color: Color(0xff29A8F7),
+                    borderRadius:
+                    BorderRadius.circular(18),
+                  ),
+                  child: const Text('All',
+                      style: TextStyle(
+                          color: Colors.white))),
+                     SizedBox(width: 15,),
+                     Container(
+                       alignment: Alignment.center,
+                         height: 40,
+                         width: 70,
+                       decoration: BoxDecoration(
+                         color: Color(0xff29A8F7),
+                         borderRadius:
+                         BorderRadius.circular(15),
+                       ),
+                       child:Text('software',style: TextStyle(
+                           color: Colors.white))
+                     ),
+                     SizedBox(width: 15,),
+                     Container(
+                       alignment: Alignment.center,
+                         height: 40,
+                         width: 70,
+                       decoration: BoxDecoration(
+                         color: Color(0xff29A8F7),
+                         borderRadius:
+                         BorderRadius.circular(15),
+                       ),
+                       child:Text('design',style: TextStyle(
+                           color: Colors.white))
+                     ),
+                     SizedBox(width: 15,),
+                     Container(
+                       alignment: Alignment.center,
+                         height: 40,
+                         width: 100,
+                       decoration: BoxDecoration(
+                         color: Color(0xff29A8F7),
+                         borderRadius:
+                         BorderRadius.circular(15),
+                       ),
+                       child:Text('management',style: TextStyle(
+                           color: Colors.white))
+                     ),
+                     SizedBox(width: 15,),
+                     Container(
+                         alignment: Alignment.center,
+                         height: 40,
+                         width: 70,
+                         decoration: BoxDecoration(
+                           color: Color(0xff29A8F7),
+                           borderRadius:
+                           BorderRadius.circular(15),
+                         ),
+                         child:Text('developer',style: TextStyle(
+                             color: Colors.white))
+                     ),
+                     SizedBox(width: 15,),
+                     Container(
+                         alignment: Alignment.center,
+                         height: 40,
+                         width: 70,
+                         decoration: BoxDecoration(
+                           color: Color(0xff29A8F7),
+                           borderRadius:
+                           BorderRadius.circular(15),
+                         ),
+                         child:Text('security',style: TextStyle(
+                             color: Colors.white))
+                     ),
+                     SizedBox(width: 15,),
+                     Container(
+                         alignment: Alignment.center,
+                         height: 40,
+                         width: 70,
+                         decoration: BoxDecoration(
+                           color: Color(0xff29A8F7),
+                           borderRadius:
+                           BorderRadius.circular(15),
+                         ),
+                         child:Text('senior',style: TextStyle(
+                             color: Colors.white))
+                     ),
+                     SizedBox(width: 15,),
+
+                   ],
+                 ),
+              ),
+                // coustom_chip(),
+                // CustomChip(),
+
+                //-------------------------------------------------------------------------------------
                 const Row(
                   children: [
                     Text(
@@ -144,7 +242,6 @@ class Homescreen extends StatelessWidget {
                 FutureBuilder<List<Job>?>(
                   future: bloc.getJobsAndSetBanners(),
                   builder: (context, snapshot) {
-
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Show SkeletonLoader while loading
                       return CarouselSlider(
@@ -158,12 +255,17 @@ class Homescreen extends StatelessWidget {
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 backgroundBlendMode: BlendMode.dst,
-                                image:DecorationImage(
-                                    image: AssetImage('assets/images/black.jpg'), // Your image URL
-                                    fit: BoxFit.cover, // Adjusts how the image fits inside the container
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/black.jpg'),
+                                    // Your image URL
+                                    fit: BoxFit.cover,
+                                    // Adjusts how the image fits inside the container
                                     colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.2), // Adjust the transparency here
-                                      BlendMode.dstATop,)),
+                                      Colors.black.withOpacity(0.2),
+                                      // Adjust the transparency here
+                                      BlendMode.dstATop,
+                                    )),
                                 color: Colors.grey[400],
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -288,27 +390,32 @@ class Homescreen extends StatelessWidget {
                           // Skeleton loading disabled when data is ready
                           //------------> Banner Container <------------------
                           child: GestureDetector(
-                            onTap:  (){
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => JobDetailsScreen(item:jobBanners[i] ,
+                                  builder: (context) => JobDetailsScreen(
+                                    item: jobBanners[i],
                                   ),
                                 ),
                               );
-
                             },
                             child: Container(
                               padding: EdgeInsets.all(10),
                               height: 170,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                image:DecorationImage(
-                                    image: AssetImage('assets/images/black.avif'), // Your image URL
-                                fit: BoxFit.cover, // Adjusts how the image fits inside the container
-                                colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.2), // Adjust the transparency here
-                                  BlendMode.dstATop,)),
+                                image: DecorationImage(
+                                    image:
+                                        AssetImage('assets/images/black.avif'),
+                                    // Your image URL
+                                    fit: BoxFit.cover,
+                                    // Adjusts how the image fits inside the container
+                                    colorFilter: ColorFilter.mode(
+                                      Colors.black.withOpacity(0.2),
+                                      // Adjust the transparency here
+                                      BlendMode.dstATop,
+                                    )),
                                 gradient: const LinearGradient(
                                   begin: Alignment.centerLeft,
                                   end: Alignment.centerRight,
@@ -323,42 +430,42 @@ class Homescreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       // const SizedBox(height: 15),
                                       Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                      BorderRadius.circular(50),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius:
-                                      BorderRadius.circular(50),
-                                      child: CachedNetworkImage(
-                                        imageUrl:
-                                        jobBanners[i].companyLogo,
-                                        // color: Colors.blue,
-                                        width: 55,
-                                        height: 55,
-                                        alignment: Alignment.center,
-                                        maxHeightDiskCache: 75,
-                                        fit: BoxFit.contain,
-                                        // للصور اللى لسه بتحمل
-                                        placeholder: (c, u) =>
-                                            const CircleAvatar(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: CachedNetworkImage(
+                                            imageUrl: jobBanners[i].companyLogo,
+                                            // color: Colors.blue,
+                                            width: 55,
+                                            height: 55,
+                                            alignment: Alignment.center,
+                                            maxHeightDiskCache: 75,
+                                            fit: BoxFit.contain,
+                                            // للصور اللى لسه بتحمل
+                                            placeholder: (c, u) =>
+                                                const CircleAvatar(
                                               backgroundImage: AssetImage(
                                                   "assets/images/photo_2024-09-16_15-28-23-removebg-preview.png"),
                                             ),
-                                        // للصور البايظة
-                                        errorWidget: (c, u, e) =>
-                                            const CircleAvatar(
+                                            // للصور البايظة
+                                            errorWidget: (c, u, e) =>
+                                                const CircleAvatar(
                                               backgroundImage: AssetImage(
                                                   "assets/images/linkedin.png"),
                                             ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    ),
                                       const SizedBox(width: 10),
                                       Column(
                                         crossAxisAlignment:
@@ -369,13 +476,13 @@ class Homescreen extends StatelessWidget {
                                             jobBanners[i].company,
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
-                                                color: Colors.white,
+                                              color: Colors.white,
                                               fontSize: 15,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                           const SizedBox(height: 4),
-                                           Row(
+                                          Row(
                                             children: [
                                               Icon(Icons.access_time,
                                                   color: Colors.white70),
@@ -388,7 +495,8 @@ class Homescreen extends StatelessWidget {
                                                   fontSize: 16,
                                                   color: Colors.white,
                                                 ),
-                                              ),                                            ],
+                                              ),
+                                            ],
                                           ),
 
 /*
@@ -407,8 +515,6 @@ class Homescreen extends StatelessWidget {
                                             ),
                                           ),
 */
-
-
                                         ],
                                       ),
                                       const Spacer(),
@@ -417,16 +523,17 @@ class Homescreen extends StatelessWidget {
                                           return IconButton(
                                             onPressed: () {
                                               final newColor =
-                                              jobBanners[i].savedColor == Colors.grey
-                                                  ? Colors.redAccent
-                                                  : Colors.grey;
+                                                  jobBanners[i].savedColor ==
+                                                          Colors.grey
+                                                      ? Colors.redAccent
+                                                      : Colors.grey;
                                               context
                                                   .read<MainCubit>()
                                                   .changeColor(i, newColor);
                                             },
                                             icon: Icon(
                                               Icons.bookmark,
-                                              color:  jobBanners[i].savedColor,
+                                              color: jobBanners[i].savedColor,
                                               // Saved color
                                               size: 30,
                                             ),
@@ -452,7 +559,8 @@ class Homescreen extends StatelessWidget {
                                                 BorderRadius.circular(15),
                                           ),
                                           child: const Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Icon(Icons.work_outline,
                                                   color: Colors.white),
@@ -475,7 +583,8 @@ class Homescreen extends StatelessWidget {
                                                 BorderRadius.circular(15),
                                           ),
                                           child: const Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Icon(
                                                 Icons
@@ -503,7 +612,8 @@ class Homescreen extends StatelessWidget {
                                                 BorderRadius.circular(15),
                                           ),
                                           child: const Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Icon(Icons.location_on_outlined,
                                                   color: Colors.white),
@@ -538,7 +648,7 @@ class Homescreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),//Banners
+                ), //Banners
                 const SizedBox(
                   height: 30,
                 ),
@@ -698,15 +808,15 @@ class Homescreen extends StatelessWidget {
                         final item = data[index];
 
                         return GestureDetector(
-                          onTap:  (){
+                          onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => JobDetailsScreen(item:item ,
+                                builder: (context) => JobDetailsScreen(
+                                  item: item,
                                 ),
                               ),
                             );
-
                           },
                           child: Container(
                             width: double.infinity,
@@ -838,17 +948,17 @@ class Homescreen extends StatelessWidget {
                                           _launchUrl(item.applyUrl);
                                         },
                                         child: Container(
-                        alignment: Alignment.center,
-                        height: 40,
-                        width: 70,
-                        decoration: BoxDecoration(
-                        color: Color(0xff09555c),
-                        borderRadius:
-                        BorderRadius.circular(18),
-                        ),
+                                          alignment: Alignment.center,
+                                          height: 40,
+                                          width: 70,
+                                          decoration: BoxDecoration(
+                                            color: Color(0xff09555c),
+                                            borderRadius:
+                                                BorderRadius.circular(18),
+                                          ),
                                           child: const Text('Apply',
-                                              style:
-                                                  TextStyle(color: Colors.white)),
+                                              style: TextStyle(
+                                                  color: Colors.white)),
                                         ),
                                       ),
                                     ],
@@ -861,7 +971,7 @@ class Homescreen extends StatelessWidget {
                       },
                     );
                   },
-                ),//Home
+                ), //Home
               ],
             ),
           ),
