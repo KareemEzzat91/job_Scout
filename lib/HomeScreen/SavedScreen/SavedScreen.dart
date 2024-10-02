@@ -7,15 +7,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:jobscout/kconstnt/constants.dart';
 
-
 class Savedscreen extends StatelessWidget {
   const Savedscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
   return Scaffold(
-    backgroundColor: kPrimaryColor,
-    body: Center(child: Text("Saved Screen"),),
+
+    body: Container(alignment: Alignment.topCenter, padding: EdgeInsets.only(top: 10),child: Text("Saved Jobs",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)),
 
   );
   }
