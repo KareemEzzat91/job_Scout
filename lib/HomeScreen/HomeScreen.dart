@@ -128,104 +128,26 @@ class Homescreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                    children: [
-                  Container(
-                  alignment: Alignment.center,
-                  height: 40,
-                  width: 70,
-                  decoration: BoxDecoration(
-                    color: Color(0xff29A8F7),
-                    borderRadius:
-                    BorderRadius.circular(18),
-                  ),
-                  child: const Text('All',
-                      style: TextStyle(
-                          color: Colors.white))),
+                     _tag("All"),
                      SizedBox(width: 15,),
-                     Container(
-                       alignment: Alignment.center,
-                         height: 40,
-                         width: 70,
-                       decoration: BoxDecoration(
-                         color: Color(0xff29A8F7),
-                         borderRadius:
-                         BorderRadius.circular(15),
-                       ),
-                       child:Text('software',style: TextStyle(
-                           color: Colors.white))
-                     ),
+                     _tag("Software"),
                      SizedBox(width: 15,),
-                     Container(
-                       alignment: Alignment.center,
-                         height: 40,
-                         width: 70,
-                       decoration: BoxDecoration(
-                         color: Color(0xff29A8F7),
-                         borderRadius:
-                         BorderRadius.circular(15),
-                       ),
-                       child:Text('design',style: TextStyle(
-                           color: Colors.white))
-                     ),
+                     _tag("design"),
                      SizedBox(width: 15,),
-                     Container(
-                       alignment: Alignment.center,
-                         height: 40,
-                         width: 100,
-                       decoration: BoxDecoration(
-                         color: Color(0xff29A8F7),
-                         borderRadius:
-                         BorderRadius.circular(15),
-                       ),
-                       child:Text('management',style: TextStyle(
-                           color: Colors.white))
-                     ),
+                     _tag("management", width: 100, ),
                      SizedBox(width: 15,),
-                     Container(
-                         alignment: Alignment.center,
-                         height: 40,
-                         width: 70,
-                         decoration: BoxDecoration(
-                           color: Color(0xff29A8F7),
-                           borderRadius:
-                           BorderRadius.circular(15),
-                         ),
-                         child:Text('developer',style: TextStyle(
-                             color: Colors.white))
-                     ),
+                    _tag("developer"),
                      SizedBox(width: 15,),
-                     Container(
-                         alignment: Alignment.center,
-                         height: 40,
-                         width: 70,
-                         decoration: BoxDecoration(
-                           color: Color(0xff29A8F7),
-                           borderRadius:
-                           BorderRadius.circular(15),
-                         ),
-                         child:Text('security',style: TextStyle(
-                             color: Colors.white))
-                     ),
+                    _tag("security"),
                      SizedBox(width: 15,),
-                     Container(
-                         alignment: Alignment.center,
-                         height: 40,
-                         width: 70,
-                         decoration: BoxDecoration(
-                           color: Color(0xff29A8F7),
-                           borderRadius:
-                           BorderRadius.circular(15),
-                         ),
-                         child:Text('senior',style: TextStyle(
-                             color: Colors.white))
-                     ),
+                     _tag("senior"),
                      SizedBox(width: 15,),
-
                    ],
                  ),
               ),
+                SizedBox(height: 10,),
                 // coustom_chip(),
                 // CustomChip(),
-
                 //-------------------------------------------------------------------------------------
                 const Row(
                   children: [
@@ -978,5 +900,24 @@ class Homescreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _tag(String tagName,{double width = 70, double height = 40, VoidCallback? onTap}) {
+    return GestureDetector(
+                  onTap: onTap,
+                     child: Container(
+                                       alignment: Alignment.center,
+                                       height: height,
+                                       width: width,
+                                       decoration: BoxDecoration(
+                                         color: Color(0xff29A8F7),
+                                         borderRadius:
+                                         BorderRadius.circular(18),
+                                       ),
+                                       child:  Text(tagName,
+                      style: TextStyle(
+                          color: Colors.white))),
+
+                   );
   }
 }

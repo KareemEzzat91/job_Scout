@@ -14,12 +14,12 @@ import '../onboardingScreen/onboardingScreen.dart';
 import 'SavedScreen/SavedScreen.dart';
 import 'SearchScreen/SearchScreen.dart';
 
-
-
 class Mainscreen extends StatefulWidget {
   static final String routename = "Mainscreen";
 
-  const Mainscreen({super.key,});
+  const Mainscreen({
+    super.key,
+  });
 
   @override
   State<Mainscreen> createState() => _MainscreenState();
@@ -30,9 +30,9 @@ class _MainscreenState extends State<Mainscreen> {
   List<Widget> Screens = [
     // Populate this with your screen widgets
     /* Center(child: Text('Home Screen'))*/
-    Homescreen(),//AhmedAshraf
-    JobSearchScreen(),//Farah
-    Savedscreen(),//AhmedAshraf
+    Homescreen(), //AhmedAshraf
+    JobSearchScreen(), //Farah
+    Savedscreen(), //AhmedAshraf
   ];
 
   @override
@@ -50,41 +50,79 @@ class _MainscreenState extends State<Mainscreen> {
           child: Text(
             'Job Finder',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900,color: Colors.blue),
+            style: TextStyle(
+                fontSize: 22, fontWeight: FontWeight.w900, color: Colors.blue),
           ),
         ),
-        actions: [GestureDetector( onTap: (){}, child: Icon(Icons.notifications_active_outlined,color: Colors.blue,)), SizedBox(width: 18,)],
+        actions: [
+          GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.notifications_active_outlined,
+                color: Colors.blue,
+              )),
+          SizedBox(
+            width: 18,
+          )
+        ],
       ),
       drawer: Drawer(
         backgroundColor: Colors.white,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+
             UserAccountsDrawerHeader(
-                currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://th.bing.com/th/id/OIP.1cqb9FuTBVMfBMvyhRTvPwHaL1?w=124&h=199&c=7&r=0&o=5&pid=1.7"),
+
+              currentAccountPicture: CircleAvatar(
+                backgroundImage:NetworkImage(
+                    "https://th.bing.com/th/id/OIP.1cqb9FuTBVMfBMvyhRTvPwHaL1?w=124&h=199&c=7&r=0&o=5&pid=1.7"),
+              ),
+              accountName: Text(
+                FirebaseAuth.instance.currentUser?.displayName ?? "Guest ",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              accountEmail: Text(
+                FirebaseAuth.instance.currentUser?.email ?? "Guset@gmail.com",
+                style: TextStyle(fontSize: 15),
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Color(0xff3c8ce7),
+                    Color(0xff00eaff),
+                  ],
                 ),
-                decoration: BoxDecoration(
-                  color: Color(0xff2CAEE2),
-                ),
-                accountName: Text(FirebaseAuth.instance.currentUser?.displayName??"Guest "),
-                accountEmail: Text(FirebaseAuth.instance.currentUser?.email??"Guset@gmail.com")),
+              ),
+            ),
             ListTile(
-              leading: Icon(Icons.person_3_outlined),
-              title: Text("Profile"),
+              leading: Icon(
+                Icons.person_3_outlined,
+              ),
+              title: Text("Profile",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black)),
               onTap: () {},
             ),
             ListTile(
                 leading: Icon(Icons.notifications_active_outlined),
-                title: Text("Notifications"),
+                title: Text("Notifications",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
                 onTap: () {}),
             ListTile(
                 leading: Icon(Icons.translate),
-                title: Text("Language"),
+                title: Text("Language",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
                 onTap: () {}),
             ListTile(
                 leading: Icon(Icons.help_center_outlined),
-                title: Text("About"),
+                title: Text("About",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
                 onTap: () {}),
             Spacer(),
             Padding(
@@ -93,18 +131,23 @@ class _MainscreenState extends State<Mainscreen> {
                   leading: Icon(Icons.logout, color: Colors.redAccent),
                   title: Text(
                     "logout",
-                    style: TextStyle(color: Colors.redAccent),
+                    style: TextStyle(
+                        color: Colors.redAccent, fontWeight: FontWeight.bold),
                   ),
                   onTap: () {
                     GoogleSignIn().disconnect();
                     FirebaseAuth.instance.signOut();
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context)=> onboardingScreen()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => onboardingScreen()));
                   }),
             )
           ],
         ),
       ),
+
+      //-------------------------------------
       body: Screens[Selectedindex], // Display the selected screen
       bottomNavigationBar: CurvedNavigationBar(
         index: Selectedindex,
@@ -128,5 +171,3 @@ class _MainscreenState extends State<Mainscreen> {
     );
   }
 }
-
-
