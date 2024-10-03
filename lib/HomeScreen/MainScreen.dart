@@ -32,7 +32,7 @@ class _MainscreenState extends State<Mainscreen> {
     /* Center(child: Text('Home Screen'))*/
     Homescreen(), //AhmedAshraf
     JobSearchScreen(), //Farah
-    Savedscreen(), //AhmedAshraf
+    const  Savedscreen(), //AhmedAshraf
   ];
 
   @override
@@ -57,11 +57,11 @@ class _MainscreenState extends State<Mainscreen> {
         actions: [
           GestureDetector(
               onTap: () {},
-              child: Icon(
+              child: const Icon(
                 Icons.notifications_active_outlined,
                 color: Colors.blue,
               )),
-          SizedBox(
+          const SizedBox(
             width: 18,
           )
         ],
@@ -74,19 +74,19 @@ class _MainscreenState extends State<Mainscreen> {
 
             UserAccountsDrawerHeader(
 
-              currentAccountPicture: CircleAvatar(
+              currentAccountPicture: const CircleAvatar(
                 backgroundImage:NetworkImage(
                     "https://th.bing.com/th/id/OIP.1cqb9FuTBVMfBMvyhRTvPwHaL1?w=124&h=199&c=7&r=0&o=5&pid=1.7"),
               ),
               accountName: Text(
                 FirebaseAuth.instance.currentUser?.displayName ?? "Guest ",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style:const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               accountEmail: Text(
                 FirebaseAuth.instance.currentUser?.email ?? "Guset@gmail.com",
-                style: TextStyle(fontSize: 15),
+                style:const TextStyle(fontSize: 15),
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -98,38 +98,38 @@ class _MainscreenState extends State<Mainscreen> {
               ),
             ),
             ListTile(
-              leading: Icon(
+              leading:const Icon(
                 Icons.person_3_outlined,
               ),
-              title: Text("Profile",
+              title: const Text("Profile",
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black)),
               onTap: () {},
             ),
             ListTile(
-                leading: Icon(Icons.notifications_active_outlined),
-                title: Text("Notifications",
+                leading:const Icon(Icons.notifications_active_outlined),
+                title: const Text("Notifications",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black)),
                 onTap: () {}),
             ListTile(
-                leading: Icon(Icons.translate),
-                title: Text("Language",
+                leading:const Icon(Icons.translate),
+                title: const Text("Language",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black)),
                 onTap: () {}),
             ListTile(
-                leading: Icon(Icons.help_center_outlined),
-                title: Text("About",
+                leading:const Icon(Icons.help_center_outlined),
+                title: const Text("About",
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.black)),
                 onTap: () {}),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: ListTile(
-                  leading: Icon(Icons.logout, color: Colors.redAccent),
-                  title: Text(
+                  leading: const Icon(Icons.logout, color: Colors.redAccent),
+                  title: const Text(
                     "logout",
                     style: TextStyle(
                         color: Colors.redAccent, fontWeight: FontWeight.bold),
@@ -160,7 +160,7 @@ class _MainscreenState extends State<Mainscreen> {
         buttonBackgroundColor: Colors.blue[400],
         backgroundColor: Colors.white,
         animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 600),
+        animationDuration:const Duration(milliseconds: 600),
         onTap: (index) {
           setState(() {
             Selectedindex = index;

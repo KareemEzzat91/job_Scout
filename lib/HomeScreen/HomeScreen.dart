@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:jobscout/kconstnt/constants.dart';
@@ -38,13 +36,16 @@ class Homescreen extends StatelessWidget {
   }
 
   Future<void> _launchUrl(String url) async {
-    final Uri _url = Uri.parse(url); // Convert the string URL to a Uri
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
-    }
+    try {
+      final Uri _url = Uri.parse(url); // Convert the string URL to a Uri
+      if (!await launchUrl(_url)) {
+        throw Exception('Could not launch $_url');
+      }
+    }catch (e){}
+
   }
 
-  List<Job> JobBanners = [];
+   final List<Job> JobBanners = [];
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +146,7 @@ class Homescreen extends StatelessWidget {
                    ],
                  ),
               ),
-                SizedBox(height: 10,),
+                const SizedBox(height: 10,),
                 // coustom_chip(),
                 // CustomChip(),
                 //-------------------------------------------------------------------------------------
@@ -297,7 +298,6 @@ class Homescreen extends StatelessWidget {
                         ),
                       );
                     }
-
                     final jobData = snapshot.data ?? [];
                     if (jobData.isEmpty) {
                       return const Center(child: Text("No jobs found."));
@@ -329,7 +329,7 @@ class Homescreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image:
-                                        AssetImage('assets/images/black.avif'),
+                                        const AssetImage('assets/images/black.avif'),
                                     // Your image URL
                                     fit: BoxFit.cover,
                                     // Adjusts how the image fits inside the container
@@ -394,26 +394,29 @@ class Homescreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           // const SizedBox(height: 5),
-                                          Text(
-                                            jobBanners[i].company,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold,
+                                          Container(
+                                            child: Text(
+                                              jobBanners[i].company,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
+                                            width: 220,
                                           ),
                                           const SizedBox(height: 4),
                                           Row(
                                             children: [
-                                              Icon(Icons.access_time,
+                                              const Icon(Icons.access_time,
                                                   color: Colors.white70),
                                               Text(
                                                 jobBanners[i].date.length > 10
                                                     ? '${jobBanners[i].date.substring(0, 10)}...'
                                                     : jobBanners[i].date,
                                                 overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.white,
                                                 ),
@@ -726,8 +729,8 @@ class Homescreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: data.length,
                       itemBuilder: (context, index) {
-                        final bloc2 = context.read<MainCubit>();
                         final item = data[index];
+
 
                         return GestureDetector(
                           onTap: () {
@@ -752,7 +755,7 @@ class Homescreen extends StatelessWidget {
                                   color: Colors.grey.withOpacity(0.2),
                                   spreadRadius: 2,
                                   blurRadius: 5,
-                                  offset: Offset(0, 3),
+                                  offset: const Offset(0, 3),
                                 ),
                               ],
                             ),
@@ -763,28 +766,11 @@ class Homescreen extends StatelessWidget {
                                 ClipRRect(
                                   borderRadius: const BorderRadius.vertical(
                                       top: Radius.circular(20)),
-                                  child: Image.network(
-                                    item.companyLogo ?? '',
-                                    fit: BoxFit.scaleDown,
-                                    height: 200,
-                                    width: double.infinity,
-                                    loadingBuilder: (context, child, progress) {
-                                      if (progress == null) return child;
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          value: progress.expectedTotalBytes !=
-                                                  null
-                                              ? progress.cumulativeBytesLoaded /
-                                                  (progress
-                                                          .expectedTotalBytes ??
-                                                      1)
-                                              : null,
-                                        ),
-                                      );
-                                    },
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            Icon(Icons.error, size: 50),
+                                  child: CachedNetworkImage(
+                                    imageUrl: item.companyLogo, fit: BoxFit.scaleDown,height:200 ,placeholder: (c,e)=>Image.asset("assets/images/black.jpg", fit: BoxFit.cover),errorWidget: (c, u, e) => Center(
+                                      child: Image.asset(
+                                        "assets/images/linkedin.png"),
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -915,7 +901,7 @@ class Homescreen extends StatelessWidget {
                                          BorderRadius.circular(18),
                                        ),
                                        child:  Text(tagName,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white))),
 
                    );

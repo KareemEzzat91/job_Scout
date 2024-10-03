@@ -32,8 +32,10 @@ class JobDetailsScreen extends StatelessWidget {
             children: [
             ClipRect(
                 child: CachedNetworkImage(
-                  imageUrl: item.companyLogo, fit: BoxFit.fitWidth,height:350 ,placeholder: (c,e)=>Image.asset("assets/images/black.jpg", fit: BoxFit.cover),errorWidget: (c, u, e) => Image.asset(
-                    "assets/images/linkedin.png"),
+                  imageUrl: item.companyLogo, fit: BoxFit.fitWidth,height:350 ,placeholder: (c,e)=>Image.asset("assets/images/black.jpg", fit: BoxFit.cover),errorWidget: (c, u, e) => Center(
+                    child: Image.asset(
+                      "assets/images/linkedin.png"),
+                  ),
                 ),
 
               ),
