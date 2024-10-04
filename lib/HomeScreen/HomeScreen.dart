@@ -15,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 // import 'package:chips_choice_null_safety/chips_choice_null_safety.dart';
 //-------------------------------------------
 
+import '../FireStoreHelper/FireStoreHelper.dart';
 import '../Firebasenotofication/NotoficationScreen.dart';
 import 'SearchScreen/job_details_screen.dart';
 import '../main.dart';
@@ -787,6 +788,9 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       BlocBuilder<MainCubit, MainState>(
                                         builder: (context, state) {
+                                          FireStoreHelper().checkifexist(item);
+                                          FireStoreHelper().isTrue ? item.savedColor=Colors.grey : item.savedColor=Colors.blue;
+
                                           return IconButton(
                                             onPressed: () {
                                               final newColor =
@@ -796,6 +800,11 @@ class Homescreen extends StatelessWidget {
                                               context
                                                   .read<MainCubit>()
                                                   .changeColor(index, newColor);
+
+                                              if (  item.savedColor == Colors.grey ){
+                                                FireStoreHelper().addToFirestore(item);
+                                              }
+                                              else {}//remove
                                             },
                                             icon: Icon(
                                               Icons.bookmark,
@@ -888,22 +897,19 @@ class Homescreen extends StatelessWidget {
     );
   }
 
-  Widget _tag(String tagName,{double width = 70, double height = 40, VoidCallback? onTap}) {
+  Widget _tag(String tagName,
+      {double width = 70, double height = 40, VoidCallback? onTap}) {
     return GestureDetector(
-                  onTap: onTap,
-                     child: Container(
-                                       alignment: Alignment.center,
-                                       height: height,
-                                       width: width,
-                                       decoration: BoxDecoration(
-                                         color: Color(0xff29A8F7),
-                                         borderRadius:
-                                         BorderRadius.circular(18),
-                                       ),
-                                       child:  Text(tagName,
-                      style: const TextStyle(
-                          color: Colors.white))),
-
-                   );
+      onTap: onTap,
+      child: Container(
+          alignment: Alignment.center,
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            color: Color(0xff29A8F7),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Text(tagName, style: const TextStyle(color: Colors.white))),
+    );
   }
 }

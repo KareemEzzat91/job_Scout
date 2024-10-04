@@ -42,4 +42,20 @@ class Job {
       companyLogo: json['company_logo'],
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'date': date,
+      'position': position,
+      'company': company,
+      'location': location,
+      'salary_min': salaryMin,
+      'salary_max': salaryMax,
+      'description': description,
+      'apply_url': applyUrl,
+      'company_logo': companyLogo,
+      'saved_color': savedColor.value, // Convert Color to int
+    };
+  }
+
 }

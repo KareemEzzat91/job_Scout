@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:jobscout/HomeScreen/JobsModel/JobsModel.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../FireStoreHelper/FireStoreHelper.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   final Job item;
@@ -19,6 +22,18 @@ class JobDetailsScreen extends StatelessWidget {
       throw Exception('Could not launch $_url');
     }
   }
+  String chechkimage (){
+    String imageUrl = item.companyLogo;
+  try {
+    if (imageUrl == null || imageUrl.isEmpty) {
+      return   "assets/images/linkedin.png";
+    }
+    return imageUrl ;
+  } catch (e) {
+    print("Error: $e");
+    return "assets/images/linkedin.png"; // You can provide a fallback URL or handle it another way
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +45,19 @@ class JobDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-            ClipRect(
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
                 child: CachedNetworkImage(
-                  imageUrl: item.companyLogo, fit: BoxFit.fitWidth,height:350 ,placeholder: (c,e)=>Image.asset("assets/images/black.jpg", fit: BoxFit.cover),errorWidget: (c, u, e) => Center(
-                    child: Image.asset(
-                      "assets/images/linkedin.png"),
+                  imageUrl: chechkimage(),
+                  fit: BoxFit.fitWidth,
+                  height: 350,
+                  placeholder: (context, url) => Image.asset("assets/images/black.jpg", fit: BoxFit.cover),
+                  errorWidget: (context, url, error) => Center(
+                    child: Image.asset("assets/images/linkedin.png"),
                   ),
                 ),
-
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               // Position
               Text(item.position ,style: GoogleFonts.monda(fontWeight: FontWeight.bold,fontSize: 25),),
@@ -103,7 +121,8 @@ class JobDetailsScreen extends StatelessWidget {
                     color: Colors.black87,  // Same color for consistency
                   ),
                 },
-              ),              SizedBox(height: 20),
+              ),
+              SizedBox(height: 20),
 
               // Action Buttons (Apply, Save)
               Row(
@@ -113,7 +132,7 @@ class JobDetailsScreen extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () => _launchUrl(item.applyUrl),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.lightBlue[200],
+                      backgroundColor: Colors.blue[400],
                     ),
                     child: Text('Apply',style: GoogleFonts.aBeeZee(color: Colors.white),),
                   ),
@@ -121,13 +140,15 @@ class JobDetailsScreen extends StatelessWidget {
                   // Save Button
                   ElevatedButton(
                     onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
+                     FireStoreHelper().addToFirestore(item);
+                      FireStoreHelper().checkifexist(item);
 
-                        SnackBar(content: Text('Saved ${item.position}',style:GoogleFonts.aclonica(color: Colors.blue[400],) ,)),
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(FireStoreHelper().isTrue ? ' Saved ${item.position}':'Already saved ${item.position}',style:GoogleFonts.aclonica(color: Colors.blue[400],) ,)),
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.lightBlue[200],
+                      backgroundColor: Colors.blue[400],
                     ),
                     child: Text('Save',style: GoogleFonts.aBeeZee(color: Colors.white)),
                   ),
