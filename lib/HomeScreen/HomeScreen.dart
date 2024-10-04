@@ -132,11 +132,11 @@ class Homescreen extends StatelessWidget {
                    children: [
                      _tag("All"),
                      SizedBox(width: 15,),
-                     _tag("Software"),
+                     _tag("Software",width :100),
                      SizedBox(width: 15,),
                      _tag("design"),
                      SizedBox(width: 15,),
-                     _tag("management", width: 100, ),
+                     _tag("management", width: 110, ),
                      SizedBox(width: 15,),
                     _tag("developer"),
                      SizedBox(width: 15,),
@@ -788,23 +788,29 @@ class Homescreen extends StatelessWidget {
                                       ),
                                       BlocBuilder<MainCubit, MainState>(
                                         builder: (context, state) {
-                                          FireStoreHelper().checkifexist(item);
-                                          FireStoreHelper().isTrue ? item.savedColor=Colors.grey : item.savedColor=Colors.blue;
-
                                           return IconButton(
                                             onPressed: () {
-                                              final newColor =
-                                                  item.savedColor == Colors.grey
-                                                      ? Colors.blue
-                                                      : Colors.grey;
-                                              context
-                                                  .read<MainCubit>()
-                                                  .changeColor(index, newColor);
+                                              final newColor = item.savedColor == Colors.grey ? Colors.blue : Colors.grey;
+                                            final checked =   context.read<MainCubit>().changeColor(index, newColor);
+                                              checked ?FireStoreHelper().addToFirestoreUser(item) :
+                                              showDialog(context: context, builder: (c){
+                                                return AlertDialog(
+                                                  title:  const Text("DO YOU WANT TO DELETE THIS ITEM From Saved  ?"),
+                                                  actions: [
+                                                    TextButton(onPressed: (){
+                                                      Navigator.pop(context);
 
-                                              if (  item.savedColor == Colors.grey ){
-                                                FireStoreHelper().addToFirestore(item);
-                                              }
-                                              else {}//remove
+                                                    }, child: const Text("NO")),
+                                                    TextButton(onPressed: (){
+                                                      FireStoreHelper().deleteSavedJob(item);
+                                                      Navigator.pop(context);
+
+                                                    }, child: const Text("Yes")),
+                                                  ],
+
+                                                );
+                                              });
+
                                             },
                                             icon: Icon(
                                               Icons.bookmark,

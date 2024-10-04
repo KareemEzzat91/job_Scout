@@ -24,15 +24,6 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
     });
     final response = await http.get(Uri.parse('https://api.example.com/jobs?search=$searchQuery&location=$locationQuery'));
     if (response.statusCode == 200) {
-     /* List<dynamic> jsonData = json.decode(response.body);
-      setState(() {
-        jobResults = jsonData.map((job) => Job(
-          position: job['position'],
-          company: job['company'],
-          location: job['location'],
-          description: job['description'],
-        )).toList();
-      });*/
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Failed to load jobs. Please try again later.'),
@@ -104,7 +95,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 12.0),
                   decoration: BoxDecoration(
-                    color: Colors.lightBlue[200],
+                    color: Colors.blue.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Center(

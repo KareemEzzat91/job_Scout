@@ -95,7 +95,7 @@ class _OnboardingScreenState extends State<onboardingScreen>
             child: Container(
               padding:  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: BoxDecoration(
-                color: Colors.cyan.withOpacity(0.3),
+                color:  Colors.blue[300]?.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
@@ -140,7 +140,7 @@ class _OnboardingScreenState extends State<onboardingScreen>
               child: TextButton(
                 onPressed: _nextPage,
                 style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Colors.cyan),
+                  backgroundColor: WidgetStateProperty.all( Colors.blue[300]),
                   shape: WidgetStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),

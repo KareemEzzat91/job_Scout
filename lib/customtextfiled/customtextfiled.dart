@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jobscout/kconstnt/constants.dart';
 
 class CustomTextField extends StatefulWidget {
   final String text;
@@ -46,14 +47,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff58AD53)),
+              borderSide: BorderSide(color: Colors.grey),
               borderRadius: BorderRadius.circular(20),
             ),
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xff58AD53)),
+              borderSide: BorderSide(color: Colors.grey),
               borderRadius: BorderRadius.circular(20),
             ),
-            fillColor: Colors.cyan[50], // Change this if you want a different shade or keep it as is
+            fillColor: Colors.blue[300], // Change this if you want a different shade or keep it as is
             filled: true, // Make sure to set this to true to apply fillColor
             prefixIcon:widget.icon ,
             suffixIcon: widget.isPassword
@@ -67,6 +68,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 _obscureText
                     ? CupertinoIcons.eye
                     : CupertinoIcons.eye_slash,
+                color: Colors.white,
               ),
             )
                 : null,

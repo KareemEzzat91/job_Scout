@@ -5,6 +5,7 @@ import 'package:jobscout/main.dart';
 import 'package:meta/meta.dart';
 
 import '../../APIHelper/Apihelper.dart';
+import '../../FireStoreHelper/FireStoreHelper.dart';
 import '../../Firebasenotofication/NotoficationScreen.dart';
 import '../JobsModel/JobsModel.dart';
 
@@ -106,9 +107,17 @@ class MainCubit extends Cubit<MainState> {
 
   Color _currentColor = Colors.grey; // اللون الافتراضي
 
-  void changeColor(int index, Color newColor) {
+  bool changeColor( int index, Color newColor) {
+    if ( JobModels[index].savedColor == Colors.grey){
+      JobModels[index].savedColor = newColor;
+      emit(ColorChangedState());
+      return true;
+    }
     JobModels[index].savedColor = newColor;
+
     emit(ColorChangedState());
+    return false;
+
   }
   Color get currentColor => _currentColor;
   List<Job> getjobs (){

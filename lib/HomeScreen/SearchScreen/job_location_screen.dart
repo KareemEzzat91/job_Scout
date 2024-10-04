@@ -31,7 +31,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
     });
 
 
-    List <Job> results =JOBS.where((job)=>job.position.toLowerCase().contains(query.toLowerCase())).map((job)=>job ).toList();
+    List <Job> results =JOBS.where((job)=>job.location.toLowerCase().contains(query.toLowerCase())).map((job)=>job ).toList();
 
 
 
@@ -54,7 +54,10 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
     final list = bloc.JobModels;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Location Search')),
+      appBar: AppBar(backgroundColor: Colors.blue[400], title: Text('Location Search',
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+
+      )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -265,7 +268,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
               ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.lightBlue[300],
+                backgroundColor: Colors.blue[400],
                 padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
@@ -275,7 +278,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
               onPressed: () {
                 Navigator.pop(context, _controller.text);
               },
-              child: Text('Finish'),
+              child: Text('Finish',style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

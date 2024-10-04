@@ -55,7 +55,7 @@ class _MainscreenState extends State<Mainscreen> {
           ),
         ),
         actions: [
-          GestureDetector(
+            GestureDetector(
               onTap: () {},
               child: const Icon(
                 Icons.notifications_active_outlined,
@@ -137,10 +137,12 @@ class _MainscreenState extends State<Mainscreen> {
                   onTap: () {
                     GoogleSignIn().disconnect();
                     FirebaseAuth.instance.signOut();
+                    Hivehelper.logout();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => onboardingScreen()));
+
                   }),
             )
           ],

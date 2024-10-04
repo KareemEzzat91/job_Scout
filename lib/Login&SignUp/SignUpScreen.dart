@@ -66,7 +66,7 @@ class Signupscreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.person),
+                              icon: Icon(Icons.person,color: Colors.white),
                               controller: _nameController,
                               height: height,
                               text: "Name",
@@ -81,7 +81,7 @@ class Signupscreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.email_outlined),
+                              icon: Icon(Icons.email_outlined,color: Colors.white),
                               controller: _EmailController,
                               height: height,
                               text: "Email",
@@ -102,7 +102,7 @@ class Signupscreen extends StatelessWidget {
 
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.lock),
+                              icon: Icon(Icons.lock,color: Colors.white),
                               height: height,
                               controller: _passwordController,
                               text: "Password",
@@ -122,7 +122,7 @@ class Signupscreen extends StatelessWidget {
 
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.mobile_friendly),
+                              icon: Icon(Icons.mobile_friendly,color: Colors.white,),
                               height: height,
                               controller: _mobileController,
                               text: "Mobile",
@@ -150,7 +150,7 @@ class Signupscreen extends StatelessWidget {
                   },
                   child: Container (
                     decoration: BoxDecoration(
-                        color:  Colors.cyan,
+                        color:  Colors.blue[400],
                         borderRadius: BorderRadius.circular(20), // Optional: Rounded corners
                         boxShadow: const [BoxShadow(
                             color: Colors.grey,
@@ -183,7 +183,7 @@ class Signupscreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Loginscreen()),
                       );
 
-                    }, child: Text("Login",style: GoogleFonts.agbalumo(color: Colors.cyan),))
+                    }, child: Text("Login",style: GoogleFonts.agbalumo(color: Colors.blue[400]),))
                   ],)
 
 

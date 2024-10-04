@@ -209,7 +209,7 @@ class Loginscreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
-                                icon: Icon(Icons.email_outlined),
+                                icon: Icon(Icons.email_outlined,color: Colors.white),
                                 controller: _nameController,
                                 height: height,
                                 text: "Email",
@@ -230,7 +230,7 @@ class Loginscreen extends StatelessWidget {
 
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
-                                icon: Icon(Icons.lock),
+                                icon: Icon(Icons.lock,color: Colors.white),
                                 height: height,
                                 controller: _passwordController,
                                 text: "Password",
@@ -259,7 +259,7 @@ class Loginscreen extends StatelessWidget {
                   },
                   child: Container (
                       decoration: BoxDecoration(
-                        color:  Colors.cyan,
+                        color: Colors.blue[400],
                           borderRadius: BorderRadius.circular(20), // Optional: Rounded corners
                         boxShadow: const [BoxShadow(
                           color: Colors.grey,
@@ -299,7 +299,7 @@ class Loginscreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Signupscreen()),
                       );
 
-                    }, child: Text("Register Now",style: GoogleFonts.agbalumo(color: Colors.cyan),))
+                    }, child: Text("Register Now",style: GoogleFonts.agbalumo(color:kPrimaryColor),))
                   ],)
 
 

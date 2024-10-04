@@ -140,7 +140,7 @@ class JobDetailsScreen extends StatelessWidget {
                   // Save Button
                   ElevatedButton(
                     onPressed: () {
-                     FireStoreHelper().addToFirestore(item);
+                     FireStoreHelper().addToFirestoreUser(item);
                       FireStoreHelper().checkifexist(item);
 
                       ScaffoldMessenger.of(context).showSnackBar(
