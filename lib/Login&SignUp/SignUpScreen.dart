@@ -66,7 +66,7 @@ class Signupscreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.person,color: Colors.white),
+                              icon: const Icon(Icons.person,color: Color(0xff0186c7)),
                               controller: _nameController,
                               height: height,
                               text: "Name",
@@ -81,7 +81,7 @@ class Signupscreen extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.email_outlined,color: Colors.white),
+                              icon: const Icon(Icons.email_outlined,color:  Color(0xff0186c7)),
                               controller: _EmailController,
                               height: height,
                               text: "Email",
@@ -102,7 +102,7 @@ class Signupscreen extends StatelessWidget {
 
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.lock,color: Colors.white),
+                              icon: const Icon(Icons.lock,color:  Color(0xff0186c7)),
                               height: height,
                               controller: _passwordController,
                               text: "Password",
@@ -122,7 +122,7 @@ class Signupscreen extends StatelessWidget {
 
                             padding: const EdgeInsets.all(8.0),
                             child: CustomTextField(
-                              icon: Icon(Icons.mobile_friendly,color: Colors.white,),
+                              icon: const Icon(Icons.mobile_friendly,color:  Color(0xff0186c7),),
                               height: height,
                               controller: _mobileController,
                               text: "Mobile",
@@ -142,16 +142,17 @@ class Signupscreen extends StatelessWidget {
                     )
 
                 ),
-                SizedBox(height:40,),
+                const SizedBox(height:40,),
                 GestureDetector(
                   onTap: (){
                     bloc.SignUp(context,_key, _EmailController, _nameController, _passwordController, _mobileController);
 
                   },
                   child: Container (
+                    height: 70,
                     decoration: BoxDecoration(
-                        color:  Colors.blue[400],
-                        borderRadius: BorderRadius.circular(20), // Optional: Rounded corners
+                        color:  Color(0xff0186c7),
+                        borderRadius: BorderRadius.circular(15), // Optional: Rounded corners
                         boxShadow: const [BoxShadow(
                             color: Colors.grey,
                             offset:Offset(0.5, 0.5)
@@ -164,26 +165,26 @@ class Signupscreen extends StatelessWidget {
                          builder: (BuildContext context, SignState state) {
                            if (state is SignLoadingState){return Center(child: CircularProgressIndicator() ,);}
                            return  Text(
-                             "Sign Up ",style: GoogleFonts.abyssinicaSil(fontSize: 40,color: Colors.white),);
+                             "Sign Up ",style: TextStyle(fontSize: 30,color: Colors.white),);
                          },
 
                         )],),
                   ),
                 )
-                ,SizedBox(height:40,)
+                ,const SizedBox(height:40,)
 
                 , Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Text("Already a member  ? "),
+                    const Text("Already a member  ? "),
                     InkWell(onTap: (){
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => Loginscreen()),
                       );
 
-                    }, child: Text("Login",style: GoogleFonts.agbalumo(color: Colors.blue[400]),))
+                    }, child: Text("Login",style: TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold),))
                   ],)
 
 

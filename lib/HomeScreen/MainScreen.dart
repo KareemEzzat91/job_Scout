@@ -2,14 +2,11 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/HomeScreen.dart';
-import 'package:jobscout/kconstnt/constants.dart';
-import 'package:searchable_listview/searchable_listview.dart';
 
 import '../Hivehelper.dart';
+import '../onboardingScreen/IntroScreen/IntroScreen.dart';
 import '../onboardingScreen/onboardingScreen.dart';
 import 'SavedScreen/SavedScreen.dart';
 import 'SearchScreen/SearchScreen.dart';
@@ -28,8 +25,6 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   var Selectedindex = 0;
   List<Widget> Screens = [
-    // Populate this with your screen widgets
-    /* Center(child: Text('Home Screen'))*/
     Homescreen(), //AhmedAshraf
     JobSearchScreen(), //Farah
     const  Savedscreen(), //AhmedAshraf
@@ -141,7 +136,7 @@ class _MainscreenState extends State<Mainscreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => onboardingScreen()));
+                            builder: (context) => IntroScreen()));
 
                   }),
             )

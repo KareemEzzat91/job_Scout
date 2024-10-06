@@ -17,7 +17,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'ResetPasswordScreen.dart';
 class Loginscreen extends StatelessWidget {
    Loginscreen({super.key,});
-   bool issignedin =false;
+  final bool issignedin =false;
 
    Future signInWithGoogle(BuildContext context) async {
      // Trigger the authentication flow
@@ -201,6 +201,7 @@ class Loginscreen extends StatelessWidget {
                     Text("-------------------- Or Login With --------------------",style: TextStyle(color: Colors.black.withOpacity(0.6)),),
 
                   ],),
+                  SizedBox(height: height*0.04,),
                   Form(
                       key: _key,
                       child: Container(
@@ -209,7 +210,7 @@ class Loginscreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
-                                icon: Icon(Icons.email_outlined,color: Colors.white),
+                                icon: const Icon(Icons.email_outlined,color:  Color(0xff0186c7)),
                                 controller: _nameController,
                                 height: height,
                                 text: "Email",
@@ -224,13 +225,13 @@ class Loginscreen extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              height: height * .02,
+                              height: height * .01,
                             ),
                             Padding(
 
                               padding: const EdgeInsets.all(8.0),
                               child: CustomTextField(
-                                icon: Icon(Icons.lock,color: Colors.white),
+                                icon: const Icon(Icons.lock,color:  Color(0xff0186c7)),
                                 height: height,
                                 controller: _passwordController,
                                 text: "Password",
@@ -250,23 +251,24 @@ class Loginscreen extends StatelessWidget {
                   ),
                   Row(children: [Spacer(),InkWell(onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPasswordScreen()));
-                  }, child: Text("Forgot Password ?",style: TextStyle(color: kPrimaryColor,fontWeight: FontWeight.bold),))],)
-                  ,SizedBox(height:40,),
+                  }, child:  const Text("Forgot Password ?",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold)/*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/ ,))],)
+                  ,const SizedBox(height:40,),
                 GestureDetector(
                   onTap: (){
                     bloc.Login(context,_key,_nameController,_passwordController);
 
                   },
-                  child: Container (
+                  child: Container (height: 70,
                       decoration: BoxDecoration(
-                        color: Colors.blue[400],
-                          borderRadius: BorderRadius.circular(20), // Optional: Rounded corners
+                        color: Color(0xff0186c7),
+                          borderRadius: BorderRadius.circular(15), // Optional: Rounded corners
                         boxShadow: const [BoxShadow(
                           color: Colors.grey,
                           offset:Offset(0.5, 0.5)
                         )]
 
                       ),
+
                     child: Row(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         BlocBuilder <SignCubit, SignState>(
@@ -274,11 +276,11 @@ class Loginscreen extends StatelessWidget {
                           builder: (BuildContext context, SignState state) {
                             if (state is SignLoadingState)
                               {
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               }
-                            return Center(
+                            return const Center(
                               child: Text(
-                                "Login",style: GoogleFonts.abyssinicaSil(fontSize: 40,color: Colors.white),),
+                                "Login",style:TextStyle(fontSize: 30,color: Colors.white,) /*GoogleFonts.agbalumo(fontSize: 40,color: Colors.white)*/,),
                             );
 
 
@@ -286,20 +288,20 @@ class Loginscreen extends StatelessWidget {
                         )],),
                   ),
                 )
-                ,SizedBox(height:40,)
+                ,const SizedBox(height:30,)
 
                 , Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
 
-                    Text("Dont have any account ? "),
+                    const Text("Dont have any account ? "),
                     InkWell(onTap: (){
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => Signupscreen()),
                       );
 
-                    }, child: Text("Register Now",style: GoogleFonts.agbalumo(color:kPrimaryColor),))
+                    }, child: Text("Register Now",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold) /*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/,))
                   ],)
 
 

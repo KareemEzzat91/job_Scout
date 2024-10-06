@@ -26,37 +26,54 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool _obscureText = true;
+  late FocusNode _focusNode;
+  Color _iconColor = Colors.grey;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      setState(() {
+        _iconColor = _focusNode.hasFocus ? const Color(0xff0186c7) : Colors.grey;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.text,
-          style: TextStyle(color: Colors.black),
-        ),
         SizedBox(
           height: widget.height * .01,
         ),
         TextFormField(
           obscureText: _obscureText && widget.isPassword,
-          autofocus: true,
           enabled: true,
           validator: widget.validator,
+          focusNode: _focusNode, // Assign the focus node
+
           controller: widget.controller,
+          cursorHeight: 19,
           decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.circular(20),
-            ),
+            enabled: true ,
+            focusColor:  Color(0xff0186c7),
+            hintText: "Enter ${widget.text}",hintStyle: TextStyle(color: _iconColor) ,
+            isDense: true,
             border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.2)),
+              borderRadius: BorderRadius.circular(15),
             ),
-            fillColor: Colors.blue[300], // Change this if you want a different shade or keep it as is
-            filled: true, // Make sure to set this to true to apply fillColor
-            prefixIcon:widget.icon ,
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color:Color(0xff0186c7)),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            prefixIcon: Icon(
+              widget.icon.icon,
+              color: _iconColor, // Change icon color dynamically
+            ),
             suffixIcon: widget.isPassword
                 ? IconButton(
               onPressed: () {
@@ -68,13 +85,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 _obscureText
                     ? CupertinoIcons.eye
                     : CupertinoIcons.eye_slash,
-                color: Colors.white,
+                color: _iconColor,
               ),
             )
                 : null,
           ),
+          cursorColor:  Color(0xff0186c7),
         ),
       ],
     );
   }
+
 }

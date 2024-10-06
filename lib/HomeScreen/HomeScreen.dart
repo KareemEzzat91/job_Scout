@@ -5,21 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
-import 'package:jobscout/kconstnt/constants.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-//------------------------------------
-// import 'custom_chip.dart';
-// import 'package:chips_choice_null_safety/chips_choice_null_safety.dart';
-//-------------------------------------------
 
 import '../FireStoreHelper/FireStoreHelper.dart';
 import '../Firebasenotofication/NotoficationScreen.dart';
 import 'SearchScreen/job_details_screen.dart';
 import '../main.dart';
-import '../onboardingScreen/onboardingScreen.dart';
 import 'JobsModel/JobsModel.dart';
 
 class Homescreen extends StatelessWidget {
@@ -89,196 +82,480 @@ class Homescreen extends StatelessWidget {
           );
         }
       },
+
       child: Scaffold(
+
         backgroundColor: Color(0xfff7faff),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              children: [
-                Container(
-                    padding: EdgeInsets.only(right: 30, top: 10),
-                    width: double.infinity,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Hi ${FirebaseAuth.instance.currentUser?.displayName ?? "Guest"}",
-                          textAlign: TextAlign.start,
-                          style: const TextStyle(
-                              color: Color(0xff3c6EAE),
-                              fontStyle: FontStyle.italic,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900),
-                        ),
-                        const Text(
-                          'Find Your Dream Job',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                              color: Color(0xff3c6EAE),
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900),
-                        ),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                //-----------------------------------------------------------------------------------
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                   children: [
-                     _tag("All"),
-                     SizedBox(width: 15,),
-                     _tag("Software",width :100),
-                     SizedBox(width: 15,),
-                     _tag("design"),
-                     SizedBox(width: 15,),
-                     _tag("management", width: 110, ),
-                     SizedBox(width: 15,),
-                    _tag("developer"),
-                     SizedBox(width: 15,),
-                    _tag("security"),
-                     SizedBox(width: 15,),
-                     _tag("senior"),
-                     SizedBox(width: 15,),
-                   ],
-                 ),
+          child: Container(
+            decoration: const BoxDecoration(
+
+              image: DecorationImage(
+                image: AssetImage('assets/images/g.jpg'),
+                fit: BoxFit.fill , // Adjust to fit the screen
               ),
-                const SizedBox(height: 10,),
-                // coustom_chip(),
-                // CustomChip(),
-                //-------------------------------------------------------------------------------------
-                const Row(
-                  children: [
-                    Text(
-                      'Featured Jobs',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    )
-                  ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(right: 30, top: 10),
+                      width: double.infinity,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Hi ${FirebaseAuth.instance.currentUser?.displayName ?? "Guest"}",
+                            textAlign: TextAlign.start,
+                            style: const TextStyle(
+                                color: Color(0xff3c6EAE),
+                                fontStyle: FontStyle.italic,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900),
+                          ),
+                          const Text(
+                            'Find Your Dream Job',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                                color: Color(0xff3c6EAE),
+                                fontSize: 25,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ],
+                      )),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //-----------------------------------------------------------------------------------
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                     children: [
+                       _tag("All"),
+                       const SizedBox(width: 10,),
+                       _tag("Software",width :100),
+                       const SizedBox(width: 10,),
+                       _tag("design"),
+                       const SizedBox(width: 10,),
+                       _tag("management", width: 110, ),
+                       const SizedBox(width: 10,),
+                      _tag("developer",width: 110),
+                       const SizedBox(width: 10,),
+                      _tag("security"),
+                       const SizedBox(width: 10,),
+                       _tag("senior"),
+                       const SizedBox(width: 10,),
+                     ],
+                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                FutureBuilder<List<Job>?>(
-                  future: bloc.getJobsAndSetBanners(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      // Show SkeletonLoader while loading
+                  const SizedBox(height: 10,),
+
+                  //-------------------------------------------------------------------------------------
+                  const Row(
+                    children: [
+                      Text(
+                        'Featured Jobs',
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  FutureBuilder<List<Job>?>(
+                    future: bloc.getJobsAndSetBanners(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Show SkeletonLoader while loading
+                        return CarouselSlider(
+                          items: List.generate(
+                            10, // Show 10 skeleton placeholders
+                            (i) => Skeletonizer(
+                              enabled: true, // Skeleton loading enabled
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                height: 150,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  backgroundBlendMode: BlendMode.dst,
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/images/black.jpg'),
+                                      // Your image URL
+                                      fit: BoxFit.cover,
+                                      // Adjusts how the image fits inside the container
+                                      colorFilter: ColorFilter.mode(
+                                        Colors.black.withOpacity(0.2),
+                                        // Adjust the transparency here
+                                        BlendMode.dstATop,
+                                      )),
+                                  color: Colors.grey[400],
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const SizedBox(height: 15),
+                                        const CircleAvatar(
+                                          backgroundColor: Colors.grey,
+                                          // Skeleton avatar
+                                          radius: 20,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(height: 10),
+                                            Container(
+                                              width: 100,
+                                              height: 15,
+                                              color: Colors
+                                                  .grey[400], // Skeleton text
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Container(
+                                              width: 80,
+                                              height: 10,
+                                              color: Colors
+                                                  .grey[400], // Skeleton text
+                                            ),
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        Container(
+                                          width: 20,
+                                          height: 20,
+                                          color:
+                                              Colors.grey[400], // Skeleton icon
+                                        ),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[400],
+                                              // Skeleton button
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[400],
+                                              // Skeleton button
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 5),
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[400],
+                                              // Skeleton button
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          options: CarouselOptions(
+                            height: 170,
+                            viewportFraction: 1,
+                            enableInfiniteScroll: true,
+                            autoPlay: false,
+                          ),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            "Error: ${snapshot.error}",
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        );
+                      }
+                      final jobData = snapshot.data ?? [];
+                      if (jobData.isEmpty) {
+                        return const Center(child: Text("No jobs found."));
+                      }
+                      final jobBanners = jobData.toList();
+
                       return CarouselSlider(
                         items: List.generate(
-                          10, // Show 10 skeleton placeholders
+                          jobBanners.length,
                           (i) => Skeletonizer(
-                            enabled: true, // Skeleton loading enabled
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              height: 150,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                backgroundBlendMode: BlendMode.dst,
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/black.jpg'),
-                                    // Your image URL
-                                    fit: BoxFit.cover,
-                                    // Adjusts how the image fits inside the container
-                                    colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.2),
-                                      // Adjust the transparency here
-                                      BlendMode.dstATop,
-                                    )),
-                                color: Colors.grey[400],
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const SizedBox(height: 15),
-                                      const CircleAvatar(
-                                        backgroundColor: Colors.grey,
-                                        // Skeleton avatar
-                                        radius: 20,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 10),
-                                          Container(
-                                            width: 100,
-                                            height: 15,
-                                            color: Colors
-                                                .grey[400], // Skeleton text
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Container(
-                                            width: 80,
-                                            height: 10,
-                                            color: Colors
-                                                .grey[400], // Skeleton text
-                                          ),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      Container(
-                                        width: 20,
-                                        height: 20,
-                                        color:
-                                            Colors.grey[400], // Skeleton icon
-                                      ),
+                            enabled: false,
+                            // Skeleton loading disabled when data is ready
+                            //------------> Banner Container <------------------
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => JobDetailsScreen(
+                                      item: jobBanners[i],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                height: 170,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image:
+                                          const AssetImage('assets/images/black.avif'),
+                                      // Your image URL
+                                      fit: BoxFit.cover,
+                                      // Adjusts how the image fits inside the container
+                                      colorFilter: ColorFilter.mode(
+                                        Colors.black.withOpacity(0.2),
+                                        // Adjust the transparency here
+                                        BlendMode.dstATop,
+                                      )),
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [
+                                      Color(0xff62cff4),
+                                      Color(0xff2c67f2),
                                     ],
                                   ),
-                                  const Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
+                                  color: Colors.blue[400],
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        // const SizedBox(height: 15),
+                                        Container(
                                           decoration: BoxDecoration(
-                                            color: Colors.grey[400],
-                                            // Skeleton button
+                                            color: Colors.white,
                                             borderRadius:
-                                                BorderRadius.circular(15),
+                                                BorderRadius.circular(50),
+                                          ),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(50),
+                                            child: CachedNetworkImage(
+                                              imageUrl: jobBanners[i].companyLogo,
+                                              // color: Colors.blue,
+                                              width: 55,
+                                              height: 55,
+                                              alignment: Alignment.center,
+                                              maxHeightDiskCache: 75,
+                                              fit: BoxFit.contain,
+                                              // للصور اللى لسه بتحمل
+                                              placeholder: (c, u) =>
+                                                  const CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    "assets/images/photo_2024-09-16_15-28-23-removebg-preview.png"),
+                                              ),
+                                              // للصور البايظة
+                                              errorWidget: (c, u, e) =>
+                                                  const CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    "assets/images/linkedin.png"),
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[400],
-                                            // Skeleton button
-                                            borderRadius:
-                                                BorderRadius.circular(15),
+                                        const SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            // const SizedBox(height: 5),
+                                            Container(
+                                              child: Text(
+                                                jobBanners[i].company,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              width: 220,
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Row(
+                                              children: [
+                                                const Icon(Icons.access_time,
+                                                    color: Colors.white70),
+                                                Text(
+                                                  jobBanners[i].date.length > 10
+                                                      ? '${jobBanners[i].date.substring(0, 10)}...'
+                                                      : jobBanners[i].date,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: const TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+
+            /*
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                jobBanners[i].position.length > 20
+                                                    ? '${jobBanners[i].position.substring(0, 10)}...'
+                                                    : jobBanners[i].position,
+                                                overflow: TextOverflow.fade,
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+            */
+                                          ],
+                                        ),
+                                        const Spacer(),
+                                        BlocBuilder<MainCubit, MainState>(
+                                          builder: (context, state) {
+                                            return IconButton(
+                                              onPressed: () {
+                                                final newColor =
+                                                    jobBanners[i].savedColor ==
+                                                            Colors.grey
+                                                        ? Colors.redAccent
+                                                        : Colors.grey;
+                                                context
+                                                    .read<MainCubit>()
+                                                    .changeColor(i, newColor);
+                                              },
+                                              icon: Icon(
+                                                Icons.bookmark,
+                                                color: jobBanners[i].savedColor,
+                                                // Saved color
+                                                size: 30,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                        // const Icon(Icons.bookmark,
+                                        //     color: Colors.white70),
+                                      ],
+                                    ),
+                                    const Spacer(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff7ebdf8),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Icon(Icons.work_outline,
+                                                    color: Colors.white),
+                                                // SizedBox(width: 8),
+                                                Text('On Site',
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[400],
-                                            // Skeleton button
-                                            borderRadius:
-                                                BorderRadius.circular(15),
+                                        const SizedBox(width: 7),
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff7ebdf8),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Icon(
+                                                  Icons
+                                                      .local_fire_department_outlined,
+                                                  color: Colors.white,
+                                                ),
+                                                Text(
+                                                  'Part Time',
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  )
-                                ],
+                                        const SizedBox(width: 7),
+                                        Expanded(
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff7ebdf8),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: const Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Icon(Icons.location_on_outlined,
+                                                    color: Colors.white),
+                                                Text('Remote',
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -286,322 +563,189 @@ class Homescreen extends StatelessWidget {
                         options: CarouselOptions(
                           height: 170,
                           viewportFraction: 1,
+                          initialPage: 0,
                           enableInfiniteScroll: true,
-                          autoPlay: false,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          enlargeCenterPage: true,
+                          enlargeFactor: 0.3,
+                          scrollDirection: Axis.horizontal,
                         ),
                       );
-                    }
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                          "Error: ${snapshot.error}",
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      );
-                    }
-                    final jobData = snapshot.data ?? [];
-                    if (jobData.isEmpty) {
-                      return const Center(child: Text("No jobs found."));
-                    }
-                    final jobBanners = jobData.toList();
+                    },
+                  ), //Banners
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Row(
+                    children: [
+                      Text(
+                        "Recent Jobs",
+                        style:
+                            TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  FutureBuilder<List<Job>?>(
+                    future: bloc.getJobs(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // SkeletonLoader for when the data is loading
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: 5, // Number of skeleton placeholders
+                          itemBuilder: (context, index) {
+                            return Skeletonizer(
+                              enabled: true, // Show skeleton
+                              child: Container(
+                                width: double.infinity,
+                                margin: const EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.2),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Skeleton for image
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.vertical(
+                                          top: Radius.circular(20)),
+                                      child: Container(
+                                        height: 200,
+                                        width: double.infinity,
+                                        color: Colors.grey[
+                                            300], // Grey placeholder for image
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              width: 100,
+                                              height: 20,
+                                              color: Colors.grey[
+                                                  300], // Skeleton for position text
+                                            ),
+                                          ),
+                                          Container(
+                                            width: 30,
+                                            height: 30,
+                                            color: Colors.grey[
+                                                300], // Skeleton for bookmark icon
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Container(
+                                        width: 150,
+                                        height: 16,
+                                        color: Colors.grey[
+                                            300], // Skeleton for company name
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Container(
+                                        width: 100,
+                                        height: 16,
+                                        color: Colors.grey[
+                                            300], // Skeleton for location text
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 50,
+                                        color: Colors.grey[
+                                            300], // Skeleton for description
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Container(
+                                            width: 100,
+                                            height: 16,
+                                            color: Colors
+                                                .grey[300], // Skeleton for salary
+                                          ),
+                                          Container(
+                                            width: 50,
+                                            height: 16,
+                                            color: Colors.grey[
+                                                300], // Skeleton for apply button
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            "Error: ${snapshot.error}",
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        );
+                      }
 
-                    return CarouselSlider(
-                      items: List.generate(
-                        jobBanners.length,
-                        (i) => Skeletonizer(
-                          enabled: false,
-                          // Skeleton loading disabled when data is ready
-                          //------------> Banner Container <------------------
-                          child: GestureDetector(
+                      final data = snapshot.data ?? [];
+                      if (data.isEmpty) {
+                        return const Center(child: Text("No jobs found."));
+                      }
+
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          final item = data[index];
+
+
+                          return GestureDetector(
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => JobDetailsScreen(
-                                    item: jobBanners[i],
+                                    item: item,
                                   ),
                                 ),
                               );
                             },
-                            child: Container(
-                              padding: EdgeInsets.all(10),
-                              height: 170,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        const AssetImage('assets/images/black.avif'),
-                                    // Your image URL
-                                    fit: BoxFit.cover,
-                                    // Adjusts how the image fits inside the container
-                                    colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.2),
-                                      // Adjust the transparency here
-                                      BlendMode.dstATop,
-                                    )),
-                                gradient: const LinearGradient(
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  colors: [
-                                    Color(0xff62cff4),
-                                    Color(0xff2c67f2),
-                                  ],
-                                ),
-                                color: Colors.blue[400],
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // const SizedBox(height: 15),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          child: CachedNetworkImage(
-                                            imageUrl: jobBanners[i].companyLogo,
-                                            // color: Colors.blue,
-                                            width: 55,
-                                            height: 55,
-                                            alignment: Alignment.center,
-                                            maxHeightDiskCache: 75,
-                                            fit: BoxFit.contain,
-                                            // للصور اللى لسه بتحمل
-                                            placeholder: (c, u) =>
-                                                const CircleAvatar(
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/photo_2024-09-16_15-28-23-removebg-preview.png"),
-                                            ),
-                                            // للصور البايظة
-                                            errorWidget: (c, u, e) =>
-                                                const CircleAvatar(
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/linkedin.png"),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // const SizedBox(height: 5),
-                                          Container(
-                                            child: Text(
-                                              jobBanners[i].company,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            width: 220,
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Row(
-                                            children: [
-                                              const Icon(Icons.access_time,
-                                                  color: Colors.white70),
-                                              Text(
-                                                jobBanners[i].date.length > 10
-                                                    ? '${jobBanners[i].date.substring(0, 10)}...'
-                                                    : jobBanners[i].date,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-
-/*
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              jobBanners[i].position.length > 20
-                                                  ? '${jobBanners[i].position.substring(0, 10)}...'
-                                                  : jobBanners[i].position,
-                                              overflow: TextOverflow.fade,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-*/
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      BlocBuilder<MainCubit, MainState>(
-                                        builder: (context, state) {
-                                          return IconButton(
-                                            onPressed: () {
-                                              final newColor =
-                                                  jobBanners[i].savedColor ==
-                                                          Colors.grey
-                                                      ? Colors.redAccent
-                                                      : Colors.grey;
-                                              context
-                                                  .read<MainCubit>()
-                                                  .changeColor(i, newColor);
-                                            },
-                                            icon: Icon(
-                                              Icons.bookmark,
-                                              color: jobBanners[i].savedColor,
-                                              // Saved color
-                                              size: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      // const Icon(Icons.bookmark,
-                                      //     color: Colors.white70),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff7ebdf8),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Icon(Icons.work_outline,
-                                                  color: Colors.white),
-                                              // SizedBox(width: 8),
-                                              Text('On Site',
-                                                  style: TextStyle(
-                                                      color: Colors.white)),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 7),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff7ebdf8),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Icon(
-                                                Icons
-                                                    .local_fire_department_outlined,
-                                                color: Colors.white,
-                                              ),
-                                              Text(
-                                                'Part Time',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 7),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff7ebdf8),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Icon(Icons.location_on_outlined,
-                                                  color: Colors.white),
-                                              Text('Remote',
-                                                  style: TextStyle(
-                                                      color: Colors.white)),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      options: CarouselOptions(
-                        height: 170,
-                        viewportFraction: 1,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        enlargeFactor: 0.3,
-                        scrollDirection: Axis.horizontal,
-                      ),
-                    );
-                  },
-                ), //Banners
-                const SizedBox(
-                  height: 30,
-                ),
-                const Row(
-                  children: [
-                    Text(
-                      "Recent Jobs",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                FutureBuilder<List<Job>?>(
-                  future: bloc.getJobs(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      // SkeletonLoader for when the data is loading
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5, // Number of skeleton placeholders
-                        itemBuilder: (context, index) {
-                          return Skeletonizer(
-                            enabled: true, // Show skeleton
                             child: Container(
                               width: double.infinity,
                               margin: const EdgeInsets.symmetric(
@@ -614,22 +758,22 @@ class Homescreen extends StatelessWidget {
                                     color: Colors.grey.withOpacity(0.2),
                                     spreadRadius: 2,
                                     blurRadius: 5,
-                                    offset: Offset(0, 3),
+                                    offset: const Offset(0, 3),
                                   ),
                                 ],
                               ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  // Skeleton for image
+                                  // Display image
                                   ClipRRect(
                                     borderRadius: const BorderRadius.vertical(
                                         top: Radius.circular(20)),
-                                    child: Container(
-                                      height: 200,
-                                      width: double.infinity,
-                                      color: Colors.grey[
-                                          300], // Grey placeholder for image
+                                    child: CachedNetworkImage(
+                                      imageUrl: item.companyLogo, fit: BoxFit.scaleDown,height:200 ,placeholder: (c,e)=>Image.asset("assets/images/black.jpg", fit: BoxFit.cover),errorWidget: (c, u, e) => Center(
+                                        child: Image.asset(
+                                          "assets/images/linkedin.png"),
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -637,18 +781,47 @@ class Homescreen extends StatelessWidget {
                                     child: Row(
                                       children: [
                                         Expanded(
-                                          child: Container(
-                                            width: 100,
-                                            height: 20,
-                                            color: Colors.grey[
-                                                300], // Skeleton for position text
+                                          child: Text(
+                                            item.position ?? 'No Position',
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                        Container(
-                                          width: 30,
-                                          height: 30,
-                                          color: Colors.grey[
-                                              300], // Skeleton for bookmark icon
+                                        BlocBuilder<MainCubit, MainState>(
+                                          builder: (context, state) {
+                                            return IconButton(
+                                              onPressed: () {
+                                                final newColor = item.savedColor == Colors.grey ? Colors.blue : Colors.grey;
+                                              final checked =   context.read<MainCubit>().changeColor(index, newColor);
+                                                checked ?FireStoreHelper().addToFirestoreUser(item) :
+                                                showDialog(context: context, builder: (c){
+                                                  return AlertDialog(
+                                                    title:  const Text("DO YOU WANT TO DELETE THIS ITEM From Saved  ?"),
+                                                    actions: [
+                                                      TextButton(onPressed: (){
+                                                        Navigator.pop(context);
+
+                                                      }, child: const Text("NO")),
+                                                      TextButton(onPressed: (){
+                                                        FireStoreHelper().deleteSavedJob(item);
+                                                        Navigator.pop(context);
+
+                                                      }, child: const Text("Yes")),
+                                                    ],
+
+                                                  );
+                                                });
+
+                                              },
+                                              icon: Icon(
+                                                Icons.bookmark,
+                                                color: item.savedColor,
+                                                // Saved color
+                                                size: 30,
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
@@ -656,31 +829,30 @@ class Homescreen extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
-                                    child: Container(
-                                      width: 150,
-                                      height: 16,
-                                      color: Colors.grey[
-                                          300], // Skeleton for company name
+                                    child: Text(
+                                      item.company ?? 'No Company',
+                                      style: const TextStyle(
+                                          fontSize: 16, color: Colors.grey),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
-                                    child: Container(
-                                      width: 100,
-                                      height: 16,
-                                      color: Colors.grey[
-                                          300], // Skeleton for location text
+                                    child: Text(
+                                      item.location ?? 'No Location',
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.grey),
                                     ),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 50,
-                                      color: Colors.grey[
-                                          300], // Skeleton for description
+                                    child: Html(
+                                      data: truncateHtml(item.description),
+                                      style: {
+                                        "p": Style(
+                                            fontSize: FontSize(16), maxLines: 3),
+                                      },
                                     ),
                                   ),
                                   Padding(
@@ -689,17 +861,30 @@ class Homescreen extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Container(
-                                          width: 100,
-                                          height: 16,
-                                          color: Colors
-                                              .grey[300], // Skeleton for salary
+                                        Text(
+                                          '\$${item.salaryMin.toStringAsFixed(1)} - \$${item.salaryMax.toStringAsFixed(1)}',
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green),
                                         ),
-                                        Container(
-                                          width: 50,
-                                          height: 16,
-                                          color: Colors.grey[
-                                              300], // Skeleton for apply button
+                                        TextButton(
+                                          onPressed: () {
+                                            _launchUrl(item.applyUrl);
+                                          },
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xff09555c),
+                                              borderRadius:
+                                                  BorderRadius.circular(18),
+                                            ),
+                                            child: const Text('Apply',
+                                                style: TextStyle(
+                                                    color: Colors.white)),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -710,192 +895,10 @@ class Homescreen extends StatelessWidget {
                           );
                         },
                       );
-                    }
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                          "Error: ${snapshot.error}",
-                          style: const TextStyle(color: Colors.red),
-                        ),
-                      );
-                    }
-
-                    final data = snapshot.data ?? [];
-                    if (data.isEmpty) {
-                      return const Center(child: Text("No jobs found."));
-                    }
-
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        final item = data[index];
-
-
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => JobDetailsScreen(
-                                  item: item,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Display image
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(20)),
-                                  child: CachedNetworkImage(
-                                    imageUrl: item.companyLogo, fit: BoxFit.scaleDown,height:200 ,placeholder: (c,e)=>Image.asset("assets/images/black.jpg", fit: BoxFit.cover),errorWidget: (c, u, e) => Center(
-                                      child: Image.asset(
-                                        "assets/images/linkedin.png"),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          item.position ?? 'No Position',
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      BlocBuilder<MainCubit, MainState>(
-                                        builder: (context, state) {
-                                          return IconButton(
-                                            onPressed: () {
-                                              final newColor = item.savedColor == Colors.grey ? Colors.blue : Colors.grey;
-                                            final checked =   context.read<MainCubit>().changeColor(index, newColor);
-                                              checked ?FireStoreHelper().addToFirestoreUser(item) :
-                                              showDialog(context: context, builder: (c){
-                                                return AlertDialog(
-                                                  title:  const Text("DO YOU WANT TO DELETE THIS ITEM From Saved  ?"),
-                                                  actions: [
-                                                    TextButton(onPressed: (){
-                                                      Navigator.pop(context);
-
-                                                    }, child: const Text("NO")),
-                                                    TextButton(onPressed: (){
-                                                      FireStoreHelper().deleteSavedJob(item);
-                                                      Navigator.pop(context);
-
-                                                    }, child: const Text("Yes")),
-                                                  ],
-
-                                                );
-                                              });
-
-                                            },
-                                            icon: Icon(
-                                              Icons.bookmark,
-                                              color: item.savedColor,
-                                              // Saved color
-                                              size: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    item.company ?? 'No Company',
-                                    style: const TextStyle(
-                                        fontSize: 16, color: Colors.grey),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    item.location ?? 'No Location',
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Colors.grey),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Html(
-                                    data: truncateHtml(item.description),
-                                    style: {
-                                      "p": Style(
-                                          fontSize: FontSize(16), maxLines: 3),
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '\$${item.salaryMin.toStringAsFixed(1)} - \$${item.salaryMax.toStringAsFixed(1)}',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          _launchUrl(item.applyUrl);
-                                        },
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            color: Color(0xff09555c),
-                                            borderRadius:
-                                                BorderRadius.circular(18),
-                                          ),
-                                          child: const Text('Apply',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ), //Home
-              ],
+                    },
+                  ), //Home
+                ],
+              ),
             ),
           ),
         ),
@@ -912,7 +915,7 @@ class Homescreen extends StatelessWidget {
           height: height,
           width: width,
           decoration: BoxDecoration(
-            color: Color(0xff29A8F7),
+            color: const Color(0xff29A8F7),
             borderRadius: BorderRadius.circular(18),
           ),
           child: Text(tagName, style: const TextStyle(color: Colors.white))),

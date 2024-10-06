@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../Login&SignUp/LoginScreen.dart';
-import '../kconstnt/constants.dart';
 
 class onboardingScreen extends StatefulWidget {
    onboardingScreen({super.key});
@@ -34,11 +32,9 @@ class _OnboardingScreenState extends State<onboardingScreen>
   void initState() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        print('User is currently signed out!');
-        isUserSignedIn = false;
+         isUserSignedIn = false;
       } else {
-        print('User is signed in!');
-        isUserSignedIn = true;
+         isUserSignedIn = true;
       }
     });
 

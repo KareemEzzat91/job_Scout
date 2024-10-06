@@ -16,6 +16,7 @@ import 'HomeScreen/MainScreen.dart';
 import 'HomeScreen/Maincubit/main_cubit.dart';
 import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
+import 'onboardingScreen/IntroScreen/IntroScreen.dart';
 
 
 void main() async {
@@ -53,14 +54,10 @@ class _MyAppState extends State<MyApp> {
   void checkUserSignedIn() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null && Hivehelper.checkfirst() ) {
-        print('User is currently signed out!');
-        print ( ":::::::::::::::::${user?.email.toString()}");
         setState(() {
           isUserSignedIn = false;
         });
       } else {
-        print('User is signed in!');
-        print ( ":::::::::::::::::${user?.email.toString()}");
         setState(() {
           isUserSignedIn = true;
         });
@@ -98,21 +95,8 @@ class _MyAppState extends State<MyApp> {
             bodyMedium: const TextStyle(color: kBodyTextColor),
           ),
         ),
-        home: isUserSignedIn! ? Mainscreen() :  onboardingScreen(),
+        home: isUserSignedIn! ? const Mainscreen() :  const IntroScreen(),
       ),
     );
   }
 }
-/*
-class MyAPP extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Job Scout',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: JobSearchScreen(),
-    );
-  }
-}*/
