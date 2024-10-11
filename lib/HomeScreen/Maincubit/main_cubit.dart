@@ -98,12 +98,24 @@ class MainCubit extends Cubit<MainState> {
 
 
 
+  Map<String, Color> tagColors = {
+    "All": Colors.white,
+    "Software": Colors.white,
+    "Design": Colors.white,
+    "Management": Colors.white,
+    "Developer": Colors.white,
+    "Security": Colors.white,
+    "Senior": Colors.white,
+  };
 
 
 
+  void changecolor(String tag) {
+    tagColors.updateAll((key, value) => Colors.white);
 
-
-
+    tagColors[tag] = tagColors[tag] == Colors.white ? Colors.blue.shade700 : Colors.white;
+    emit(ColorChangedState());
+  }
 
   Color _currentColor = Colors.grey; // اللون الافتراضي
 

@@ -10,6 +10,7 @@ import 'package:jobscout/HomeScreen/JobsModel/JobsModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../FireStoreHelper/FireStoreHelper.dart';
+import '../../kconstnt/constants.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   final Job item;
@@ -34,11 +35,13 @@ class JobDetailsScreen extends StatelessWidget {
     return "assets/images/linkedin.png"; // You can provide a fallback URL or handle it another way
   }
 }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Job Details')),
+      appBar: AppBar(backgroundColor: Colors.blue[400], title: Text(item.position,
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 16),
+
+      )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -47,13 +50,17 @@ class JobDetailsScreen extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: CachedNetworkImage(
-                  imageUrl: chechkimage(),
-                  fit: BoxFit.fitWidth,
-                  height: 350,
-                  placeholder: (context, url) => Image.asset("assets/images/black.jpg", fit: BoxFit.cover),
-                  errorWidget: (context, url, error) => Center(
-                    child: Image.asset("assets/images/linkedin.png"),
+                child: Hero(
+                  transitionOnUserGestures: true,
+                  tag: item.id,
+                  child: CachedNetworkImage(
+                    imageUrl: chechkimage(),
+                    fit: BoxFit.fitWidth,
+                    height: 350,
+                    placeholder: (context, url) => Image.asset("assets/images/black.jpg", fit: BoxFit.cover),
+                    errorWidget: (context, url, error) => Center(
+                      child: Image.asset("assets/images/linkedin.png"),
+                    ),
                   ),
                 ),
               ),
@@ -133,6 +140,7 @@ class JobDetailsScreen extends StatelessWidget {
                     onPressed: () => _launchUrl(item.applyUrl),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue[400],
+
                     ),
                     child: Text('Apply',style: GoogleFonts.aBeeZee(color: Colors.white),),
                   ),
@@ -146,6 +154,8 @@ class JobDetailsScreen extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(FireStoreHelper().isTrue ? ' Saved ${item.position}':'Already saved ${item.position}',style:GoogleFonts.aclonica(color: Colors.blue[400],) ,)),
                       );
+                     FireStoreHelper().addnumofapplytimes(numberofApply++);
+
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue[400],

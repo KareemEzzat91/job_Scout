@@ -111,7 +111,6 @@ class _SavedscreenState extends State<Savedscreen> {
                                     final newColor = item.savedColor == Colors.grey ? Colors.blue : Colors.grey;
                                     context.read<MainCubit>().changeColor(index, newColor);
                                     if (item.savedColor == Colors.grey) {
-                                      FireStoreHelper().addToFirestore(item);
                                     } else {}
                                     showDialog(context: context, builder: (c){
                                       return AlertDialog(

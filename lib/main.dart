@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:jobscout/FireStoreHelper/FireStoreHelper.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
 import 'APIHelper/Apihelper.dart';
@@ -27,7 +28,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
     ApiHelper.init();
+  await FireStoreHelper().getumofapplytimes ();
   var Box = await Hive.openBox(Hivehelper.Boxname);
+  await FireStoreHelper(). getProfileSettings();
   await  NotificationService().initNotification();
   runApp(const MyApp());
   runApp(MyApp());

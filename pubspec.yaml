@@ -57,6 +57,8 @@ dependencies:
   chips_choice_null_safety: ^2.0.6
   cloud_firestore: ^5.4.4
   dio: ^5.6.0
+  fl_chart: ^0.69.0
+
 
 
 dev_dependencies:

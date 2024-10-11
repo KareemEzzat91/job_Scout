@@ -15,4 +15,4 @@ class Hivehelper {
     return Hive.box(Boxname).isEmpty;
   }
 
-}
+}   
