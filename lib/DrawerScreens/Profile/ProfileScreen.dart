@@ -44,11 +44,11 @@ class ProfileScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: List.generate(controllers.length, (i) {
                 return TextField(
-                  style: TextStyle(color: Colors.white),
+
+                  style: TextStyle(color: Colors.black),
                   controller: controllers[i],
                   decoration: InputDecoration(
                     hintText: "Enter value for position ${i + 1}",
-
                   ),
                   onChanged: (value) {
                     controllers[i].text = value; // Update corresponding controller text
@@ -94,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
           return AlertDialog(
             title: Text("Update $field"),
             content: TextField(
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.black),
 
               controller: TextEditingController(text: newValue),
               decoration: InputDecoration(
@@ -175,6 +175,10 @@ class ProfileScreen extends StatelessWidget {
       body: StreamBuilder(stream: FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser?.uid).snapshots(), builder: (context,snapshot){
         if (snapshot.hasData){
           final userdata = snapshot.data?.data()as Map<String,dynamic>;
+          if (userdata ["skills"]==null || userdata['Bio']==null ||userdata['workExperience']==null)
+            {
+                FireStoreHelper().saveProfile( Skills: ["Skill1","skill2","skill3",'skill4','skill5'],WorkExperience: ['Job Name',"Positon",'date','image.examble']);
+            }
           List <dynamic>Skills =userdata['skills'];
 
           return SingleChildScrollView(
@@ -352,7 +356,7 @@ class ProfileScreen extends StatelessWidget {
         EditField ("skills",context,index :index,Skills:Skills );
       },
       child: Chip(
-        label: Text(label),
+        label: Text(label,style: TextStyle(color: Colors.white.withOpacity(0.8)),),
         backgroundColor: const Color(0xff3c6EAE),
         elevation: 4.0,
         shadowColor: Colors.black38,
