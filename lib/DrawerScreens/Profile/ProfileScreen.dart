@@ -1,14 +1,27 @@
 
+
+
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jobscout/FireStoreHelper/FireStoreHelper.dart';
-import '../../test.dart';
+import '../../kconstnt/constants.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
   final TextEditingController _controller = TextEditingController();
+  Uint8List? _image;
+
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    _image = img;
+  }
+
+
   Future<void> EditField(String field, BuildContext context, {int index = 0,List Skills = const []}) async {
     String newValue = '';
 
@@ -31,9 +44,11 @@ class ProfileScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: List.generate(controllers.length, (i) {
                 return TextField(
+                  style: TextStyle(color: Colors.white),
                   controller: controllers[i],
                   decoration: InputDecoration(
                     hintText: "Enter value for position ${i + 1}",
+
                   ),
                   onChanged: (value) {
                     controllers[i].text = value; // Update corresponding controller text
@@ -79,6 +94,8 @@ class ProfileScreen extends StatelessWidget {
           return AlertDialog(
             title: Text("Update $field"),
             content: TextField(
+              style: TextStyle(color: Colors.white),
+
               controller: TextEditingController(text: newValue),
               decoration: InputDecoration(
                 hintText: "Enter new value for $field",
@@ -189,13 +206,14 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
                       children: [
-                        const Hero(
-                          tag: 'profile-pic',
-                          child: CircleAvatar(
-                            radius: 50.0,
-                            backgroundColor: Colors.white,
-                            backgroundImage: NetworkImage('profile_image_url'),
-                          ),
+                        _image !=null?CircleAvatar(
+                          radius: 50.0,
+                          backgroundColor: Colors.white,
+                          backgroundImage:MemoryImage(_image!),
+                        ):  const CircleAvatar(
+                          radius: 50.0,
+                          backgroundColor: Colors.white,
+                          backgroundImage: AssetImage('assets/images/OIP (4).jpeg'),
                         ),
                         const SizedBox(width: 16.0),
                         Expanded(
@@ -228,17 +246,9 @@ class ProfileScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                Positioned(height: 230,left: 80,child: IconButton(onPressed: (){}, icon: Icon(Icons.add_a_photo_rounded,color: Colors.black,)))
-/*
-                  Positioned(
-                    right: 0.0,
-                    bottom: 16.0,
-                    child: IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.white),
-                      onPressed: () {},
-                    ),
-                  ),
-*/
+                Positioned(height: 230,left: 80,child: IconButton(onPressed: (){selectImage();
+
+                }, icon: Icon(Icons.add_a_photo_rounded,color: Colors.black,)))
                 ],
               ),
               // About Me

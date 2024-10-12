@@ -113,7 +113,7 @@ class MainCubit extends Cubit<MainState> {
   void changecolor(String tag) {
     tagColors.updateAll((key, value) => Colors.white);
 
-    tagColors[tag] = tagColors[tag] == Colors.white ? Colors.blue.shade700 : Colors.white;
+    tagColors[tag] = tagColors[tag] == Colors.white ? Color(0xff3c6EAE): Colors.white;
     emit(ColorChangedState());
   }
 

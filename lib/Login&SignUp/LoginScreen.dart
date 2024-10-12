@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jobscout/HomeScreen/MainScreen.dart';
 import 'package:jobscout/Login&SignUp/SignUpScreen.dart';
@@ -11,9 +10,7 @@ import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
 import '../Hivehelper.dart';
 import '../HomeScreen/HomeScreen.dart';
 import '../customtextfiled/customtextfiled.dart';
-import '../kconstnt/constants.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-// helllo
 import 'ResetPasswordScreen.dart';
 class Loginscreen extends StatelessWidget {
    Loginscreen({super.key,});
@@ -153,11 +150,11 @@ class Loginscreen extends StatelessWidget {
                               child: const Row(
                                 children: [
                                   SizedBox(width: 20),
-                                  Icon(Icons.facebook, color: Colors.blue,size: 30,), // Added color to the icon
+                                  Icon(Icons.facebook, color: Colors.blue,size: 35,), // Added color to the icon
                                   SizedBox(width: 8),
                                   Text(
                                     "Facebook",
-                                    style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.bold),
+                                    style: TextStyle(color: Colors.black,fontSize: 17,fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -180,12 +177,12 @@ class Loginscreen extends StatelessWidget {
                               ),
                               child: Row(
                                 children: [
-                                  const SizedBox(width: 20),
-                                  Image.network("https://www.vhv.rs/dpng/d/0-6167_google-app-icon-png-transparent-png.png",width: 30,),
-                                  const SizedBox(width: 8),
+                                  const SizedBox(width: 10),
+                                  Image.asset("assets/images/Google-Symbol.png",width: 45,),
+                                  const SizedBox(width: 4),
                                   const Text(
                                     "Google",
-                                    style: TextStyle(color: Colors.black,fontSize: 17,fontWeight: FontWeight.bold ),
+                                    style: TextStyle(color: Colors.black,fontSize: 20,fontWeight: FontWeight.bold ),
                                   ),
                                 ],
                               ),

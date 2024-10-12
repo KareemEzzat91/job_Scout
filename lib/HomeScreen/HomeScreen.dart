@@ -89,7 +89,7 @@ class Homescreen extends StatelessWidget {
 
       child: Scaffold(
 
-        backgroundColor: Color(0xfff7faff),
+        backgroundColor: kbackgroundcolor,
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
@@ -135,7 +135,7 @@ class Homescreen extends StatelessWidget {
                                 const SizedBox(height: 4),
                                 Text(
                                   'You have applied to ${numberofApply } jobs this week.',
-                                  style: TextStyle(color: Colors.grey[700], fontSize: 11),
+                                  style: TextStyle(color: ksecondTextcolor, fontSize: 11),
                                 ),
                               ],
                             ),
@@ -179,7 +179,7 @@ class Homescreen extends StatelessWidget {
                                 // to your image
                                 fit: BoxFit.cover, // Ensures the image covers the entire card
                               ),
-                              color: Colors.blue.shade700
+                              color: kcontainercoloe
                             ),
                             height: 220, // Set height based on your content
                           ),
@@ -190,22 +190,22 @@ class Homescreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   'Active Jobs',
-                                  style: TextStyle(color: Colors.white70, fontSize: 18),
+                                  style: TextStyle(color: kactiveJobsTextcoloe, fontSize: 18),
                                 ),
                                 const SizedBox(height: 8),
                                  Text(
                                   '${ bloc.JobModels.length==0 ?"42": bloc.JobModels.length} Jobs',
                                   style: const TextStyle(
-                                      color: Colors.white,
+                                      color: kwhiteTextcolor,
                                       fontSize: 32,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 8),
                                  Text(
                                   'You applied for $numberofApply jobs this month',
-                                  style: TextStyle(color: Colors.white60, fontSize: 14),
+                                  style: TextStyle(color: kactiveJobsTextcoloe, fontSize: 14),
                                 ),
                                 const SizedBox(height: 16),
                                 Container(
@@ -219,11 +219,11 @@ class Homescreen extends StatelessWidget {
                                     children: [
                                       const Text(
                                         'Monthly Target: 30 Jobs',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: kwhiteTextcolor),
                                       ),
                                       Text(
                                         'Reached: ${FireStoreHelper().numberofApply??"0"}',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: kwhiteTextcolor),
                                       ),
                                     ],
                                   ),
@@ -662,7 +662,7 @@ class Homescreen extends StatelessWidget {
                                             alignment: Alignment.center,
                                             height: 40,
                                             decoration: BoxDecoration(
-                                              color: Color(0xff7ebdf8),
+                                              color: Color(0xff3c6EAE),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
@@ -686,7 +686,7 @@ class Homescreen extends StatelessWidget {
                                             alignment: Alignment.center,
                                             height: 40,
                                             decoration: BoxDecoration(
-                                              color: Color(0xff7ebdf8),
+                                              color: Color(0xff3c6EAE),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
@@ -715,19 +715,24 @@ class Homescreen extends StatelessWidget {
                                             alignment: Alignment.center,
                                             height: 40,
                                             decoration: BoxDecoration(
-                                              color: Color(0xff7ebdf8),
+                                              color: Color(0xff3c6EAE),
                                               borderRadius:
                                                   BorderRadius.circular(15),
                                             ),
-                                            child: const Row(
+                                            child:  Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                Icon(Icons.location_on_outlined,
+                                                const Icon(Icons.location_on_outlined,
                                                     color: Colors.white),
-                                                Text('Remote',
-                                                    style: TextStyle(
-                                                        color: Colors.white)),
+                                                Container(
+                                                  width: 80,
+                                                  child: Text(
+                                                      jobBanners[i].location,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: const TextStyle(
+                                                          color: Colors.white)),
+                                                ),
                                               ],
                                             ),
                                           ),

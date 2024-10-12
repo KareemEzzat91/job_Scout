@@ -7,13 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:jobscout/FireStoreHelper/FireStoreHelper.dart';
 import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
-import 'package:jobscout/onboardingScreen/onboardingScreen.dart';
-import 'APIHelper/Apihelper.dart';
+import 'package:jobscout/theme/theme.dart';
+ import 'APIHelper/Apihelper.dart';
 import 'Firebasenotofication/Notofication.dart';
 import 'Firebasenotofication/NotoficationScreen.dart';
 import 'Hivehelper.dart';
-import 'HomeScreen/HomeScreen.dart';
-import 'HomeScreen/MainScreen.dart';
+ import 'HomeScreen/MainScreen.dart';
 import 'HomeScreen/Maincubit/main_cubit.dart';
 import 'firebase_options.dart';
 import 'kconstnt/constants.dart';
@@ -36,9 +35,11 @@ void main() async {
   runApp(MyApp());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
+final ValueNotifier<ThemeData> themeNotifier = ValueNotifier(lightTheme);
+
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -87,17 +88,6 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: navigatorkey,
         debugShowCheckedModeBanner: false,
         title: 'Real Estate',
-        theme: ThemeData.dark().copyWith(
-          primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor: kBgColor,
-          canvasColor: kBgColor,
-          textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-              .apply(bodyColor: Colors.white)
-              .copyWith(
-            bodyLarge: const TextStyle(color: kBodyTextColor),
-            bodyMedium: const TextStyle(color: kBodyTextColor),
-          ),
-        ),
         home: isUserSignedIn! ? const Mainscreen() :  const IntroScreen(),
       ),
     );

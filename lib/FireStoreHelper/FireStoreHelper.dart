@@ -22,7 +22,6 @@ class FireStoreHelper {
       // الحصول على UID الخاص بالمستخدم الحالي
 
       if (userId != null) {
-        // تحقق مما إذا كانت الـ Job موجودة بالفعل في Subcollection "savedJobs" الخاصة بالمستخدم الحالي
         QuerySnapshot query = await db
             .collection("users")
             .doc(userId)

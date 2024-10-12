@@ -7,8 +7,10 @@ import 'package:jobscout/DrawerScreens/Profile/ProfileScreen.dart';
 import 'package:jobscout/HomeScreen/HomeScreen.dart';
 
 import '../Hivehelper.dart';
+import '../main.dart';
 import '../onboardingScreen/IntroScreen/IntroScreen.dart';
- import 'SavedScreen/SavedScreen.dart';
+ import '../theme/theme.dart';
+import 'SavedScreen/SavedScreen.dart';
 import 'SearchScreen/SearchScreen.dart';
 
 class Mainscreen extends StatefulWidget {
@@ -32,8 +34,6 @@ class _MainscreenState extends State<Mainscreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -84,7 +84,7 @@ class _MainscreenState extends State<Mainscreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             UserAccountsDrawerHeader(
-              currentAccountPicture: CircleAvatar(
+              currentAccountPicture: const CircleAvatar(
                 backgroundImage: NetworkImage(
                     "https://th.bing.com/th/id/OIP.1cqb9FuTBVMfBMvyhRTvPwHaL1?w=124&h=199&c=7&r=0&o=5&pid=1.7"),
               ),
@@ -153,15 +153,14 @@ class _MainscreenState extends State<Mainscreen> {
           ],
         ),
       ),
-
       //-------------------------------------
       body: Screens[Selectedindex], // Display the selected screen
       bottomNavigationBar: CurvedNavigationBar(
         index: Selectedindex,
         items: const <Widget>[
-          Icon(Icons.home, size: 30),
-          Icon(Icons.search, size: 30),
-          Icon(Icons.bookmarks_outlined, size: 30),
+          Icon(Icons.home, size: 30,color: Colors.white,),
+          Icon(Icons.search, size: 30,color: Colors.white),
+          Icon(Icons.bookmarks_outlined, size: 30,color: Colors.white),
         ],
         color: Colors.blue.shade700.withOpacity(.95),
         height: 57,
