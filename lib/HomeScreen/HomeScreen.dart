@@ -222,7 +222,7 @@ class Homescreen extends StatelessWidget {
                                         style: TextStyle(color: kwhiteTextcolor),
                                       ),
                                       Text(
-                                        'Reached: ${FireStoreHelper().numberofApply??"0"}',
+                                        'Reached: $numberofApply }',
                                         style: TextStyle(color: kwhiteTextcolor),
                                       ),
                                     ],
