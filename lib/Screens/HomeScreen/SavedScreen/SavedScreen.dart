@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
  import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
-import '../../FireStoreHelper/FireStoreHelper.dart';
+import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
 import '../JobsModel/JobsModel.dart';
 import '../Maincubit/main_cubit.dart';
 import '../SearchScreen/job_details_screen.dart'; // Adjust the import path as necessary

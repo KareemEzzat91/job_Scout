@@ -1,12 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:jobscout/main.dart';
 import 'package:meta/meta.dart';
-
-import '../../APIHelper/Apihelper.dart';
-import '../../FireStoreHelper/FireStoreHelper.dart';
-import '../../Firebasenotofication/NotoficationScreen.dart';
+import '../../../Helpers/APIHelper/Apihelper.dart';
 import '../JobsModel/JobsModel.dart';
 
 part 'main_state.dart';

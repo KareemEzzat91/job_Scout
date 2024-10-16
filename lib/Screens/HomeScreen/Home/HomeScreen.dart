@@ -6,17 +6,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'package:jobscout/DrawerScreens/Profile/ProfileScreen.dart';
-import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../FireStoreHelper/FireStoreHelper.dart';
-import '../Firebasenotofication/NotoficationScreen.dart';
-import '../kconstnt/constants.dart';
-import 'SearchScreen/job_details_screen.dart';
-import '../main.dart';
-import 'JobsModel/JobsModel.dart';
+import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
+import '../../../Helpers/kconstnt/constants.dart';
+import '../../../main.dart';
+import '../../DrawerScreens/Profile/ProfileScreen.dart';
+import '../../Firebasenotofication/NotoficationScreen.dart';
+import '../Maincubit/main_cubit.dart';
+import '../SearchScreen/job_details_screen.dart';
+import '../JobsModel/JobsModel.dart';
 
 class Homescreen extends StatelessWidget {
   Homescreen({super.key});

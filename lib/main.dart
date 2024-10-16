@@ -5,18 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:jobscout/FireStoreHelper/FireStoreHelper.dart';
-import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
-import 'package:jobscout/theme/theme.dart';
- import 'APIHelper/Apihelper.dart';
-import 'Firebasenotofication/Notofication.dart';
-import 'Firebasenotofication/NotoficationScreen.dart';
-import 'Hivehelper.dart';
- import 'HomeScreen/MainScreen.dart';
-import 'HomeScreen/Maincubit/main_cubit.dart';
-import 'firebase_options.dart';
-import 'kconstnt/constants.dart';
-import 'onboardingScreen/IntroScreen/IntroScreen.dart';
+import 'Helpers/APIHelper/Apihelper.dart';
+import 'Helpers/FireStoreHelper/FireStoreHelper.dart';
+import 'Helpers/theme/theme.dart';
+import 'Helpers/Hivehelper.dart';
+
+import 'Screens/Firebasenotofication/Notofication.dart';
+import 'Screens/Firebasenotofication/NotoficationScreen.dart';
+import 'Screens/HomeScreen/MainScreen.dart';
+import 'Screens/HomeScreen/Maincubit/main_cubit.dart';
+import 'Screens/Login&SignUp/cubit/sign_cubit.dart';
+import 'Screens/onboardingScreen/IntroScreen/IntroScreen.dart';
+import 'Helpers/firebase_options.dart';
 
 
 void main() async {

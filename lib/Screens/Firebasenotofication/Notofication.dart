@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
-import '../main.dart';
+import '../../main.dart';
+import '../HomeScreen/Maincubit/main_cubit.dart';
 import 'NotoficationScreen.dart';
 
 class NotificationService {

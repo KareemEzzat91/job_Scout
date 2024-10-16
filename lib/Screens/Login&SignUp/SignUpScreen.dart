@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:jobscout/Login&SignUp/cubit/sign_cubit.dart';
-import '../customtextfiled/customtextfiled.dart';
+import '../../Helpers/customtextfiled/customtextfiled.dart';
 import 'LoginScreen.dart';
+import 'cubit/sign_cubit.dart';
 
 class Signupscreen extends StatelessWidget {
   late final String? Function(String?)? validator;

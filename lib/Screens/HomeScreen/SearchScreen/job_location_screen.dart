@@ -1,24 +1,21 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:jobscout/HomeScreen/JobsModel/JobsModel.dart';
-
-import 'package:jobscout/HomeScreen/Maincubit/main_cubit.dart';
-
+import '../JobsModel/JobsModel.dart';
+import '../Maincubit/main_cubit.dart';
 import 'job_details_screen.dart';
 
-class JobNameInputScreen extends StatefulWidget {
+class JobLocationInputScreen extends StatefulWidget {
   @override
-  _JobNameInputScreenState createState() => _JobNameInputScreenState();
+  _JobLocationInputScreenState createState() => _JobLocationInputScreenState();
 }
 
-class _JobNameInputScreenState extends State<JobNameInputScreen> {
+class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
   final TextEditingController _controller = TextEditingController();
   List<Job> _filteredSuggestions = [];
   bool isLoading = false;
 
-  void _onSearchChanged(String query, List <Job>jobs) async {
+  void _onSearchChanged(String query,List <Job>JOBS) async {
     if (query.isEmpty) {
       setState(() {
         _filteredSuggestions = [];
@@ -30,17 +27,22 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
       isLoading = true;
     });
 
-    List <Job> results = jobs.where((job) => job.position.toLowerCase().contains(query.toLowerCase())).map((job) => job).toList();
+
+    List <Job> results =JOBS.where((job)=>job.location.toLowerCase().contains(query.toLowerCase())).map((job)=>job ).toList();
+
+
 
     setState(() {
-      _filteredSuggestions = results;
-      isLoading = false;
+      _filteredSuggestions  = results;
+      isLoading = false
+      ;
     });
+
   }
 
   void _clearSearch() {
     _controller.clear();
-    _onSearchChanged('', []);
+    _onSearchChanged('',[]);
   }
 
   @override
@@ -49,27 +51,25 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
     final list = bloc.JobModels;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Job Search',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.blue[400],
-      ),
+      appBar: AppBar(backgroundColor: Colors.blue[400], title: Text('Location Search',
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+
+      )),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'What job are you looking for?',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              'Where is your location?',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            SizedBox(height: 8),
             TextField(
               controller: _controller,
-              onChanged: (value) => _onSearchChanged(value, list),
+              onChanged: (val)=> _onSearchChanged(val,list),
               decoration: InputDecoration(
-                hintText: 'Enter job name',
+                hintText: 'Enter location',
                 border: OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.grey[300],
@@ -80,7 +80,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
               ),
               style: TextStyle(color: Colors.grey[800]),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             if (isLoading)
               Center(child: CircularProgressIndicator())
             else
@@ -96,7 +96,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                   itemBuilder: (context, index) {
                     final item = _filteredSuggestions[index];
                     return GestureDetector(
-                      onTap: (){
+                      onTap:  (){
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -107,6 +107,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
 
                       },
                       child: Container(
+
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           image: DecorationImage(
@@ -227,7 +228,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
 */
                                         SizedBox(width: 4),
                                         Text('On Site',  overflow: TextOverflow.ellipsis,
-                                            style: TextStyle(color: Colors.white, fontSize: 12),),
+                                          style: TextStyle(color: Colors.white, fontSize: 12),),
                                       ],
                                     ),
                                   ),
@@ -265,25 +266,16 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue[400],
-                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
-                if (_controller.text.isNotEmpty) {
-                  Navigator.pop(context, _controller.text);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please enter a job name.')),
-                  );
-                }
+                Navigator.pop(context, _controller.text);
               },
-              child: const Text(
-                'Next',
-                style: TextStyle(color: Colors.white),
-              ),
+              child: Text('Finish',style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

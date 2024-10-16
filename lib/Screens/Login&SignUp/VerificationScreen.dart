@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:jobscout/HomeScreen/HomeScreen.dart';
-import 'package:jobscout/HomeScreen/MainScreen.dart';
+
+import '../HomeScreen/MainScreen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final User user;

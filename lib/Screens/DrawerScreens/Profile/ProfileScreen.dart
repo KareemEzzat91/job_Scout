@@ -1,14 +1,12 @@
-
-
-
 import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:jobscout/FireStoreHelper/FireStoreHelper.dart';
-import '../../kconstnt/constants.dart';
+
+import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
+import '../../../Helpers/kconstnt/constants.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});

@@ -1,16 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
-import 'package:jobscout/HomeScreen/JobsModel/JobsModel.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../FireStoreHelper/FireStoreHelper.dart';
-import '../../kconstnt/constants.dart';
+import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
+import '../../../Helpers/kconstnt/constants.dart';
+import '../JobsModel/JobsModel.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   final Job item;

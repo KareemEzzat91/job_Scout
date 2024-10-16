@@ -3,13 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:jobscout/DrawerScreens/Profile/ProfileScreen.dart';
-import 'package:jobscout/HomeScreen/HomeScreen.dart';
 
-import '../Hivehelper.dart';
-import '../main.dart';
+import '../../Helpers/Hivehelper.dart';
+import '../DrawerScreens/Profile/ProfileScreen.dart';
 import '../onboardingScreen/IntroScreen/IntroScreen.dart';
- import '../theme/theme.dart';
+import 'Home/HomeScreen.dart';
 import 'SavedScreen/SavedScreen.dart';
 import 'SearchScreen/SearchScreen.dart';
 

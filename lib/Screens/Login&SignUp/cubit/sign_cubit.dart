@@ -6,7 +6,6 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:flutter/src/widgets/form.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:jobscout/HomeScreen/HomeScreen.dart';
 import 'package:meta/meta.dart';
 
 import '../../HomeScreen/MainScreen.dart';
