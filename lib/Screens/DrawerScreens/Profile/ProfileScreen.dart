@@ -176,7 +176,7 @@ class ProfileScreen extends StatelessWidget {
           final userdata = snapshot.data?.data()as Map<String,dynamic>;
           if (userdata ["skills"]==null || userdata['Bio']==null ||userdata['workExperience']==null)
             {
-                FireStoreHelper().saveProfile( Skills: ["Skill1","skill2","skill3",'skill4','skill5'],WorkExperience: ['Job Name',"Positon",'date','image.examble']);
+                FireStoreHelper().saveProfile(Bio: "", num: 0,Username: "",Skills: ["Skill1","skill2","skill3",'skill4','skill5'],WorkExperience: ['Job Name',"Positon",'date','image.examble']);
             }
           List <dynamic>Skills =userdata['skills'];
 

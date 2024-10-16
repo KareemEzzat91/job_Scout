@@ -26,8 +26,7 @@ void main() async {
   );
     ApiHelper.init();
   await FireStoreHelper().getumofapplytimes ();
-  var Box = await Hive.openBox(Hivehelper.Boxname);
-
+  await Hive.openBox(Hivehelper.Boxname);
   await FireStoreHelper(). getProfileSettings();
   await NotificationService().initNotification();
   runApp(const MyApp());
@@ -57,10 +56,13 @@ class _MyAppState extends State<MyApp> {
       if (user == null && Hivehelper.checkfirst() ) {
         setState(() {
           isUserSignedIn = false;
+          print("user sign out");
         });
       } else {
         setState(() {
           isUserSignedIn = true;
+          print("user sign in");
+
         });
       }
     });

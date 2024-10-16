@@ -68,18 +68,6 @@ class MainCubit extends Cubit<MainState> {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   void showNotification(RemoteMessage message) {
     emit(SuccessNotoficationState(
         message.notification!.title??"",  // Title of the notification

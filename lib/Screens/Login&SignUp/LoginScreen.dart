@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,26 +20,49 @@ class LoginScreen extends StatelessWidget {
      // Trigger the authentication flow
 
      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      ("1111111111111111111111111111");
+     print ("1111111111111111111111111111");
+
+     // Obtain the auth details from the request
+     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+     print ("@22222222222222222222222222211");
+     // Create a new credential
+     final credential = GoogleAuthProvider.credential(
+       accessToken: googleAuth?.accessToken,
+       idToken: googleAuth?.idToken,
+     );
+     print("33333333333333333333333333333333");
+
+     // Once signed in, return the UserCredential
+      await FirebaseAuth.instance.signInWithCredential(credential);
+     print("444444444444444444444444444");
+    final userId =FirebaseAuth.instance.currentUser?.uid;
+
+     if (  userId !=null){
+      DocumentSnapshot document = await FirebaseFirestore.instance.collection("users").doc(userId).get();
+      if (!document.exists){
+        await FirebaseFirestore.instance.collection("users").doc(userId).set({
+          "applyCount": 0,
+          "Bio": "Add about yourself",
+          "username": FirebaseAuth.instance.currentUser?.displayName??"Guest",
+          "skills": ["Skill1","Skill2","Skill3","Skill4","Skill5"],
+          "workExperience": ["Job Tittle ","position","date","image.example"],
+        });
+        print("Done111111111111111111111111111111111111111111111111111");
+
+        await FirebaseFirestore.instance.collection("users").doc(userId).collection("savedJobs").add({});
+        print("Done22222222222222222222222222222222222222222222222222");
+
+
+      }
+    }
+
+
      Hivehelper.init();
      Navigator.pushReplacement(
        context,
        MaterialPageRoute(builder: (context) => const Mainscreen()),
      );
 
-     // Obtain the auth details from the request
-     final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-     ("@22222222222222222222222222211");
-     // Create a new credential
-     final credential = GoogleAuthProvider.credential(
-       accessToken: googleAuth?.accessToken,
-       idToken: googleAuth?.idToken,
-     );
-     ("33333333333333333333333333333333");
-
-     // Once signed in, return the UserCredential
-      await FirebaseAuth.instance.signInWithCredential(credential);
-     ("444444444444444444444444444");
 
 
 

@@ -17,7 +17,6 @@ class FireStoreHelper {
 
   Future<void> addToFirestoreUser(Job item) async {
     try {
-      // الحصول على UID الخاص بالمستخدم الحالي
 
       if (userId != null) {
         QuerySnapshot query = await db
@@ -187,6 +186,7 @@ class FireStoreHelper {
     try {
       if (userId != null) {
         DocumentSnapshot document = await db.collection("users").doc(userId).get();
+        print({"Documenttttttttttttttttttttttttttttttttttttttttttttt$document"});
 
         if (!document.exists) {
           // Create new user profile if it doesn't exist
@@ -198,6 +198,8 @@ class FireStoreHelper {
             "workExperience": WorkExperience,
           });
         } else {
+          print({"Updateeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee$document"});
+
           // Update existing user profile with the provided values
           await db.collection("users").doc(userId).update({
             "applyCount": num,
@@ -230,9 +232,6 @@ class FireStoreHelper {
     }
     return null; // Return null if userId is null or an error occurs
   }
-
-
-
 }
 class ProfileSettings {
   int num;
