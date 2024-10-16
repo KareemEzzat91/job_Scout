@@ -6,7 +6,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'Helpers/APIHelper/Apihelper.dart';
 import 'Helpers/FireStoreHelper/FireStoreHelper.dart';
-import 'Helpers/theme/theme.dart';
+import 'Helpers/theme/DarkTheme/ThemeCubit/themes_cubit.dart';
 import 'Helpers/Hivehelper.dart';
 
 import 'Screens/Firebasenotofication/Notofication.dart';
@@ -20,20 +20,19 @@ import 'Helpers/firebase_options.dart';
 
 void main() async {
   await Hive.initFlutter();
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
     ApiHelper.init();
   await FireStoreHelper().getumofapplytimes ();
+  var Box = await Hive.openBox(Hivehelper.Boxname);
+
   await FireStoreHelper(). getProfileSettings();
-  await  NotificationService().initNotification();
-  runApp(const MyApp());
+  await NotificationService().initNotification();
   runApp(const MyApp());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
-final ValueNotifier<ThemeData> themeNotifier = ValueNotifier(lightTheme);
 
 
 class MyApp extends StatefulWidget {
@@ -75,18 +74,25 @@ class _MyAppState extends State<MyApp> {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => ThemesCubit()..setinitalTheme()), // إضافة BlocProvider للثيم
+
         BlocProvider(create: (context) => MainCubit()),
         BlocProvider(create: (context) => SignCubit()),
       ],
-      child: GetMaterialApp(
-        routes:{
-          NotoficationScreen.routeName : (context)=> const NotoficationScreen(),
+      child: BlocBuilder<ThemesCubit,ThemState>(
+        builder: (context,state) {
+          return GetMaterialApp(
+            routes:{
+              NotoficationScreen.routeName : (context)=> const NotoficationScreen(),
 
-        },
-        navigatorKey: navigatorkey,
-        debugShowCheckedModeBanner: false,
-        title: 'Real Estate',
-        home: isUserSignedIn! ? const Mainscreen() :  const IntroScreen(),
+            },
+            navigatorKey: navigatorkey,
+            debugShowCheckedModeBanner: false,
+            theme: state.themeData,
+            title: 'JobScout',
+            home: isUserSignedIn! ? const Mainscreen() :  const IntroScreen(),
+          );
+        }
       ),
     );
   }

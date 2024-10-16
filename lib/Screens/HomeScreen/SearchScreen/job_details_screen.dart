@@ -35,6 +35,7 @@ class JobDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(backgroundColor: Colors.blue[400], title: Text(item.position,
         style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 16),
 

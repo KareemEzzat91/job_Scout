@@ -38,6 +38,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   get: ^4.6.6
   hive_flutter: ^1.1.0
+  shared_preferences: ^2.3.2
   searchable_listview: ^2.15.1
   curved_navigation_bar: ^1.0.6
   google_fonts: ^6.2.1

@@ -49,6 +49,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = context.read<MainCubit>();
+    final iSDarkMode = Theme.of(context).brightness ==Brightness.dark;
 
     return BlocListener<MainCubit, MainState>(
       listener: (BuildContext context, MainState state) {
@@ -90,7 +91,7 @@ class HomeScreen extends StatelessWidget {
 
       child: Scaffold(
 
-        backgroundColor: kbackgroundcolor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -102,13 +103,13 @@ class HomeScreen extends StatelessWidget {
                     Navigator.push(context, MaterialPageRoute(builder: (c)=>ProfileScreen()));
                   },
 
-                  child: Card(color: Colors.white,
+                  child: Card(color: iSDarkMode?Colors.black:Colors.white,
                     elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding:  EdgeInsets.all(16.0),
                       child: Row(
                         children: [
                           const CircleAvatar(
@@ -125,16 +126,21 @@ class HomeScreen extends StatelessWidget {
                                   "Welcome Back ${FirebaseAuth.instance.currentUser?.displayName ?? ""}",
                                   overflow: TextOverflow.fade,
                                   maxLines: 1,
-                                  style: const TextStyle(
-                                      color: Colors.black,
+                                  style:   TextStyle(
+                                      color: iSDarkMode?Colors.white:Colors.black,
                                       fontSize: 17,
                                       fontWeight: FontWeight.bold),
                                 ),
                                ),
                               const SizedBox(height: 4),
                               Text(
-                                'You have applied to $numberofApply  jobs this week.',
-                                style: const TextStyle(color: ksecondTextcolor, fontSize: 11),
+                                'You have applied to $numberofApply jobs this week.',
+                                style: TextStyle(
+                                  color: Theme.of(context).brightness == Brightness.dark
+                                      ? Colors.white.withOpacity(0.9)// لون النص في الثيم الداكن
+                                      : Colors.black.withOpacity(0.7), // لون النص في الثيم الفاتح
+                                  fontSize: 11,
+                                ),
                               ),
                             ],
                           ),
@@ -171,13 +177,13 @@ class HomeScreen extends StatelessWidget {
                             ),
 
                             borderRadius: BorderRadius.circular(12),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/Clouds.jpg'), // Path
-                            opacity: 0.23,
+                          image:  DecorationImage(
+                            image: AssetImage(iSDarkMode?"assets/images/MoonKnightImage.jpg":'assets/images/Clouds.jpg'), // Path
+                            opacity:iSDarkMode? 0.23:0.3,
                             // to your image
                             fit: BoxFit.cover, // Ensures the image covers the entire card
                           ),
-                          color: kcontainercoloe
+                          color: Theme.of(context).primaryColor
                         ),
                         height: 220, // Set height based on your content
                       ),
@@ -188,22 +194,22 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                             Text(
                               'Active Jobs',
-                              style: TextStyle(color: kactiveJobsTextcoloe, fontSize: 18),
+                              style: TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73) , fontSize: 18),
                             ),
                             const SizedBox(height: 8),
                              Text(
                               '${ bloc.JobModels.isEmpty ?"42": bloc.JobModels.length} Jobs',
-                              style: const TextStyle(
-                                  color: kwhiteTextcolor,
+                              style:  TextStyle(
+                                  color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.93) ,
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 8),
                              Text(
                               'You applied for $numberofApply jobs this month',
-                              style: const TextStyle(color: kactiveJobsTextcoloe, fontSize: 14),
+                              style:  TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.83), fontSize: 14),
                             ),
                             const SizedBox(height: 16),
                             Container(
@@ -215,13 +221,13 @@ class HomeScreen extends StatelessWidget {
                               child:  Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
+                                   Text(
                                     'Monthly Target: 30 Jobs',
-                                    style: TextStyle(color: kwhiteTextcolor),
+                                    style: TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73)),
                                   ),
                                   Text(
-                                    'Reached: $numberofApply }',
-                                    style: const TextStyle(color: kwhiteTextcolor),
+                                    'Reached: $numberofApply  ',
+                                    style:  TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73)),
                                   ),
                                 ],
                               ),
@@ -249,10 +255,10 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    _buildDashboardItem(Icons.work, "Active Jobs", " ${ bloc.JobModels.isEmpty ?"42": bloc.JobModels.length} ", Colors.pink),
-                    _buildDashboardItem(Icons.people, "Candidates", "298", Colors.yellow),
-                    _buildDashboardItem(Icons.event, "Events", "54", Colors.blue),
-                    _buildDashboardItem(Icons.check_circle, "To-dos", "48", Colors.green),
+                    _buildDashboardItem(Icons.work, "Active Jobs", " ${ bloc.JobModels.isEmpty ?"42": bloc.JobModels.length} ", Colors.pink,iSDarkMode),
+                    _buildDashboardItem(Icons.people, "Candidates", "298", Colors.yellow,iSDarkMode),
+                    _buildDashboardItem(Icons.event, "Events", "54", Colors.blue,iSDarkMode),
+                    _buildDashboardItem(Icons.check_circle, "To-dos", "48", Colors.green,iSDarkMode),
                   ],
                 ),
                 const SizedBox(height: 20),
@@ -290,7 +296,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: _tag("Software",
                               const Icon(Icons.computer, color: Colors.grey),
-                            color: bloc.tagColors["Software"],
+                            color:  bloc.tagColors["All"],ISDarkMode: iSDarkMode,
 
                           ),
                         ),
@@ -301,7 +307,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: _tag("Design",
                               const Icon(Icons.design_services, color: Colors.grey),
-                            color: bloc.tagColors["Design"],
+                            color:  bloc.tagColors["All"],ISDarkMode:iSDarkMode ,
                           ),
                         ),
                         const SizedBox(width: 14),
@@ -311,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: _tag("Management",
                               const Icon(Icons.manage_accounts, color: Colors.grey),
-                              color: bloc.tagColors["Management"]),
+                              color: bloc.tagColors["Management"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
                         InkWell(
@@ -320,7 +326,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: _tag("Developer",
                               const Icon(Icons.developer_mode, color: Colors.grey),
-                              color: bloc.tagColors["Developer"]),
+                              color: bloc.tagColors["Developer"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
                         InkWell(
@@ -329,7 +335,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: _tag("Security",
                               const Icon(Icons.security, color: Colors.grey),
-                              color: bloc.tagColors["Security"]),
+                              color: bloc.tagColors["Security"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
                         InkWell(
@@ -338,7 +344,7 @@ class HomeScreen extends StatelessWidget {
                           },
                           child: _tag(
                               "Senior", const Icon(Icons.scale, color: Colors.grey),
-                              color: bloc.tagColors["Senior"]),
+                              color: bloc.tagColors["Senior"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
                       ],
@@ -934,7 +940,7 @@ class HomeScreen extends StatelessWidget {
                                 vertical: 10, horizontal: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
+                              color:iSDarkMode?Colors.black :Colors.white,
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.2),
@@ -1019,6 +1025,7 @@ class HomeScreen extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0),
                                   child: Text(
+
                                     item.company  ,
                                     style: const TextStyle(
                                         fontSize: 16, color: Colors.grey),
@@ -1095,15 +1102,16 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+
   Widget _tag(String tagName, Icon icon,
-      {double width = 91, double height = 80, Color ?color = Colors.white}) {
+      {double width = 91, double height = 80, Color ?color = Colors.white,bool ISDarkMode=false}) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       alignment: Alignment.center,
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: color,
+        color: ISDarkMode?Colors.black:color,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -1120,19 +1128,19 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             tagName,
-            style: const TextStyle(color: Colors.black, fontSize: 12),
+            style:  TextStyle(color: ISDarkMode?Colors.white:Colors.black, fontSize: 12),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDashboardItem(IconData icon, String label, String value, Color color) {
+  Widget _buildDashboardItem(IconData icon, String label, String value, Color color,bool ISDarkMode) {
     return Container(
       margin: const EdgeInsets.all(8),
-      padding: const EdgeInsets.all(16),
+      padding:  EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color:ISDarkMode ?Colors.black:Colors.white,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(

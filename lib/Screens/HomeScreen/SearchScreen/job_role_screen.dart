@@ -47,14 +47,17 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
   Widget build(BuildContext context) {
     final bloc = context.read<MainCubit>();
     final list = bloc.JobModels;
+    final iSDarkMode = Theme.of(context).brightness ==Brightness.dark;
+
+
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title:  Text(
           'Job Search',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: TextStyle(color:  Colors.white , fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.blue[400],
+        backgroundColor: iSDarkMode?Colors.black:Colors.blue[400],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

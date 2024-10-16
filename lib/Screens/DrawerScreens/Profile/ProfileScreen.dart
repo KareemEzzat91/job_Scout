@@ -145,12 +145,14 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final iSDarkMode = Theme.of(context).brightness ==Brightness.dark;
+
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.blue[400]),
-        backgroundColor: Colors.white,
+        backgroundColor:iSDarkMode?Colors.black: Colors.white,
         title: Padding(
           padding: const EdgeInsets.all(50.0),
           child: Column(
@@ -255,13 +257,13 @@ class ProfileScreen extends StatelessWidget {
               // About Me
               const SizedBox(height: 24.0),
               Row(
-                children:  [const Text(
+                children:  [ Text(
                   'About Me',
                   style: TextStyle(
-                      fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.black87),
+                      fontSize: 24.0, fontWeight: FontWeight.w600, color:iSDarkMode?Colors.white :Colors.black87),
 
                 ),const Spacer(),IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.black),
+                  icon:  Icon(Icons.edit, color: iSDarkMode ?Colors.white:Colors.black),
                   onPressed: () {EditField ("Bio",context );
                   },
                 )]
@@ -271,12 +273,12 @@ class ProfileScreen extends StatelessWidget {
 
               // My Skills
               const SizedBox(height: 24.0),
-              const Row(
+               Row(
                 children: [
                   Text(
                     'My Skills',
                     style: TextStyle(
-                        fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black87),
+                        fontSize: 20.0, fontWeight: FontWeight.w600,color:iSDarkMode?Colors.white :Colors.black87),
                   ),
               ]),
               const SizedBox(height: 8.0),
@@ -294,10 +296,10 @@ class ProfileScreen extends StatelessWidget {
 
               // Work Experience
               const SizedBox(height: 24.0),
-              const Text(
+               Text(
                 'Work Experience',
                 style: TextStyle(
-                    fontSize: 20.0, fontWeight: FontWeight.w600, color: Colors.black87),
+                    fontSize: 20.0, fontWeight: FontWeight.w600,color:iSDarkMode?Colors.white :Colors.black87),
               ),
               const SizedBox(height: 8.0),
               _buildWorkExperienceCard(

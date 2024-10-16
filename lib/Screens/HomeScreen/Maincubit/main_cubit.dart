@@ -92,7 +92,6 @@ class MainCubit extends Cubit<MainState> {
 
 
 
-
   Map<String, Color> tagColors = {
     "All": Colors.white,
     "Software": Colors.white,
@@ -108,7 +107,7 @@ class MainCubit extends Cubit<MainState> {
   void changecolor(String tag) {
     tagColors.updateAll((key, value) => Colors.white);
 
-    tagColors[tag] = tagColors[tag] == Colors.white ? const Color(0xff3c6EAE): Colors.white;
+    tagColors[tag] = tagColors[tag] == Colors.white ?  Colors.black: Colors.white;
     emit(ColorChangedState());
   }
 

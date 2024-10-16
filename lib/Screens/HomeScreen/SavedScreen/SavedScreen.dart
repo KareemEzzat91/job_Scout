@@ -27,6 +27,8 @@ class _SavedScreenState extends State<SavedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final iSDarkMode = Theme.of(context).brightness ==Brightness.dark;
+
     return Scaffold(
 
       body: FutureBuilder<List<Job>>(
@@ -67,7 +69,7 @@ class _SavedScreenState extends State<SavedScreen> {
                   margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
+                    color:iSDarkMode?Colors.black :Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.2),

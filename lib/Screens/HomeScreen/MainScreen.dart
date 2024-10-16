@@ -1,9 +1,11 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Helpers/Hivehelper.dart';
+import '../../Helpers/theme/DarkTheme/ThemeCubit/themes_cubit.dart';
 import '../DrawerScreens/Profile/ProfileScreen.dart';
 import '../onboardingScreen/IntroScreen/IntroScreen.dart';
 import 'Home/HomeScreen.dart';
@@ -31,12 +33,14 @@ class _MainscreenState extends State<Mainscreen> {
 
   @override
   Widget build(BuildContext context) {
+    final iSDarkMode = Theme.of(context).brightness ==Brightness.dark;
+    final bloc = context.read<ThemesCubit>();
 
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         iconTheme: IconThemeData(color: Colors.blue[400]),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Padding(
           padding: const EdgeInsets.all(50.0),
           child:    Container(
@@ -65,10 +69,12 @@ class _MainscreenState extends State<Mainscreen> {
         ),
         actions: [
             GestureDetector(
-              onTap: () {},
-              child: const Icon(
-                Icons.notifications_active_outlined,
-                color: Colors.blue,
+              onTap: () {
+                bloc.toggleTheme(!iSDarkMode);
+              },
+              child: Icon(iSDarkMode?
+                Icons.nightlight_round_sharp:Icons.sunny,
+                color: iSDarkMode?Colors.blue:Colors.orange,
               )),
           const SizedBox(
             width: 18,
@@ -76,7 +82,7 @@ class _MainscreenState extends State<Mainscreen> {
         ],
       ),
       drawer: Drawer(
-        backgroundColor: Colors.white,
+        backgroundColor: iSDarkMode?Colors.black:Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -93,9 +99,9 @@ class _MainscreenState extends State<Mainscreen> {
                 FirebaseAuth.instance.currentUser?.email ?? "Guest@gmail.com",
                 style: const TextStyle(fontSize: 15),
               ),
-              decoration: const BoxDecoration(
-                image:  DecorationImage(image:AssetImage( 'assets/images/moonandstars.jpg'),opacity: 0.3,fit: BoxFit.fill),
-                gradient: LinearGradient(
+              decoration: BoxDecoration(
+                image:  DecorationImage(image:AssetImage( iSDarkMode?'assets/images/moonandstars.jpg':"assets/images/sunBackgrond.jpg"),opacity: 0.3,fit: BoxFit.fill),
+                gradient: const LinearGradient(
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
                   colors: [
@@ -108,24 +114,32 @@ class _MainscreenState extends State<Mainscreen> {
             _buildDrawerItem(
               icon: Icons.person_3_outlined,
               title: "Profile",
+
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (C)=>ProfileScreen()));
                 },
+                titleColor: iSDarkMode ?Colors.white:Colors.black
+
             ),
             _buildDrawerItem(
               icon: Icons.notifications_active_outlined,
               title: "Notifications",
               onTap: () {},
+                titleColor: iSDarkMode ?Colors.white:Colors.black
+
             ),
             _buildDrawerItem(
               icon: Icons.translate,
               title: "Language",
               onTap: () {},
+              titleColor: iSDarkMode ?Colors.white:Colors.black
             ),
             _buildDrawerItem(
               icon: Icons.help_center_outlined,
               title: "About",
               onTap: () {},
+                titleColor: iSDarkMode ?Colors.white:Colors.black
+
             ),
             const Spacer(),
             Padding(
@@ -159,11 +173,11 @@ class _MainscreenState extends State<Mainscreen> {
           Icon(Icons.search, size: 30,color: Colors.white),
           Icon(Icons.bookmarks_outlined, size: 30,color: Colors.white),
         ],
-        color: Colors.blue.shade700.withOpacity(.95),
+        color: iSDarkMode? Colors.blue.shade900.withOpacity(.40):Colors.blue.shade700.withOpacity(.95),
         height: 57,
-        buttonBackgroundColor: Colors.blue[600],
+        buttonBackgroundColor:iSDarkMode? Colors.blue[800]:Colors.blue[600],
 
-        backgroundColor: Colors.white,
+        backgroundColor:iSDarkMode? Colors.black:Colors.white,
         animationCurve: Curves.easeInOut,
         animationDuration:const Duration(milliseconds: 600),
         onTap: (index) {

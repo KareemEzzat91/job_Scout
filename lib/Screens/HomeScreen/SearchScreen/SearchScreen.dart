@@ -41,7 +41,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
-          color: Colors.white,
+          color: Theme.of(context).scaffoldBackgroundColor,
           child: Column(
             children: [
 
