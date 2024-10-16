@@ -73,6 +73,7 @@ class IntroWidget extends StatelessWidget {
                       child: Container(
                         width: width, // Adjust the width as needed
                         child: Text(
+                          maxLines: 5,
                         description,
                         style: const TextStyle(
                           fontSize: 18,

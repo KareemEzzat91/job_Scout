@@ -41,14 +41,14 @@ class _IntroScreenState extends State<IntroScreen> {
       'title': 'Welcome to JobScout',
       'image': 'assets/images/image1.jpg',
       'description': "Discover your dream job effortlessly.\n  "
-          "Connect with employers and stay updated with the latest job openings in your field.",
+          "Connect with employers\nand stay updated\nwith the latest\nJobs",
       'skip': true
     },
     {
       'color': '#5babde',
       'title': 'Find Your Perfect Job',
       'image': 'assets/images/image2.jpg',
-      'description': 'Explore thousands of job listings tailored to your skills and preferences. '
+      'description': '\n   Explore thousands of job listings\n tailored to your skills and preferences. '
          ,
       'skip': true
     },
@@ -56,7 +56,7 @@ class _IntroScreenState extends State<IntroScreen> {
       'color': '#0186c7',
       'title': 'Step Into Your Future',
       'image': 'assets/images/image3.jpg',
-      'description': '  Join our community and take\n the first step towards your ideal career! '
+      'description': '  Join our community and take\n  the first step towards your\n ideal career! '
          ,
       'skip': false
     },
