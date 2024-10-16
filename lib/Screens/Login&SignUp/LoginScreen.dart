@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -12,34 +11,34 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'ResetPasswordScreen.dart';
 import 'SignUpScreen.dart';
 import 'cubit/sign_cubit.dart';
-class Loginscreen extends StatelessWidget {
-   Loginscreen({super.key,});
+class LoginScreen extends StatelessWidget {
+   LoginScreen({super.key,});
   final bool issignedin =false;
 
    Future signInWithGoogle(BuildContext context) async {
      // Trigger the authentication flow
 
      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      print("1111111111111111111111111111");
+      ("1111111111111111111111111111");
      Hivehelper.init();
      Navigator.pushReplacement(
        context,
-       MaterialPageRoute(builder: (context) => Mainscreen()),
+       MaterialPageRoute(builder: (context) => const Mainscreen()),
      );
 
      // Obtain the auth details from the request
      final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
-     print("@22222222222222222222222222211");
+     ("@22222222222222222222222222211");
      // Create a new credential
      final credential = GoogleAuthProvider.credential(
        accessToken: googleAuth?.accessToken,
        idToken: googleAuth?.idToken,
      );
-     print("33333333333333333333333333333333");
+     ("33333333333333333333333333333333");
 
      // Once signed in, return the UserCredential
       await FirebaseAuth.instance.signInWithCredential(credential);
-     print("444444444444444444444444444");
+     ("444444444444444444444444444");
 
 
 
@@ -50,17 +49,17 @@ class Loginscreen extends StatelessWidget {
        Hivehelper.init();
         Navigator.pushReplacement(
          context,
-         MaterialPageRoute(builder: (context) => Mainscreen()),
+         MaterialPageRoute(builder: (context) => const Mainscreen()),
        );
        // Trigger the sign-in flow Not working
        final LoginResult loginResult = await FacebookAuth.instance.login();
-       print("1111111111111111111111111111");
+       ("1111111111111111111111111111");
 
 
 
        // Check if the login was successful
        if (loginResult.status == LoginStatus.success) {
-         print("@22222222222222222222222222211");
+         ("@22222222222222222222222222211");
 
          // Create a credential from the access token
          final AccessToken accessToken = loginResult.accessToken!;
@@ -71,17 +70,17 @@ class Loginscreen extends StatelessWidget {
           await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
          Navigator.pushReplacement(
            context,
-           MaterialPageRoute(builder: (context) => Homescreen()),
+           MaterialPageRoute(builder: (context) => HomeScreen()),
          );
        } else {
-         print("33333333333333333333333333333333");
+         ("33333333333333333333333333333333");
 
-         print('Facebook sign-in failed: ${loginResult.status}');
+         ('Facebook sign-in failed: ${loginResult.status}');
          return null; // or handle the error as needed
        }
-     } catch (e) {     print("34444444444444444444444");
+     } catch (e) {
 
-     print('Error during Facebook sign-in: $e');
+     ('Error during Facebook sign-in: $e');
        return null; // or handle the error as needed
      }
    }
@@ -129,7 +128,7 @@ class Loginscreen extends StatelessWidget {
                       ),),
                     ],
                   ),
-                  SizedBox(height: 8,),
+                  const SizedBox(height: 8,),
                   Text("Enter Your information Below ",style: TextStyle(color: Colors.grey.shade400),)
                   ,Padding(
                     padding: const EdgeInsets.all(20.0),
@@ -161,7 +160,7 @@ class Loginscreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                         Expanded(
                           child: InkWell(
                             onTap:() {signInWithGoogle(context );},
@@ -201,53 +200,51 @@ class Loginscreen extends StatelessWidget {
                   SizedBox(height: height*0.04,),
                   Form(
                       key: _key,
-                      child: Container(
-                        child:Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(
-                                icon: const Icon(Icons.email_outlined,color:  Color(0xff0186c7)),
-                                controller: _nameController,
-                                height: height,
-                                text: "Email",
-                                validator: (val) {
-                                  if (!val!.isEmail) {
-                                    return "this should be valid Email.";
-                                  } else if (val.length < 10) {
-                                    return " email should be more than 10 letters";
-                                  }
-                                  return null;
-                                },
-                              ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomTextField(
+                              icon: const Icon(Icons.email_outlined,color:  Color(0xff0186c7)),
+                              controller: _nameController,
+                              height: height,
+                              text: "Email",
+                              validator: (val) {
+                                if (!val!.isEmail) {
+                                  return "this should be valid Email.";
+                                } else if (val.length < 10) {
+                                  return " email should be more than 10 letters";
+                                }
+                                return null;
+                              },
                             ),
-                            SizedBox(
-                              height: height * .01,
-                            ),
-                            Padding(
+                          ),
+                          SizedBox(
+                            height: height * .01,
+                          ),
+                          Padding(
 
-                              padding: const EdgeInsets.all(8.0),
-                              child: CustomTextField(
-                                icon: const Icon(Icons.lock,color:  Color(0xff0186c7)),
-                                height: height,
-                                controller: _passwordController,
-                                text: "Password",
-                                isPassword: true,
-                                validator: (val) {
-                                  if (val!.length < 6) {
-                                    return "Password should be more than 7 letters";
-                                  }
-                                  return null;
-                                },
-                              ),
+                            padding: const EdgeInsets.all(8.0),
+                            child: CustomTextField(
+                              icon: const Icon(Icons.lock,color:  Color(0xff0186c7)),
+                              height: height,
+                              controller: _passwordController,
+                              text: "Password",
+                              isPassword: true,
+                              validator: (val) {
+                                if (val!.length < 6) {
+                                  return "Password should be more than 7 letters";
+                                }
+                                return null;
+                              },
                             ),
-                          ],
-                        ) ,
+                          ),
+                        ],
                       )
 
                   ),
-                  Row(children: [Spacer(),InkWell(onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ResetPasswordScreen()));
+                  Row(children: [const Spacer(),InkWell(onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const ResetPasswordScreen()));
                   }, child:  const Text("Forgot Password ?",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold)/*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/ ,))],)
                   ,const SizedBox(height:40,),
                 GestureDetector(
@@ -257,7 +254,7 @@ class Loginscreen extends StatelessWidget {
                   },
                   child: Container (height: 70,
                       decoration: BoxDecoration(
-                        color: Color(0xff0186c7),
+                        color: const Color(0xff0186c7),
                           borderRadius: BorderRadius.circular(15), // Optional: Rounded corners
                         boxShadow: const [BoxShadow(
                           color: Colors.grey,
@@ -298,7 +295,7 @@ class Loginscreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Signupscreen()),
                       );
 
-                    }, child: Text("Register Now",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold) /*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/,))
+                    }, child: const Text("Register Now",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold) /*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/,))
                   ],)
 
 

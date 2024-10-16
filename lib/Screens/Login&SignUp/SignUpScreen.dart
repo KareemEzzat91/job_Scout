@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -13,6 +12,8 @@ class Signupscreen extends StatelessWidget {
   final _mobileController = TextEditingController();
   final _passwordController = TextEditingController();
   final _key = GlobalKey<FormState>();
+
+  Signupscreen({super.key});
 
 
   @override
@@ -150,7 +151,7 @@ class Signupscreen extends StatelessWidget {
                   child: Container (
                     height: 70,
                     decoration: BoxDecoration(
-                        color:  Color(0xff0186c7),
+                        color:  const Color(0xff0186c7),
                         borderRadius: BorderRadius.circular(15), // Optional: Rounded corners
                         boxShadow: const [BoxShadow(
                             color: Colors.grey,
@@ -162,8 +163,8 @@ class Signupscreen extends StatelessWidget {
                       children: [
                         BlocBuilder<SignCubit,SignState>(
                          builder: (BuildContext context, SignState state) {
-                           if (state is SignLoadingState){return Center(child: CircularProgressIndicator() ,);}
-                           return  Text(
+                           if (state is SignLoadingState){return const Center(child: CircularProgressIndicator() ,);}
+                           return  const Text(
                              "Sign Up ",style: TextStyle(fontSize: 30,color: Colors.white),);
                          },
 
@@ -180,10 +181,10 @@ class Signupscreen extends StatelessWidget {
                     InkWell(onTap: (){
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Loginscreen()),
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
 
-                    }, child: Text("Login",style: TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold),))
+                    }, child: const Text("Login",style: TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold),))
                   ],)
 
 

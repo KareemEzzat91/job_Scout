@@ -7,6 +7,8 @@ import '../Maincubit/main_cubit.dart';
 import 'job_details_screen.dart';
 
 class JobNameInputScreen extends StatefulWidget {
+  const JobNameInputScreen({super.key});
+
   @override
   _JobNameInputScreenState createState() => _JobNameInputScreenState();
 }
@@ -68,11 +70,11 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
               onChanged: (value) => _onSearchChanged(value, list),
               decoration: InputDecoration(
                 hintText: 'Enter job name',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.grey[300],
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: const Icon(Icons.clear),
                   onPressed: _clearSearch,
                 ),
               ),
@@ -80,7 +82,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
             ),
             const SizedBox(height: 20),
             if (isLoading)
-              Center(child: CircularProgressIndicator())
+              const Center(child: CircularProgressIndicator())
             else
               Expanded(
                 child: GridView.builder(
@@ -105,10 +107,10 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
 
                       },
                       child: Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('assets/images/flat.jpg'), // Your image path
+                            image: const AssetImage('assets/images/flat.jpg'), // Your image path
                             fit: BoxFit.cover,
                             colorFilter: ColorFilter.mode(
                               Colors.black.withOpacity(0.05),
@@ -158,7 +160,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
 
                             // Company Name
                             Text(
@@ -170,7 +172,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                               ),
                               overflow: TextOverflow.ellipsis, // To avoid text overflow
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
 
                             // Job Position
                             Text(
@@ -181,7 +183,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
 
                             // Location and Salary
                             Text(
@@ -202,7 +204,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                               ),
                             ),
 
-                            Spacer(),
+                            const Spacer(),
 
                             // Buttons (Job Type, Work Mode, Location)
                             Row(
@@ -214,7 +216,7 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                                     alignment: Alignment.center,
                                     height: 20,
                                     decoration: BoxDecoration(
-                                      color: Color(0xff7ebdf8),
+                                      color: const Color(0xff7ebdf8),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Row(
@@ -230,13 +232,13 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Expanded(
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 20,
                                     decoration: BoxDecoration(
-                                      color: Color(0xff7ebdf8),
+                                      color: const Color(0xff7ebdf8),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Row(
@@ -263,18 +265,18 @@ class _JobNameInputScreenState extends State<JobNameInputScreen> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue[400],
-                padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
+                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
-                textStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
                 if (_controller.text.isNotEmpty) {
                   Navigator.pop(context, _controller.text);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please enter a job name.')),
+                    const SnackBar(content: Text('Please enter a job name.')),
                   );
                 }
               },

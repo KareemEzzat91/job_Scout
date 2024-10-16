@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -12,7 +11,7 @@ import 'SavedScreen/SavedScreen.dart';
 import 'SearchScreen/SearchScreen.dart';
 
 class Mainscreen extends StatefulWidget {
-  static final String routename = "Mainscreen";
+  static const String routename = "Mainscreen";
 
   const Mainscreen({
     super.key,
@@ -25,9 +24,9 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   var Selectedindex = 0;
   List<Widget> Screens = [
-    Homescreen(), //AhmedAshraf
-    JobSearchScreen(), //Farah
-    const  Savedscreen(), //AhmedAshraf
+    HomeScreen(), //AhmedAshraf
+    const JobSearchScreen(), //Farah
+    const  SavedScreen(), //AhmedAshraf
   ];
 
   @override
@@ -88,11 +87,11 @@ class _MainscreenState extends State<Mainscreen> {
               ),
               accountName: Text(
                 FirebaseAuth.instance.currentUser?.displayName ?? "Guest",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               accountEmail: Text(
                 FirebaseAuth.instance.currentUser?.email ?? "Guest@gmail.com",
-                style: TextStyle(fontSize: 15),
+                style: const TextStyle(fontSize: 15),
               ),
               decoration: const BoxDecoration(
                 image:  DecorationImage(image:AssetImage( 'assets/images/moonandstars.jpg'),opacity: 0.3,fit: BoxFit.fill),
@@ -128,7 +127,7 @@ class _MainscreenState extends State<Mainscreen> {
               title: "About",
               onTap: () {},
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: _buildDrawerItem(
@@ -142,7 +141,7 @@ class _MainscreenState extends State<Mainscreen> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => IntroScreen(),
+                      builder: (context) => const IntroScreen(),
                     ),
                   );
                 },

@@ -6,7 +6,7 @@ import '../HomeScreen/MainScreen.dart';
 
 class VerificationScreen extends StatefulWidget {
   final User user;
-  const VerificationScreen({Key? key, required this.user}) : super(key: key);
+  const VerificationScreen({super.key, required this.user});
 
   @override
   _VerificationScreenState createState() => _VerificationScreenState();
@@ -30,7 +30,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       if (!isEmailVerified) {  // إذا لم يتم التحقق، انتقل بعد 6 ثوانٍ
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => Mainscreen()),
+          MaterialPageRoute(builder: (context) => const Mainscreen()),
         );
         timer?.cancel();  // تأكد من إلغاء المؤقت عند الخروج من الشاشة
         super.dispose();
@@ -48,7 +48,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
       timer?.cancel();  // إلغاء المؤقت إذا تم التحقق
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Mainscreen()),
+        MaterialPageRoute(builder: (context) => const Mainscreen()),
       );
     }
   }

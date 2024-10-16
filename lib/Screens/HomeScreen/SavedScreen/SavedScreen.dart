@@ -6,14 +6,14 @@ import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
 import '../JobsModel/JobsModel.dart';
 import '../Maincubit/main_cubit.dart';
 import '../SearchScreen/job_details_screen.dart'; // Adjust the import path as necessary
-class Savedscreen extends StatefulWidget {
-  const Savedscreen({super.key});
+class SavedScreen extends StatefulWidget {
+  const SavedScreen({super.key});
 
   @override
-  State<Savedscreen> createState() => _SavedscreenState();
+  State<SavedScreen> createState() => _SavedScreenState();
 }
 
-class _SavedscreenState extends State<Savedscreen> {
+class _SavedScreenState extends State<SavedScreen> {
   String truncateHtml(String html, {int length = 200}) {
     // Remove HTML tags
     final RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
@@ -21,7 +21,7 @@ class _SavedscreenState extends State<Savedscreen> {
 
     // Truncate if necessary
     return (plainText.length > length)
-        ? plainText.substring(0, length) + '...'
+        ? '${plainText.substring(0, length)}...'
         : plainText;
   }
 

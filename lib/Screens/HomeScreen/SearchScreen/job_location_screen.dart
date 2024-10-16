@@ -6,6 +6,8 @@ import '../Maincubit/main_cubit.dart';
 import 'job_details_screen.dart';
 
 class JobLocationInputScreen extends StatefulWidget {
+  const JobLocationInputScreen({super.key});
+
   @override
   _JobLocationInputScreenState createState() => _JobLocationInputScreenState();
 }
@@ -51,7 +53,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
     final list = bloc.JobModels;
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Colors.blue[400], title: Text('Location Search',
+      appBar: AppBar(backgroundColor: Colors.blue[400], title: const Text('Location Search',
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
 
       )),
@@ -64,25 +66,25 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
               'Where is your location?',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextField(
               controller: _controller,
               onChanged: (val)=> _onSearchChanged(val,list),
               decoration: InputDecoration(
                 hintText: 'Enter location',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 filled: true,
                 fillColor: Colors.grey[300],
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.clear),
+                  icon: const Icon(Icons.clear),
                   onPressed: _clearSearch,
                 ),
               ),
               style: TextStyle(color: Colors.grey[800]),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             if (isLoading)
-              Center(child: CircularProgressIndicator())
+              const Center(child: CircularProgressIndicator())
             else
               Expanded(
                 child: GridView.builder(
@@ -108,10 +110,10 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                       },
                       child: Container(
 
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           image: DecorationImage(
-                            image: AssetImage('assets/images/flat.jpg'), // Your image path
+                            image: const AssetImage('assets/images/flat.jpg'), // Your image path
                             fit: BoxFit.cover,
                             colorFilter: ColorFilter.mode(
                               Colors.black.withOpacity(0.05),
@@ -161,7 +163,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
 
                             // Company Name
                             Text(
@@ -173,7 +175,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                               ),
                               overflow: TextOverflow.ellipsis, // To avoid text overflow
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
 
                             // Job Position
                             Text(
@@ -184,7 +186,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
-                            SizedBox(height: 5),
+                            const SizedBox(height: 5),
 
                             // Location and Salary
                             Text(
@@ -205,7 +207,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                               ),
                             ),
 
-                            Spacer(),
+                            const Spacer(),
 
                             // Buttons (Job Type, Work Mode, Location)
                             Row(
@@ -217,7 +219,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                                     alignment: Alignment.center,
                                     height: 20,
                                     decoration: BoxDecoration(
-                                      color: Color(0xff7ebdf8),
+                                      color: const Color(0xff7ebdf8),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Row(
@@ -233,13 +235,13 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Expanded(
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 20,
                                     decoration: BoxDecoration(
-                                      color: Color(0xff7ebdf8),
+                                      color: const Color(0xff7ebdf8),
                                       borderRadius: BorderRadius.circular(10),
                                     ),
                                     child: const Row(
@@ -275,7 +277,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
               onPressed: () {
                 Navigator.pop(context, _controller.text);
               },
-              child: Text('Finish',style: TextStyle(color: Colors.white),),
+              child: const Text('Finish',style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

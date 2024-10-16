@@ -18,19 +18,19 @@ class NotificationService {
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       // Getting the token for FCM
       String? token = await _firebaseMessaging.getToken();
-      print("FCM Token: $token");
+      ("FCM Token: $token");
     } else {
-      print("User declined or has not accepted permission");
+      ("User declined or has not accepted permission");
     }
 
     // Set up foreground message handlers
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Foreground message received: ${message.notification?.title}");
+      ("Foreground message received: ${message.notification?.title}");
       HandleMessage(message);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Message clicked! : ${message.data}");
+      ("Message clicked! : ${message.data}");
       HandleMessage(message); // Handle the message when the app is opened from a notification
     });
 
@@ -44,20 +44,20 @@ class NotificationService {
     // Check for the notification part
     if (message.notification != null) {
       bloc.showNotification(message);  // Dispatch to the cubit
-      print("Notification Title: ${message.notification?.title}");
-      print("Notification Body: ${message.notification?.body}");
+      ("Notification Title: ${message.notification?.title}");
+      ("Notification Body: ${message.notification?.body}");
       navigatorkey.currentState!.pushNamed(NotoficationScreen.routeName , arguments: message);
     }
 
     // Check for data part
     if (message.data.isNotEmpty) {
-      print("Message data: ${message.data}");
+      ("Message data: ${message.data}");
     }
   }
 
   // Background message handler
    Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    print("Handling a background message: ${message.messageId}");
+    ("Handling a background message: ${message.messageId}");
     FirebaseMessaging.instance.getInitialMessage().then(HandleMessage);
     FirebaseMessaging.onMessageOpenedApp.listen(HandleMessage);
 

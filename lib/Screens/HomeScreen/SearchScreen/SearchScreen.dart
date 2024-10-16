@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'job_details_screen.dart';
 import 'job_location_screen.dart';
 import 'job_role_screen.dart';
@@ -8,6 +7,8 @@ import '../JobsModel/JobsModel.dart';
 
 
 class JobSearchScreen extends StatefulWidget {
+  const JobSearchScreen({super.key});
+
   @override
   _JobSearchScreenState createState() => _JobSearchScreenState();
 }
@@ -48,7 +49,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 onTap: () async {
                   final jobName = await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => JobNameInputScreen()),
+                    MaterialPageRoute(builder: (context) => const JobNameInputScreen()),
                   );
                   if (jobName != null) {
                     setState(() {
@@ -60,7 +61,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 decoration: InputDecoration(
                   labelText: 'Search job, company',
                   prefixIcon: Icon(Icons.search, color: Colors.grey[700]),
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.grey[300],
                 ),
@@ -71,7 +72,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 onTap: () async {
                   final location = await Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => JobLocationInputScreen()),
+                    MaterialPageRoute(builder: (context) => const JobLocationInputScreen()),
                   );
                   if (location != null) {
                     setState(() {
@@ -83,29 +84,29 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                 decoration: InputDecoration(
                   labelText: 'Location',
                   prefixIcon: Icon(Icons.location_on, color: Colors.grey[700]),
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   filled: true,
                   fillColor: Colors.grey[300],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               GestureDetector(
                 onTap: searchQuery.isNotEmpty || locationQuery.isNotEmpty ? searchJobs : null,
                 child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   decoration: BoxDecoration(
                     color: Colors.blue.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: Center(
                     child: isLoading
-                        ? CircularProgressIndicator()
-                        : Text('Search', style: TextStyle(color: Colors.white)),
+                        ? const CircularProgressIndicator()
+                        : const Text('Search', style: TextStyle(color: Colors.white)),
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
 
               Expanded(
                 child: ListView.builder(

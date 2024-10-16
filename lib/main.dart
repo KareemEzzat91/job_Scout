@@ -3,7 +3,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'Helpers/APIHelper/Apihelper.dart';
 import 'Helpers/FireStoreHelper/FireStoreHelper.dart';
@@ -28,11 +27,10 @@ void main() async {
   );
     ApiHelper.init();
   await FireStoreHelper().getumofapplytimes ();
-  var Box = await Hive.openBox(Hivehelper.Boxname);
   await FireStoreHelper(). getProfileSettings();
   await  NotificationService().initNotification();
   runApp(const MyApp());
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
 final ValueNotifier<ThemeData> themeNotifier = ValueNotifier(lightTheme);
@@ -82,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: GetMaterialApp(
         routes:{
-          NotoficationScreen.routeName : (context)=> NotoficationScreen(),
+          NotoficationScreen.routeName : (context)=> const NotoficationScreen(),
 
         },
         navigatorKey: navigatorkey,

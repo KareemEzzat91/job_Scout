@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import '../../../Helpers/APIHelper/Apihelper.dart';
 import '../JobsModel/JobsModel.dart';
 
@@ -109,11 +108,11 @@ class MainCubit extends Cubit<MainState> {
   void changecolor(String tag) {
     tagColors.updateAll((key, value) => Colors.white);
 
-    tagColors[tag] = tagColors[tag] == Colors.white ? Color(0xff3c6EAE): Colors.white;
+    tagColors[tag] = tagColors[tag] == Colors.white ? const Color(0xff3c6EAE): Colors.white;
     emit(ColorChangedState());
   }
 
-  Color _currentColor = Colors.grey; // اللون الافتراضي
+  final Color _currentColor = Colors.grey; // اللون الافتراضي
 
   bool changeColor( int index, Color newColor) {
     if ( JobModels[index].savedColor == Colors.grey){

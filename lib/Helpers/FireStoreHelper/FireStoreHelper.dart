@@ -1,10 +1,7 @@
 import 'dart:core';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../Screens/HomeScreen/JobsModel/JobsModel.dart';
-
 class FireStoreHelper {
   FireStoreHelper._privateConstructor();
 
@@ -46,7 +43,7 @@ class FireStoreHelper {
         }
       }
     } catch (e) {
-      print('Error adding document: $e');
+      ('Error adding document: $e');
       isTrue = false;
     }
   }
@@ -69,10 +66,10 @@ class FireStoreHelper {
           savedJobs.add(Job.fromJson(doc.data() as Map<String, dynamic>));
         }
       } else {
-        print("No user is signed in.");
+        ("No user is signed in.");
       }
     } catch (e) {
-      print("Error fetching jobs: $e");
+      ("Error fetching jobs: $e");
     }
     return savedJobs;
   }
@@ -96,11 +93,10 @@ class FireStoreHelper {
               .doc(doc.id) // استخدام الـ documentId للحذف
               .delete();
 
-          print('Job with ID: ${item.id} deleted.');
         }
       }
     } catch (e) {
-      print("Error deleting job: $e");
+      ("Error deleting job: $e");
     }
   }
   void checkifexist(Job item) async {
@@ -119,7 +115,7 @@ class FireStoreHelper {
         isTrue = true;
       }
     } else {
-      print("No user is signed in.");
+      ("No user is signed in.");
       isTrue = false;
     }
   }
@@ -145,12 +141,12 @@ class FireStoreHelper {
           });
         }
 
-        print(num);
+        (num);
       }
 
-      print("eeeeeeeeeeeeeeeee${numberofApply}");
+      ("eeeeeeeeeeeeeeeee$numberofApply");
     } catch (e) {
-      print('Error adding/updating apply times: $e');
+      ('Error adding/updating apply times: $e');
     }
   }
   Future<void> getumofapplytimes() async {
@@ -167,15 +163,15 @@ class FireStoreHelper {
           int applyCount = data['applyCount'] ?? 0; // Default to 0 if the field does not exist
           numberofApply =applyCount;
 
-          print('Apply Count: $applyCount');
+          ('Apply Count: $applyCount');
         } else {
-          print('No document found for user: $userId');
+          ('No document found for user: $userId');
         }
       } else {
-        print('User is not authenticated');
+        ('User is not authenticated');
       }
     } catch (e) {
-      print('Error retrieving apply times: $e');
+      ('Error retrieving apply times: $e');
     }
   }
 
@@ -213,7 +209,7 @@ class FireStoreHelper {
         }
       }
     } catch (e) {
-      print("Error saving profile: $e");
+      ("Error saving profile: $e");
     }
   }
    late final ProfileSettings userProfileSettings ;
@@ -230,7 +226,7 @@ class FireStoreHelper {
         }
       }
     } catch (e) {
-      print("Error getting profile settings: $e");
+      ("Error getting profile settings: $e");
     }
     return null; // Return null if userId is null or an error occurs
   }

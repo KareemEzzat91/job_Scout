@@ -79,7 +79,7 @@ class IntroWidget extends StatelessWidget {
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (context) => Loginscreen()),
+                          MaterialPageRoute(builder: (context) => LoginScreen()),
                         );
 
                       },
@@ -106,7 +106,7 @@ class IntroWidget extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => Loginscreen()),
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
 
                     },

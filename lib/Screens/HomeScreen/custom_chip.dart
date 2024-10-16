@@ -25,8 +25,8 @@ class _CustomChipState extends State<CustomChip> {
         value: (i,v)=>i,
         label: (i,v)=>v,
       ),
-      choiceActiveStyle: C2ChoiceStyle(color: Color(0xffffff0f)),
-      choiceStyle: C2ChoiceStyle(color: Color(0xffff4f5)),
+      choiceActiveStyle: const C2ChoiceStyle(color: Color(0xffffff0f)),
+      choiceStyle: const C2ChoiceStyle(color: Color(0x0ffff4f5)),
 
 
     );

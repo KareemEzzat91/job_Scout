@@ -58,7 +58,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           cursorHeight: 19,
           decoration: InputDecoration(
             enabled: true ,
-            focusColor:  Color(0xff0186c7),
+            focusColor:  const Color(0xff0186c7),
             hintText: "Enter ${widget.text}",hintStyle: TextStyle(color: _iconColor) ,
             isDense: true,
             border: OutlineInputBorder(
@@ -66,7 +66,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               borderRadius: BorderRadius.circular(15),
             ),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color:Color(0xff0186c7)),
+              borderSide: const BorderSide(color:Color(0xff0186c7)),
               borderRadius: BorderRadius.circular(15),
             ),
             prefixIcon: Icon(
@@ -89,7 +89,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             )
                 : null,
           ),
-          cursorColor:  Color(0xff0186c7),
+          cursorColor:  const Color(0xff0186c7),
         ),
       ],
     );

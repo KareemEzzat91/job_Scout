@@ -12,7 +12,7 @@ class NotoficationScreen extends StatelessWidget {
     final RemoteMessage? message = ModalRoute.of(context)?.settings.arguments as RemoteMessage?;
 
     return Scaffold(
-      appBar: AppBar(title: Text('Notification Details')),
+      appBar: AppBar(title: const Text('Notification Details')),
       body: message != null
           ? Padding(
         padding: const EdgeInsets.all(16.0),
@@ -21,20 +21,20 @@ class NotoficationScreen extends StatelessWidget {
           children: [
             Text(
               'Title: ${message.notification?.title ?? 'No title'}',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Body: ${message.notification?.body ?? 'No body'}',
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 20),
-            Text('Data:'),
+            const SizedBox(height: 20),
+            const Text('Data:'),
             Text(message.data.toString()),
           ],
         ),
       )
-          : Center(child: Text('No notification data')),
+          : const Center(child: Text('No notification data')),
     );
   }
 }

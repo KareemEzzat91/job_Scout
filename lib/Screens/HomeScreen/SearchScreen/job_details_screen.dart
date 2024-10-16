@@ -12,23 +12,23 @@ import '../JobsModel/JobsModel.dart';
 class JobDetailsScreen extends StatelessWidget {
   final Job item;
 
-  JobDetailsScreen({required this.item});
+  const JobDetailsScreen({super.key, required this.item});
 
   Future<void> _launchUrl(String url) async {
-    final Uri _url = Uri.parse(url); // Convert the string URL to a Uri
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    final Uri url0 = Uri.parse(url); // Convert the string URL to a Uri
+    if (!await launchUrl(url0)) {
+      throw Exception('Could not launch $url0');
     }
   }
   String chechkimage (){
     String imageUrl = item.companyLogo;
   try {
-    if (imageUrl == null || imageUrl.isEmpty) {
+    if (imageUrl.isEmpty) {
       return   "assets/images/linkedin.png";
     }
     return imageUrl ;
   } catch (e) {
-    print("Error: $e");
+    ("Error: $e");
     return "assets/images/linkedin.png"; // You can provide a fallback URL or handle it another way
   }
 }
@@ -36,7 +36,7 @@ class JobDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(backgroundColor: Colors.blue[400], title: Text(item.position,
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 16),
+        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold,fontSize: 16),
 
       )),
       body: Padding(
@@ -65,7 +65,7 @@ class JobDetailsScreen extends StatelessWidget {
 
               // Position
               Text(item.position ,style: GoogleFonts.monda(fontWeight: FontWeight.bold,fontSize: 25),),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
 
               // Company Name
               Text(
@@ -76,7 +76,7 @@ class JobDetailsScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600,  // Slightly bold for emphasis
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
 
 // Job Location
               Text(
@@ -86,7 +86,7 @@ class JobDetailsScreen extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
 
 // Salary Range
               Text(
@@ -96,7 +96,7 @@ class JobDetailsScreen extends StatelessWidget {
                   color: Colors.grey[600],
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               // Job Description
               Html(
                 data: item.description,
@@ -126,7 +126,7 @@ class JobDetailsScreen extends StatelessWidget {
                   ),
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               // Action Buttons (Apply, Save)
               Row(

@@ -11,7 +11,6 @@ import '../../../Helpers/kconstnt/constants.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
 
-  final TextEditingController _controller = TextEditingController();
   Uint8List? _image;
 
   void selectImage() async {
@@ -43,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
               children: List.generate(controllers.length, (i) {
                 return TextField(
 
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                   controller: controllers[i],
                   decoration: InputDecoration(
                     hintText: "Enter value for position ${i + 1}",
@@ -92,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
           return AlertDialog(
             title: Text("Update $field"),
             content: TextField(
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
 
               controller: TextEditingController(text: newValue),
               decoration: InputDecoration(
@@ -158,7 +157,7 @@ class ProfileScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "${FirebaseAuth.instance.currentUser?.displayName ?? "Guest"}",
+                FirebaseAuth.instance.currentUser?.displayName ?? "Guest",
                 textAlign: TextAlign.start,
                 style: const TextStyle(
                     color: Color(0xff3c6EAE),
@@ -232,7 +231,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               Text(
                                 FirebaseAuth.instance.currentUser?.email ?? "Guest@gmail.com",
-                                style: TextStyle(color: Colors.white70),
+                                style: const TextStyle(color: Colors.white70),
                               ),
                               const SizedBox(height: 16.0),
                               Row(
@@ -250,7 +249,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 Positioned(height: 230,left: 80,child: IconButton(onPressed: (){selectImage();
 
-                }, icon: Icon(Icons.add_a_photo_rounded,color: Colors.black,)))
+                }, icon: const Icon(Icons.add_a_photo_rounded,color: Colors.black,)))
                 ],
               ),
               // About Me
@@ -261,7 +260,7 @@ class ProfileScreen extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.black87),
 
-                ),Spacer(),IconButton(
+                ),const Spacer(),IconButton(
                   icon: const Icon(Icons.edit, color: Colors.black),
                   onPressed: () {EditField ("Bio",context );
                   },
@@ -325,7 +324,7 @@ class ProfileScreen extends StatelessWidget {
           return Text("error ${snapshot.error}");
         }
         else {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         }
         
       }),
