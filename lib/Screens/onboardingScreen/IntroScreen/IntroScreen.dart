@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +40,7 @@ class _IntroScreenState extends State<IntroScreen> {
       'color': '#3c94f8',
       'title': 'Welcome to JobScout',
       'image': 'assets/images/image1.jpg',
-      'description': "Discover your dream job effortlessly. "
+      'description': "Discover your dream job effortlessly.\n  "
           "Connect with employers and stay updated with the latest job openings in your field.",
       'skip': true
     },
@@ -52,13 +54,15 @@ class _IntroScreenState extends State<IntroScreen> {
     },
     {
       'color': '#0186c7',
-      'title': 'Step Into Your Future Career',
+      'title': 'Step Into Your Future',
       'image': 'assets/images/image3.jpg',
-      'description': 'Join our community and take the first step towards your ideal career! '
+      'description': '  Join our community and take\n the first step towards your ideal career! '
          ,
       'skip': false
     },
   ];
+   bool _isout =false   ;
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +74,21 @@ class _IntroScreenState extends State<IntroScreen> {
               itemCount: _pages.length,
               scrollBehavior: AppScrollBehavior(),
               onPageChanged: (int page) {
+
                 setState(() {
-                  _activePage = page;
+                  _isout = !_isout;// true
                 });
+                Timer (const Duration(milliseconds: 300),(){
+                  setState(() {
+                  _isout = !_isout;
+                });
+                } ,);
+                _activePage = page;
+
               },
               itemBuilder: (BuildContext context, int index){
                 return IntroWidget(
+                  isout: _isout,
                   index: index,
                   color: _pages[index]['color'],
                   title: _pages[index]['title'],

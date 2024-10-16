@@ -5,6 +5,7 @@ import '../../Login&SignUp/LoginScreen.dart';
 class IntroWidget extends StatelessWidget {
   const IntroWidget({
     super.key,
+    required this.isout,
     required this.color,
     required this.title,
     required this.description,
@@ -12,7 +13,7 @@ class IntroWidget extends StatelessWidget {
     required this.image,
     required this.onTab,
     required this.index,});
-
+  final isout  ;
   final String color;
   final String title;
   final String description;
@@ -21,22 +22,26 @@ class IntroWidget extends StatelessWidget {
   final VoidCallback onTab;
   final int index;
 
+
   @override
   Widget build(BuildContext context) {
+    final height= MediaQuery.of(context).size.height;
+    final width= MediaQuery.of(context).size.width;
     return ColoredBox(
       color: hexToColor(color),
       child: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0.5,),
-            child: Container(
+            child: SizedBox(
+              width:  MediaQuery.of(context).size.width ,
               height: MediaQuery.of(context).size.height / 1.86,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(image),
-                      fit: index==0 ? BoxFit.fitHeight:BoxFit.fill
-                  )
-              ),
+              child: AnimatedScale(scale: isout?0:1, duration:  const Duration(milliseconds:200),child: Image.asset(
+                  image,
+                fit: index==0 ? BoxFit.fitHeight:BoxFit.fill
+            )
+      ,),
+
             ),
           ),
           Positioned(
@@ -54,12 +59,31 @@ class IntroWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 45),
-                child: Column(
+                child: Stack(
                   children: [
                     const SizedBox(height: 62,),
-                    Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                    AnimatedPositioned(left: isout ?width+100:0,top: height *0.05, duration: Duration(milliseconds: 250),
+                    child: Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
                     const SizedBox(height: 16,),
-                    Text(description, style: const TextStyle(fontSize: 18, height: 1.5, color: Colors.grey), textAlign: TextAlign.center,)
+                    AnimatedPositioned(
+
+                      duration: Duration(milliseconds: 250),
+                      top: height *0.12,
+                      right: isout ? width + 100 :-40,
+                      child: Container(
+                        width: width, // Adjust the width as needed
+                        child: Text(
+                        description,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          height: 1.5,
+
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.center,
+                                                  ),
+                      ),
+                    )
                   ],
                 ),
               ),
