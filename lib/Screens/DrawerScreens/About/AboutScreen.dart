@@ -14,6 +14,19 @@ class AboutScreen extends StatelessWidget {
     }
 
   }
+  Future<void> _sendEmail() async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: 'kareemezzat1222@gmail.com',
+    );
+
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
+    } else {
+      // You can show an error message or do something else
+      throw 'Could not launch $emailUri';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,27 +136,43 @@ class AboutScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 10),
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.email, color: Colors.blue),
-                  SizedBox(width: 10),
-                  Text('contact@jobscout.com'),
+                  const Icon(Icons.email, color: Colors.blue),
+                  const SizedBox(width: 10),
+                  InkWell(child: const Text('kareemezzat1222@gmail.com'),onTap: (){
+                    _launchUrl("mailto:kareemezzat1222@gmail.com");
+                  },),
+                ],
+              ),              const SizedBox(height: 10),
+
+               Row(
+                children: [
+                  const Icon(Icons.email, color: Colors.blue),
+                  const SizedBox(width: 10),
+                  InkWell(child: const Text('Farahm827@gmail.com'),onTap: (){
+                    _launchUrl("mailto:Farahm827@gmail.com");
+
+                  },),
                 ],
               ),
               const SizedBox(height: 10),
-              const Row(
+              Row(
                 children: [
-                  Icon(Icons.phone, color: Colors.blue),
-                  SizedBox(width: 10),
-                  Text('+123 456 7890'),
+                  const Icon(Icons.phone, color: Colors.blue),
+                  const SizedBox(width: 10),
+                  InkWell(child: const Text('+20 112 590 8279'),onTap: (){
+                    _launchUrl("https://wa.me/<+20 112 590 8279>?text=السلام عليكم");//https://wa.me/<+20 112 590 8279>?text=<message>
+                  },),
                 ],
               ),
               const SizedBox(height: 10),
-              const Row(
+
+              Row(
                 children: [
-                  Icon(Icons.web, color: Colors.blue),
-                  SizedBox(width: 10),
-                  Text('www.jobscout.com'),
+                  const Icon(Icons.phone, color: Colors.blue),
+                  const SizedBox(width: 10),
+                  InkWell(onTap: (){_launchUrl("https://wa.me/<+20 109 230 4229>?text=السلام عليكم");},child: const Text('+20 109 230 4229')),//https://wa.me/<+20 109 230 4229>?text=hello>"
                 ],
               ),
             ],
