@@ -18,7 +18,7 @@ class NotificationService {
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
       // Getting the token for FCM
       String? token = await _firebaseMessaging.getToken();
-      ("FCM Token: $token");
+      print("FCM Token: $token");
     } else {
       ("User declined or has not accepted permission");
     }
@@ -43,6 +43,7 @@ class NotificationService {
 
     // Check for the notification part
     if (message.notification != null) {
+      bloc.addNotofication(message);
       bloc.showNotification(message);  // Dispatch to the cubit
       ("Notification Title: ${message.notification?.title}");
       ("Notification Body: ${message.notification?.body}");

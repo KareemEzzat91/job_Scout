@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:jobscout/Helpers/Hivehelper.dart';
 import '../../../Helpers/APIHelper/Apihelper.dart';
 import '../JobsModel/JobsModel.dart';
 
@@ -9,6 +10,33 @@ part 'main_state.dart';
 class MainCubit extends Cubit<MainState> {
   MainCubit() : super(MainInitial());
      List<Job> JobModels =[];
+
+
+
+
+     void addNotofication (RemoteMessage message){
+       Hivehelper.addNotofication(message);
+
+     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   Future<List<Job>?> getJobs ()
   async{
     emit(LoadingState());

@@ -10,7 +10,6 @@ class NotoficationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Retrieve the passed RemoteMessage from the arguments
     final RemoteMessage? message = ModalRoute.of(context)?.settings.arguments as RemoteMessage?;
-
     return Scaffold(
       appBar: AppBar(title: const Text('Notification Details')),
       body: message != null

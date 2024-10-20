@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import '../../Helpers/customtextfiled/customtextfiled.dart';
+import '../../Helpers/responsive/responsive.dart';
 import 'LoginScreen.dart';
 import 'cubit/sign_cubit.dart';
 
@@ -15,6 +16,12 @@ class Signupscreen extends StatelessWidget {
 
   Signupscreen({super.key});
 
+  double TextSize(context,{required double isExtraSmallSize , required double isMobileSize,required double isMobileLarge,required double isIpadSize,required double isTabletSize,required double isLargeTabletSize,required double defaultSize} ){ return Responsive.isExtraSmall(context) ? isExtraSmallSize :
+  Responsive.isMobile(context) ?isMobileSize:
+  Responsive.isMobileLarge(context) ? isMobileLarge:
+  Responsive.isIpad(context) ? isIpadSize:
+  Responsive.isTablet(context) ? isTabletSize :
+  Responsive.isLargeTablet(context) ? isLargeTabletSize : isLargeTabletSize;}
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +51,9 @@ class Signupscreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset("assets/images/photo_2024-09-16_15-28-23-removebg-preview.png",scale: 0.5,height:height/5,width: width/4, )
-                ,  const Row(
+                ,   Row(
                   children: [
-                    Text("Register Now! ",style :TextStyle(fontSize: 25,shadows: [
+                    Text("Register Now! ",style :TextStyle(fontSize: TextSize(context,isExtraSmallSize:18,isMobileSize: 25,isMobileLarge:30,isIpadSize: 40,isTabletSize: 43,isLargeTabletSize: 50,defaultSize: 20  ),shadows: const [
                       Shadow(
                         offset: Offset(2, 2),
                         blurRadius: 4,
@@ -57,7 +64,7 @@ class Signupscreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8,),
-                Text("Enter Your information Below ",style: TextStyle(color: Colors.grey.shade400),),
+                Text("Enter Your information Below ",style: TextStyle(color: Colors.grey.shade400,fontSize: TextSize(context,isExtraSmallSize:10,isMobileSize: 17,isMobileLarge:19,isIpadSize: 26,isTabletSize: 25,isLargeTabletSize: 40,defaultSize: 15  )),),
                 Form(
                     key: _key,
                     child: Container(
@@ -177,14 +184,14 @@ class Signupscreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    const Text("Already a member  ? "),
+                     Text("Already a member  ? ",style: TextStyle(fontSize: TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  )),),
                     InkWell(onTap: (){
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
 
-                    }, child: const Text("Login",style: TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold),))
+                    }, child:  Text("Login",style: TextStyle(color: Color(0xff0186c7),fontSize: TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  ),fontWeight: FontWeight.bold),))
                   ],)
 
 

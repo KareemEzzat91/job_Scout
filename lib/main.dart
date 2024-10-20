@@ -28,6 +28,7 @@ void main() async {
     ApiHelper.init();
   await FireStoreHelper().getumofapplytimes ();
   await Hive.openBox(Hivehelper.Boxname);
+  await Hive.openBox(Hivehelper.NotoficationBoxname);
   await FireStoreHelper(). getProfileSettings();
   await NotificationService().initNotification();
   runApp(DevicePreview(builder :(context)=> MyApp()));

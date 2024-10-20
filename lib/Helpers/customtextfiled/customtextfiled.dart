@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../responsive/responsive.dart';
+
 class CustomTextField extends StatefulWidget {
   final String text;
   final double height;
@@ -39,6 +41,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
       });
     });
   }
+  double TextSize(context,{required double isExtraSmallSize , required double isMobileSize,required double isMobileLarge,required double isIpadSize,required double isTabletSize,required double isLargeTabletSize,required double defaultSize} ){ return Responsive.isExtraSmall(context) ? isExtraSmallSize :
+  Responsive.isMobile(context) ?isMobileSize:
+  Responsive.isMobileLarge(context) ? isMobileLarge:
+  Responsive.isIpad(context) ? isIpadSize:
+  Responsive.isTablet(context) ? isTabletSize :
+  Responsive.isLargeTablet(context) ? isLargeTabletSize : isLargeTabletSize;}
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +61,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           enabled: true,
           validator: widget.validator,
           focusNode: _focusNode, // Assign the focus node
-
           controller: widget.controller,
+          style:TextStyle(fontSize: TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:21,isIpadSize: 27,isTabletSize: 32,isLargeTabletSize: 40,defaultSize: 18  )) ,
           cursorHeight: 19,
           decoration: InputDecoration(
             enabled: true ,

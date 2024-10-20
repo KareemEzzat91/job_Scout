@@ -6,6 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Helpers/Hivehelper.dart';
 import '../../Helpers/theme/DarkTheme/ThemeCubit/themes_cubit.dart';
+import '../DrawerScreens/About/AboutScreen.dart';
+import '../DrawerScreens/Notofication/Notofication.dart';
 import '../DrawerScreens/Profile/ProfileScreen.dart';
 import '../onboardingScreen/IntroScreen/IntroScreen.dart';
 import 'Home/HomeScreen.dart';
@@ -124,20 +126,18 @@ class _MainscreenState extends State<Mainscreen> {
             _buildDrawerItem(
               icon: Icons.notifications_active_outlined,
               title: "Notifications",
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (c)=> Notofication ()));
+              },
                 titleColor: iSDarkMode ?Colors.white:Colors.black
 
             ),
-            _buildDrawerItem(
-              icon: Icons.translate,
-              title: "Language",
-              onTap: () {},
-              titleColor: iSDarkMode ?Colors.white:Colors.black
-            ),
-            _buildDrawerItem(
+            _buildDrawerItem(//
               icon: Icons.help_center_outlined,
               title: "About",
-              onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c)=> AboutScreen ()));
+                },
                 titleColor: iSDarkMode ?Colors.white:Colors.black
 
             ),
