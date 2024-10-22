@@ -28,8 +28,8 @@ class NotoficationScreen extends StatelessWidget {
               style: const TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 20),
-            const Text('Data:'),
-            Text(message.data.toString()),
+/*            const Text('Data:'),
+            Text(message.data.toString()),*/
           ],
         ),
       )

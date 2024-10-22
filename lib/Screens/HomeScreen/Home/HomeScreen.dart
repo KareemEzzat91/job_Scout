@@ -107,16 +107,14 @@ class HomeScreen extends StatelessWidget {
                             children: [
                               SizedBox(
                                 width: Responsive.TextSize(context,isExtraSmallSize:200,isMobileSize: 220,isMobileLarge:300,isIpadSize: 560,isTabletSize: 550,isLargeTabletSize: 760,defaultSize: 230  ),
-                                child: Container(
-                                  child: Text(
-                                    "Welcome Back ${FirebaseAuth.instance.currentUser?.displayName ?? ""}",
-                                    overflow: TextOverflow.fade,
-                                    maxLines: 1,
-                                    style:TextStyle(
-                                        color: iSDarkMode?Colors.white:Colors.black,
-                                        fontSize: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 18,isMobileLarge:24,isIpadSize: 35,isTabletSize: 40,isLargeTabletSize: 55,defaultSize: 24  ),
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                child: Text(
+                                  "Welcome Back ${FirebaseAuth.instance.currentUser?.displayName ?? ""}",
+                                  overflow: TextOverflow.fade,
+                                  maxLines: 1,
+                                  style:TextStyle(
+                                      color: iSDarkMode?Colors.white:Colors.black,
+                                      fontSize: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 15,isMobileLarge:20,isIpadSize: 35,isTabletSize: 40,isLargeTabletSize: 55,defaultSize: 24  ),
+                                      fontWeight: FontWeight.bold),
                                 ),
                                ),
                               const SizedBox(height: 6),
@@ -126,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                                   color: Theme.of(context).brightness == Brightness.dark
                                       ? Colors.white.withOpacity(0.9)// لون النص في الثيم الداكن
                                       : Colors.black.withOpacity(0.7), // لون النص في الثيم الفاتح
-                                  fontSize: Responsive.TextSize(context,isExtraSmallSize:9,isMobileSize: 13,isMobileLarge:16,isIpadSize: 30,isTabletSize: 32,isLargeTabletSize: 37,defaultSize: 20  ),
+                                  fontSize: Responsive.TextSize(context,isExtraSmallSize:9,isMobileSize: 11,isMobileLarge:16,isIpadSize: 30,isTabletSize: 32,isLargeTabletSize: 37,defaultSize: 20  ),
                                 ),
                               ),
                             ],

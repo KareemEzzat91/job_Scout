@@ -179,7 +179,7 @@ class LoginScreen extends StatelessWidget {
                                   const SizedBox(width: 8),
                                   Text(
                                     "Facebook",
-                                    style: TextStyle(color: Colors.black,fontSize:Responsive.TextSize(context,isExtraSmallSize:17,isMobileSize: 19,isMobileLarge:26,isIpadSize: 54,isTabletSize: 64,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold),//17
+                                    style: TextStyle(color: Colors.black,fontSize:Responsive.TextSize(context,isExtraSmallSize:14,isMobileSize: 17,isMobileLarge:26,isIpadSize: 54,isTabletSize: 64,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold),//17
                                   ),
                                 ],
                               ),
@@ -207,7 +207,7 @@ class LoginScreen extends StatelessWidget {
                                   const SizedBox(width: 4),
                                    Text(
                                     "Google",
-                                    style: TextStyle(color: Colors.black,fontSize:Responsive.TextSize(context,isExtraSmallSize:17,isMobileSize: 22,isMobileLarge:26,isIpadSize: 57,isTabletSize: 60,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold ),
+                                    style: TextStyle(color: Colors.black,fontSize:Responsive.TextSize(context,isExtraSmallSize:17,isMobileSize: 20,isMobileLarge:26,isIpadSize: 57,isTabletSize: 60,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold ),
                                   ),
                                 ],
                               ),

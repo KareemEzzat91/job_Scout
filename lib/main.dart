@@ -31,7 +31,7 @@ void main() async {
   await Hive.openBox(Hivehelper.NotoficationBoxname);
   await FireStoreHelper(). getProfileSettings();
   await NotificationService().initNotification();
-  runApp(DevicePreview(builder :(context)=> MyApp()));
+  runApp(MyApp());
 }
 final GlobalKey<NavigatorState>navigatorkey=GlobalKey<NavigatorState>();
 
