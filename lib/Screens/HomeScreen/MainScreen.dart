@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../Helpers/Hivehelper.dart';
+import '../../Helpers/responsive/responsive.dart';
 import '../../Helpers/theme/DarkTheme/ThemeCubit/themes_cubit.dart';
 import '../DrawerScreens/About/AboutScreen.dart';
 import '../DrawerScreens/Notofication/Notofication.dart';
@@ -52,18 +53,18 @@ class _MainscreenState extends State<Mainscreen> {
                   Text(
                     "Hi ${FirebaseAuth.instance.currentUser?.displayName ?? "Guest"}",
                     textAlign: TextAlign.start,
-                    style: const TextStyle(
-                        color: Color(0xff3c6EAE),
+                    style:  TextStyle(
+                        color: const Color(0xff3c6EAE),
                         fontStyle: FontStyle.italic,
-                        fontSize: 13,
+                        fontSize: Responsive.TextSize(context,isExtraSmallSize:11,isMobileSize: 13,isMobileLarge:16,isIpadSize: 28,isTabletSize: 30,isLargeTabletSize: 30,defaultSize: 20  ),
                         fontWeight: FontWeight.w900),
                   ),
-                  const Text(
+                   Text(
                     'Find Your Dream Job',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                        color: Color(0xff3c6EAE),
-                        fontSize: 8,
+                        color: const Color(0xff3c6EAE),
+                        fontSize:Responsive.TextSize(context,isExtraSmallSize:7,isMobileSize: 8,isMobileLarge:10,isIpadSize: 15,isTabletSize:18,isLargeTabletSize: 20,defaultSize: 20  ),
                         fontWeight: FontWeight.w900),
                   ),
                 ],
@@ -77,6 +78,7 @@ class _MainscreenState extends State<Mainscreen> {
               child: Icon(iSDarkMode?
                 Icons.nightlight_round_sharp:Icons.sunny,
                 color: iSDarkMode?Colors.blue:Colors.orange,
+                size: Responsive.TextSize(context,isExtraSmallSize:20,isMobileSize: 24,isMobileLarge:26,isIpadSize: 50,isTabletSize: 60,isLargeTabletSize: 70,defaultSize: 20  ),
               )),
           const SizedBox(
             width: 18,

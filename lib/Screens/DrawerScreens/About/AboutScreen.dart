@@ -14,19 +14,6 @@ class AboutScreen extends StatelessWidget {
     }
 
   }
-  Future<void> _sendEmail() async {
-    final Uri emailUri = Uri(
-      scheme: 'mailto',
-      path: 'kareemezzat1222@gmail.com',
-    );
-
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
-    } else {
-      // You can show an error message or do something else
-      throw 'Could not launch $emailUri';
-    }
-  }
 
   @override
   Widget build(BuildContext context) {

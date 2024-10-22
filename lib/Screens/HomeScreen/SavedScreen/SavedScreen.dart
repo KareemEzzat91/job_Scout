@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
+import '../Home/Skeletonizer/SkeletonizerHelper.dart';
 import '../JobsModel/JobsModel.dart';
 import '../Maincubit/main_cubit.dart';
 import '../SearchScreen/job_details_screen.dart'; // Adjust the import path as necessary
@@ -59,7 +60,7 @@ class _SavedScreenState extends State<SavedScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => JobDetailsScreen(
-                        item: item,
+                        item: item,image: logoDesigns[index%11],
                       ),
                     ),
                   );
@@ -86,8 +87,9 @@ class _SavedScreenState extends State<SavedScreen> {
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                         child: CachedNetworkImage(
-                          imageUrl: item.companyLogo,
+                          imageUrl:logoDesigns[index%11],
                           fit: BoxFit.scaleDown,
+                          width: double.infinity,
                           height: 200,
                           placeholder: (context, url) => Image.asset("assets/images/black.jpg", fit: BoxFit.cover),
                           errorWidget: (context, url, error) => Center(child: Image.asset("assets/images/linkedin.png")),

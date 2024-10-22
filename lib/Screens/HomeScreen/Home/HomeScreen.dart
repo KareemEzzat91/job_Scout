@@ -1,21 +1,16 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../../Helpers/FireStoreHelper/FireStoreHelper.dart';
 import '../../../Helpers/kconstnt/constants.dart';
+import '../../../Helpers/responsive/responsive.dart';
 import '../../../main.dart';
 import '../../DrawerScreens/Profile/ProfileScreen.dart';
 import '../../Firebasenotofication/NotoficationScreen.dart';
 import '../Maincubit/main_cubit.dart';
-import '../SearchScreen/job_details_screen.dart';
 import '../JobsModel/JobsModel.dart';
+import 'Skeletonizer/SkeletonizerHelper.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -31,17 +26,6 @@ class HomeScreen extends StatelessWidget {
         : plainText;
   }
 
-  Future<void> _launchUrl(String url) async {
-    try {
-      final Uri url0 = Uri.parse(url); // Convert the string URL to a Uri
-      if (!await launchUrl(url0)) {
-        throw Exception('Could not launch $url0');
-      }
-    }catch (e){
-      throw Exception('Could not launch $e');
-    }
-
-  }
   final color = Colors.white;
 
    final List<Job> JobBanners = [];
@@ -98,6 +82,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
+                SizedBox(height: 10,),
                 GestureDetector(
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (c)=>ProfileScreen()));
@@ -109,37 +94,39 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Padding(
-                      padding:  EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Row(
                         children: [
-                          const CircleAvatar(
+                           CircleAvatar(
                             backgroundImage: AssetImage('assets/images/OIP (4).jpeg'),
-                            radius: 30,
+                            radius: Responsive.TextSize(context,isExtraSmallSize:27,isMobileSize: 30,isMobileLarge:36,isIpadSize: 57,isTabletSize: 73,isLargeTabletSize: 90,defaultSize: 20  ),
                           ),
                           const SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               SizedBox(
-                                width: 250,
-                                child: Text(
-                                  "Welcome Back ${FirebaseAuth.instance.currentUser?.displayName ?? ""}",
-                                  overflow: TextOverflow.fade,
-                                  maxLines: 1,
-                                  style:   TextStyle(
-                                      color: iSDarkMode?Colors.white:Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold),
+                                width: Responsive.TextSize(context,isExtraSmallSize:200,isMobileSize: 220,isMobileLarge:300,isIpadSize: 560,isTabletSize: 550,isLargeTabletSize: 760,defaultSize: 230  ),
+                                child: Container(
+                                  child: Text(
+                                    "Welcome Back ${FirebaseAuth.instance.currentUser?.displayName ?? ""}",
+                                    overflow: TextOverflow.fade,
+                                    maxLines: 1,
+                                    style:TextStyle(
+                                        color: iSDarkMode?Colors.white:Colors.black,
+                                        fontSize: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 18,isMobileLarge:24,isIpadSize: 35,isTabletSize: 40,isLargeTabletSize: 55,defaultSize: 24  ),
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                ),
-                              const SizedBox(height: 4),
+                              const SizedBox(height: 6),
                               Text(
                                 'You have applied to $numberofApply jobs this week.',
                                 style: TextStyle(
                                   color: Theme.of(context).brightness == Brightness.dark
                                       ? Colors.white.withOpacity(0.9)// لون النص في الثيم الداكن
                                       : Colors.black.withOpacity(0.7), // لون النص في الثيم الفاتح
-                                  fontSize: 11,
+                                  fontSize: Responsive.TextSize(context,isExtraSmallSize:9,isMobileSize: 13,isMobileLarge:16,isIpadSize: 30,isTabletSize: 32,isLargeTabletSize: 37,defaultSize: 20  ),
                                 ),
                               ),
                             ],
@@ -150,11 +137,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                 SizedBox(height: Responsive.TextSize(context,isExtraSmallSize:17,isMobileSize: 20,isMobileLarge:30,isIpadSize: 46,isTabletSize: 53,isLargeTabletSize: 55,defaultSize: 20  )),
                 // Title
-                const Text(
+                 Text(
                   'Job Analytics',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: Responsive.TextSize(context,isExtraSmallSize:18,isMobileSize: 21,isMobileLarge:20,isIpadSize: 40,isTabletSize: 50,isLargeTabletSize: 60,defaultSize: 30  ), fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 20),
 
@@ -185,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                           color: Theme.of(context).primaryColor
                         ),
-                        height: 220, // Set height based on your content
+                        height: Responsive.TextSize(context,isExtraSmallSize:210,isMobileSize: 210,isMobileLarge:255,isIpadSize: 330,isTabletSize: 380,isLargeTabletSize: 460,defaultSize: 20  ), // Set height based on your content
                       ),
 
                       // Card content on top of the background
@@ -196,22 +183,22 @@ class HomeScreen extends StatelessWidget {
                           children: [
                              Text(
                               'Active Jobs',
-                              style: TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73) , fontSize: 18),
+                              style: TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73) , fontSize: Responsive.TextSize(context,isExtraSmallSize:15,isMobileSize: 18,isMobileLarge:22,isIpadSize: 44,isTabletSize: 55,isLargeTabletSize: 65,defaultSize: 20  )),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 10),
                              Text(
                               '${ bloc.JobModels.isEmpty ?"42": bloc.JobModels.length} Jobs',
                               style:  TextStyle(
                                   color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.93) ,
-                                  fontSize: 32,
+                                  fontSize: Responsive.TextSize(context,isExtraSmallSize:28,isMobileSize: 32,isMobileLarge:30,isIpadSize: 46,isTabletSize: 53,isLargeTabletSize: 70,defaultSize: 20  ),
                                   fontWeight: FontWeight.bold),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 10),
                              Text(
                               'You applied for $numberofApply jobs this month',
-                              style:  TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.83), fontSize: 14),
+                              style:  TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.83), fontSize: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 14,isMobileLarge:20,isIpadSize: 38,isTabletSize: 40,isLargeTabletSize: 45,defaultSize: 20  )),
                             ),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 22),
                             Container(
                               decoration: BoxDecoration(
                                 color: Colors.white12,
@@ -223,11 +210,11 @@ class HomeScreen extends StatelessWidget {
                                 children: [
                                    Text(
                                     'Monthly Target: 30 Jobs',
-                                    style: TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73)),
+                                    style: TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73),fontSize:Responsive.TextSize(context,isExtraSmallSize:10,isMobileSize: 12,isMobileLarge:20,isIpadSize: 28,isTabletSize: 31,isLargeTabletSize: 35,defaultSize: 20  ) ),
                                   ),
                                   Text(
                                     'Reached: $numberofApply  ',
-                                    style:  TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73)),
+                                    style:  TextStyle(color: iSDarkMode?Theme.of(context).textTheme.bodySmall?.color:Colors.white.withOpacity(0.73),fontSize:Responsive.TextSize(context,isExtraSmallSize:10,isMobileSize: 12,isMobileLarge:20,isIpadSize: 28,isTabletSize: 31,isLargeTabletSize: 35,defaultSize: 20  )),
                                   ),
                                 ],
                               ),
@@ -239,15 +226,15 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                 SizedBox(height: Responsive.TextSize(context,isExtraSmallSize:20,isMobileSize: 24,isMobileLarge:20,isIpadSize: 33,isTabletSize: 40,isLargeTabletSize: 50,defaultSize: 230  )),
 
                 // Bar Chart placeholder
-                const Text(
+                 Text(
                   'Applications Over Time',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: Responsive.TextSize(context,isExtraSmallSize:18,isMobileSize: 21,isMobileLarge:20,isIpadSize: 40,isTabletSize: 50,isLargeTabletSize: 60,defaultSize: 230  ), fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
-                SizedBox(height: 200, child: _buildBarChart()),
+                SizedBox(height: Responsive.TextSize(context,isExtraSmallSize:230,isMobileSize: 260,isMobileLarge:300,isIpadSize: 460,isTabletSize: 450,isLargeTabletSize:560,defaultSize: 230  ), child: _buildBarChart(context)),
                 const SizedBox(height: 20),
                 // Dashboard Stats
                 GridView.count(
@@ -255,16 +242,13 @@ class HomeScreen extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    _buildDashboardItem(Icons.work, "Active Jobs", " ${ bloc.JobModels.isEmpty ?"42": bloc.JobModels.length} ", Colors.pink,iSDarkMode),
-                    _buildDashboardItem(Icons.people, "Candidates", "298", Colors.yellow,iSDarkMode),
-                    _buildDashboardItem(Icons.event, "Events", "54", Colors.blue,iSDarkMode),
-                    _buildDashboardItem(Icons.check_circle, "To-dos", "48", Colors.green,iSDarkMode),
+                    _buildDashboardItem(Icons.work, "Active Jobs", " ${ bloc.JobModels.isEmpty ?"42": bloc.JobModels.length} ", Colors.pink,iSDarkMode,context),
+                    _buildDashboardItem(Icons.people, "Candidates", "298", Colors.yellow,iSDarkMode,context),
+                    _buildDashboardItem(Icons.event, "Events", "54", Colors.blue,iSDarkMode,context),
+                    _buildDashboardItem(Icons.check_circle, "To-dos", "48", Colors.green,iSDarkMode,context),
                   ],
                 ),
                 const SizedBox(height: 20),
-                // Job Analytics Bar Chart
-                // Placeho
-                /////////////////////// lder for chart
                 const SizedBox(
                   height: 20,
                 ),
@@ -286,7 +270,7 @@ class HomeScreen extends StatelessWidget {
                               const Icon(
                                 Icons.all_inclusive_outlined,
                                 color: Colors.grey,
-                              ),
+                              ),context,
                               color: bloc.tagColors["All"],
                             )),
                         const SizedBox(width: 14),
@@ -295,8 +279,8 @@ class HomeScreen extends StatelessWidget {
                             bloc.changecolor("Software");
                           },
                           child: _tag("Software",
-                              const Icon(Icons.computer, color: Colors.grey),
-                            color:  bloc.tagColors["All"],ISDarkMode: iSDarkMode,
+                              const Icon(Icons.computer, color: Colors.grey),context,
+                            color:  bloc.tagColors["Software"],ISDarkMode: iSDarkMode,
 
                           ),
                         ),
@@ -306,8 +290,8 @@ class HomeScreen extends StatelessWidget {
                             bloc.changecolor("Design");
                           },
                           child: _tag("Design",
-                              const Icon(Icons.design_services, color: Colors.grey),
-                            color:  bloc.tagColors["All"],ISDarkMode:iSDarkMode ,
+                              const Icon(Icons.design_services, color: Colors.grey),context,
+                            color:  bloc.tagColors["Design"],ISDarkMode:iSDarkMode ,
                           ),
                         ),
                         const SizedBox(width: 14),
@@ -316,7 +300,7 @@ class HomeScreen extends StatelessWidget {
                             bloc.changecolor("Management");
                           },
                           child: _tag("Management",
-                              const Icon(Icons.manage_accounts, color: Colors.grey),
+                              const Icon(Icons.manage_accounts, color: Colors.grey),context,
                               color: bloc.tagColors["Management"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
@@ -325,7 +309,7 @@ class HomeScreen extends StatelessWidget {
                             bloc.changecolor("Developer");
                           },
                           child: _tag("Developer",
-                              const Icon(Icons.developer_mode, color: Colors.grey),
+                              const Icon(Icons.developer_mode, color: Colors.grey),context,
                               color: bloc.tagColors["Developer"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
@@ -334,7 +318,7 @@ class HomeScreen extends StatelessWidget {
                             bloc.changecolor("Security");
                           },
                           child: _tag("Security",
-                              const Icon(Icons.security, color: Colors.grey),
+                              const Icon(Icons.security, color: Colors.grey),context,
                               color: bloc.tagColors["Security"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
@@ -343,7 +327,7 @@ class HomeScreen extends StatelessWidget {
                             bloc.changecolor("Senior");
                           },
                           child: _tag(
-                              "Senior", const Icon(Icons.scale, color: Colors.grey),
+                              "Senior", const Icon(Icons.scale, color: Colors.grey),context,
                               color: bloc.tagColors["Senior"],ISDarkMode: iSDarkMode),
                         ),
                         const SizedBox(width: 14),
@@ -373,128 +357,7 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Show SkeletonLoader while loading
-                      return CarouselSlider(
-                        items: List.generate(
-                          10, // Show 10 skeleton placeholders
-                          (i) => Skeletonizer(
-                            enabled: true, // Skeleton loading enabled
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 150,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                backgroundBlendMode: BlendMode.dst,
-                                image: DecorationImage(
-                                    image:
-                                        const AssetImage('assets/images/black.jpg'),
-                                    // Your image URL
-                                    fit: BoxFit.cover,
-                                    // Adjusts how the image fits inside the container
-                                    colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.2),
-                                      // Adjust the transparency here
-                                      BlendMode.dstATop,
-                                    )),
-                                color: Colors.grey[400],
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      const SizedBox(height: 15),
-                                      const CircleAvatar(
-                                        backgroundColor: Colors.grey,
-                                        // Skeleton avatar
-                                        radius: 20,
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(height: 10),
-                                          Container(
-                                            width: 100,
-                                            height: 15,
-                                            color: Colors
-                                                .grey[400], // Skeleton text
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Container(
-                                            width: 80,
-                                            height: 10,
-                                            color: Colors
-                                                .grey[400], // Skeleton text
-                                          ),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      Container(
-                                        width: 20,
-                                        height: 20,
-                                        color:
-                                            Colors.grey[400], // Skeleton icon
-                                      ),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[400],
-                                            // Skeleton button
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[400],
-                                            // Skeleton button
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 5),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[400],
-                                            // Skeleton button
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        options: CarouselOptions(
-                          height: 170,
-                          viewportFraction: 1,
-                          enableInfiniteScroll: true,
-                          autoPlay: false,
-                        ),
-                      );
+                      return buildCarouselSliderLoading();
                     }
                     if (snapshot.hasError) {
                       return Center(
@@ -510,259 +373,7 @@ class HomeScreen extends StatelessWidget {
                     }
                     final jobBanners = jobData.toList();
 
-                    return CarouselSlider(
-                      items: List.generate(
-                        jobBanners.length,
-                        (i) => Skeletonizer(
-                          enabled: false,
-                          // Skeleton loading disabled when data is ready
-                          //------------> Banner Container <------------------
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => JobDetailsScreen(
-                                    item: jobBanners[i],
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(10),
-                              height: 170,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image:
-                                        const AssetImage('assets/images/black.avif'),
-                                    // Your image URL
-                                    fit: BoxFit.cover,
-                                    // Adjusts how the image fits inside the container
-                                    colorFilter: ColorFilter.mode(
-                                      Colors.black.withOpacity(0.2),
-                                      // Adjust the transparency here
-                                      BlendMode.dstATop,
-                                    )),
-                                gradient: const LinearGradient(
-                                  colors: [Color(0xFF263238), Colors.blueAccent],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                                color: Colors.blue[400],
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      // const SizedBox(height: 15),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          child: CachedNetworkImage(
-                                            imageUrl: jobBanners[i].companyLogo,
-                                            // color: Colors.blue,
-                                            width: 55,
-                                            height: 55,
-                                            alignment: Alignment.center,
-                                            maxHeightDiskCache: 75,
-                                            fit: BoxFit.contain,
-                                            // للصور اللى لسه بتحمل
-                                            placeholder: (c, u) =>
-                                                const CircleAvatar(
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/photo_2024-09-16_15-28-23-removebg-preview.png"),
-                                            ),
-                                            // للصور البايظة
-                                            errorWidget: (c, u, e) =>
-                                                const CircleAvatar(
-                                              backgroundImage: AssetImage(
-                                                  "assets/images/linkedin.png"),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // const SizedBox(height: 5),
-                                          SizedBox(
-                                            width: 220,
-                                            child: Text(
-                                              jobBanners[i].company,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          Row(
-                                            children: [
-                                              const Icon(Icons.access_time,
-                                                  color: Colors.white70),
-                                              Text(
-                                                jobBanners[i].date.length > 10
-                                                    ? '${jobBanners[i].date.substring(0, 10)}...'
-                                                    : jobBanners[i].date,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      const Spacer(),
-                                      BlocBuilder<MainCubit, MainState>(
-                                        builder: (context, state) {
-                                          return IconButton(
-                                            onPressed: () {
-                                              final newColor =
-                                                  jobBanners[i].savedColor ==
-                                                          Colors.grey
-                                                      ? Colors.redAccent
-                                                      : Colors.grey;
-                                              context
-                                                  .read<MainCubit>()
-                                                  .changeColor(i, newColor);
-                                            },
-                                            icon: Icon(
-                                              Icons.bookmark,
-                                              color: jobBanners[i].savedColor,
-                                              // Saved color
-                                              size: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                      // const Icon(Icons.bookmark,
-                                      //     color: Colors.white70),
-                                    ],
-                                  ),
-                                  const Spacer(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xff3c6EAE),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Icon(Icons.work_outline,
-                                                  color: Colors.white),
-                                              // SizedBox(width: 8),
-                                              Text('On Site',
-                                                  style: TextStyle(
-                                                      color: Colors.white)),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 7),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xff3c6EAE),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child: const Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Icon(
-                                                Icons
-                                                    .local_fire_department_outlined,
-                                                color: Colors.white,
-                                              ),
-                                              Text(
-                                                'Part Time',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(width: 7),
-                                      Expanded(
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xff3c6EAE),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                          ),
-                                          child:  Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              const Icon(Icons.location_on_outlined,
-                                                  color: Colors.white),
-                                              SizedBox(
-                                                width: 80,
-                                                child: Text(
-                                                    jobBanners[i].location,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    style: const TextStyle(
-                                                        color: Colors.white)),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      options: CarouselOptions(
-                        height: 170,
-                        viewportFraction: 1,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enlargeCenterPage: true,
-                        enlargeFactor: 0.3,
-                        scrollDirection: Axis.horizontal,
-                      ),
-                    );
+                    return buildCarouselSliderDone(jobBanners, context);
                   },
                 ), //Banners
                 const SizedBox(
@@ -785,121 +396,7 @@ class HomeScreen extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // SkeletonLoader for when the data is loading
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 5, // Number of skeleton placeholders
-                        itemBuilder: (context, index) {
-                          return Skeletonizer(
-                            enabled: true, // Show skeleton
-                            child: Container(
-                              width: double.infinity,
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // Skeleton for image
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.vertical(
-                                        top: Radius.circular(20)),
-                                    child: Container(
-                                      height: 200,
-                                      width: double.infinity,
-                                      color: Colors.grey[
-                                          300], // Grey placeholder for image
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Container(
-                                            width: 100,
-                                            height: 20,
-                                            color: Colors.grey[
-                                                300], // Skeleton for position text
-                                          ),
-                                        ),
-                                        Container(
-                                          width: 30,
-                                          height: 30,
-                                          color: Colors.grey[
-                                              300], // Skeleton for bookmark icon
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Container(
-                                      width: 150,
-                                      height: 16,
-                                      color: Colors.grey[
-                                          300], // Skeleton for company name
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Container(
-                                      width: 100,
-                                      height: 16,
-                                      color: Colors.grey[
-                                          300], // Skeleton for location text
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0),
-                                    child: Container(
-                                      width: double.infinity,
-                                      height: 50,
-                                      color: Colors.grey[
-                                          300], // Skeleton for description
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          height: 16,
-                                          color: Colors
-                                              .grey[300], // Skeleton for salary
-                                        ),
-                                        Container(
-                                          width: 50,
-                                          height: 16,
-                                          color: Colors.grey[
-                                              300], // Skeleton for apply button
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                      return buildHomeProductsLoading();
                     }
                     if (snapshot.hasError) {
                       return Center(
@@ -915,183 +412,7 @@ class HomeScreen extends StatelessWidget {
                       return const Center(child: Text("No jobs found."));
                     }
 
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: data.length,
-                      itemBuilder: (context, index) {
-                        final item = data[index];
-
-
-                        return GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => JobDetailsScreen(
-                                  item: item,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            width: double.infinity,
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color:iSDarkMode?Colors.black :Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.2),
-                                  spreadRadius: 2,
-                                  blurRadius: 5,
-                                  offset: const Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Display image
-                                ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(20)),
-                                  child:Hero(
-                                    transitionOnUserGestures: true,
-                                    tag: item.id,
-                                    child: CachedNetworkImage(
-                                      imageUrl: item.companyLogo,
-                                      fit: BoxFit.scaleDown,
-                                      height: 200,
-                                      placeholder: (context, url) => Image.asset("assets/images/black.jpg", fit: BoxFit.cover),
-                                      errorWidget: (context, url, error) => Center(
-                                        child: Image.asset("assets/images/linkedin.png"),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          item.position  ,
-                                          style: const TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                      BlocBuilder<MainCubit, MainState>(
-                                        builder: (context, state) {
-                                          return IconButton(
-                                            onPressed: () {
-                                              final newColor = item.savedColor == Colors.grey ? Colors.blue : Colors.grey;
-                                            final checked =   context.read<MainCubit>().changeColor(index, newColor);
-                                              checked ?FireStoreHelper().addToFirestoreUser(item) :
-                                              showDialog(context: context, builder: (c){
-                                                return AlertDialog(
-                                                  title:  const Text("DO YOU WANT TO DELETE THIS ITEM From Saved  ?"),
-                                                  actions: [
-                                                    TextButton(onPressed: (){
-                                                      Navigator.pop(context);
-
-                                                    }, child: const Text("NO")),
-                                                    TextButton(onPressed: (){
-                                                      FireStoreHelper().deleteSavedJob(item);
-                                                      Navigator.pop(context);
-
-                                                    }, child: const Text("Yes")),
-                                                  ],
-
-                                                );
-                                              });
-
-                                            },
-                                            icon: Icon(
-                                              Icons.bookmark,
-                                              color: item.savedColor,
-                                              // Saved color
-                                              size: 30,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-
-                                    item.company  ,
-                                    style: const TextStyle(
-                                        fontSize: 16, color: Colors.grey),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    item.location  ,
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Colors.grey),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Html(
-                                    data: truncateHtml(item.description),
-                                    style: {
-                                      "p": Style(
-                                          fontSize: FontSize(16), maxLines: 2),
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        '\$${item.salaryMin.toStringAsFixed(1)} - \$${item.salaryMax.toStringAsFixed(1)}',
-                                        style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.green),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          FireStoreHelper().addnumofapplytimes(numberofApply++);
-                                        _launchUrl(item.applyUrl);
-                                        },
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          height: 40,
-                                          width: 70,
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xff09555c),
-                                            borderRadius:
-                                                BorderRadius.circular(18),
-                                          ),
-                                          child: const Text('Apply',
-                                              style: TextStyle(
-                                                  color: Colors.white)),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    );
+                    return BuildHomeProductsDone(data, iSDarkMode);
                   },
                 ), //Home
               ],
@@ -1102,14 +423,13 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-
-  Widget _tag(String tagName, Icon icon,
+  Widget _tag(String tagName, Icon icon,context,
       {double width = 91, double height = 80, Color ?color = Colors.white,bool ISDarkMode=false}) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       alignment: Alignment.center,
-      height: height,
-      width: width,
+      height: Responsive.TextSize(context,isExtraSmallSize:height,isMobileSize: height,isMobileLarge:100,isIpadSize: 130,isTabletSize: 150,isLargeTabletSize: 155,defaultSize: 20  ),
+      width:  Responsive.TextSize(context,isExtraSmallSize:width,isMobileSize: width,isMobileLarge:100,isIpadSize: 130,isTabletSize: 150,isLargeTabletSize: 155,defaultSize: 20  ),
       decoration: BoxDecoration(
         color: ISDarkMode?Colors.black:color,
         borderRadius: BorderRadius.circular(10),
@@ -1128,17 +448,17 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             tagName,
-            style:  TextStyle(color: ISDarkMode?Colors.white:Colors.black, fontSize: 12),
+            style:  TextStyle(color: ISDarkMode?Colors.white:Colors.grey, fontSize: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 12,isMobileLarge:15,isIpadSize: 21,isTabletSize: 40,isLargeTabletSize: 45,defaultSize: 20  )),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDashboardItem(IconData icon, String label, String value, Color color,bool ISDarkMode) {
+  Widget _buildDashboardItem(IconData icon, String label, String value, Color color,bool ISDarkMode,context) {
     return Container(
       margin: const EdgeInsets.all(8),
-      padding:  EdgeInsets.all(16),
+      padding:  EdgeInsets.all( Responsive.TextSize(context,isExtraSmallSize:15,isMobileSize: 16,isMobileLarge:19,isIpadSize: 22,isTabletSize: 25,isLargeTabletSize: 30,defaultSize: 20  )),
       decoration: BoxDecoration(
         color:ISDarkMode ?Colors.black:Colors.white,
         borderRadius: BorderRadius.circular(12),
@@ -1153,23 +473,23 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: color, size: 30),
+          Icon(icon, color: color, size:  Responsive.TextSize(context,isExtraSmallSize:15,isMobileSize: 33,isMobileLarge:38,isIpadSize: 59,isTabletSize: 70,isLargeTabletSize: 90,defaultSize: 30  )),
           const SizedBox(height: 10),
           Text(
             value,
-            style: const TextStyle(
-              fontSize: 24,
+            style:  TextStyle(
+              fontSize:  Responsive.TextSize(context,isExtraSmallSize:15,isMobileSize: 20,isMobileLarge:25,isIpadSize: 44,isTabletSize: 50,isLargeTabletSize: 55,defaultSize: 20  ),
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(label),
+          Text(label,style: TextStyle(fontSize:  Responsive.TextSize(context,isExtraSmallSize:10,isMobileSize: 18,isMobileLarge:23,isIpadSize: 30,isTabletSize: 40,isLargeTabletSize: 45,defaultSize: 13  )),),
         ],
       ),
     );
   }
 
-  // Placeholder bar chart implementation (You can customize this)
-  Widget _buildBarChart() {
+// Placeholder bar chart implementation (You can customize this)
+  Widget _buildBarChart(context) {
     return BarChart(
       BarChartData(
         borderData: FlBorderData(show: false),
@@ -1178,28 +498,27 @@ class HomeScreen extends StatelessWidget {
             sideTitles: SideTitles(
               showTitles: true,
               getTitlesWidget: (value, meta) {
-                const style = TextStyle(
-                  color: Colors.black,
+                final style = TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14,
+                  fontSize: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 15,isMobileLarge:20,isIpadSize: 20,isTabletSize: 40,isLargeTabletSize: 45,defaultSize: 20  ),
                 );
                 switch (value.toInt()) {
                   case 0:
-                    return const Text('Jan', style: style);
+                    return  Text('Jan', style: style);
                   case 1:
-                    return const Text('Feb', style: style);
+                    return  Text('Feb', style: style);
                   case 2:
-                    return const Text('Mar', style: style);
+                    return  Text('Mar', style: style);
                   case 3:
-                    return const Text('Apr', style: style);
+                    return  Text('Apr', style: style);
                   case 4:
-                    return const Text('May', style: style);
+                    return  Text('May', style: style);
                   case 5:
-                    return const Text('Jun', style: style);
+                    return  Text('Jun', style: style);
                   case 6:
-                    return const Text('Jul', style: style);
+                    return  Text('Jul', style: style);
                   case 7:
-                    return const Text('Aug', style: style);
+                    return  Text('Aug', style: style);
                   default:
                     return Container();
                 }
@@ -1208,36 +527,39 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         barGroups: [
-          _makeBarGroup(0, 10, 5), // For January
-          _makeBarGroup(1, 50, 30), // For February
-          _makeBarGroup(2, 80, 50), // For March
-          _makeBarGroup(3, 120, 60), // For April
-          _makeBarGroup(4, 40, 20), // For May
-          _makeBarGroup(5, 50, 30), // For June
-          _makeBarGroup(6, 30, 15), // For July
-          _makeBarGroup(7, 40, 20), // For August
+          _makeBarGroup(0, 10, 5,context), // For January
+          _makeBarGroup(1, 50, 30,context), // For February
+          _makeBarGroup(2, 80, 50,context), // For March
+          _makeBarGroup(3, 120, 60,context), // For April
+          _makeBarGroup(4, 40, 20,context), // For May
+          _makeBarGroup(5, 50, 30,context), // For June
+          _makeBarGroup(6, 30, 15,context), // For July
+          _makeBarGroup(7, 40, 20,context), // For August
         ],
       ),
     );
   }
 
-  // Helper method for bar chart groups
-  BarChartGroupData _makeBarGroup(int x, double applied, double qualified) {
+// Helper method for bar chart groups
+  BarChartGroupData _makeBarGroup(int x, double applied, double qualified,context) {
     return BarChartGroupData(
       x: x,
       barRods: [
         BarChartRodData(
           toY: applied,
           color: Colors.blue,
-          width: 12,
+          width: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 12,isMobileLarge:20,isIpadSize: 28,isTabletSize: 45,isLargeTabletSize: 50,defaultSize: 20  ),
         ),
         BarChartRodData(
           toY: qualified,
           color: Colors.green,
-          width: 12,
+          width: Responsive.TextSize(context,isExtraSmallSize:12,isMobileSize: 12,isMobileLarge:20,isIpadSize: 28,isTabletSize: 46,isLargeTabletSize: 50,defaultSize: 20  ),
         ),
       ],
     );
   }
+
+
+
 
 }

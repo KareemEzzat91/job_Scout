@@ -114,12 +114,6 @@ class LoginScreen extends StatelessWidget {
   final _passwordController = TextEditingController();
   final _key = GlobalKey<FormState>();
 
-  double TextSize(context,{required double isExtraSmallSize , required double isMobileSize,required double isMobileLarge,required double isIpadSize,required double isTabletSize,required double isLargeTabletSize,required double defaultSize} ){ return Responsive.isExtraSmall(context) ? isExtraSmallSize :
-   Responsive.isMobile(context) ?isMobileSize:
-   Responsive.isMobileLarge(context) ? isMobileLarge:
-   Responsive.isIpad(context) ? isIpadSize:
-   Responsive.isTablet(context) ? isTabletSize :
-   Responsive.isLargeTablet(context) ? isLargeTabletSize : isLargeTabletSize;}
 
   @override
   Widget build(BuildContext context) {
@@ -150,7 +144,7 @@ class LoginScreen extends StatelessWidget {
                 ,   Row(
                     children: [
                       Text("Lets Get You Login! ",style :TextStyle(
-                        fontSize:TextSize(context,isExtraSmallSize:18,isMobileSize: 25,isMobileLarge:30,isIpadSize: 40,isTabletSize: 43,isLargeTabletSize: 50,defaultSize: 20  ),shadows: const [
+                        fontSize:Responsive.TextSize(context,isExtraSmallSize:18,isMobileSize: 25,isMobileLarge:30,isIpadSize: 40,isTabletSize: 43,isLargeTabletSize: 50,defaultSize: 20  ),shadows: const [
                         Shadow(
                           offset: Offset(2, 2),
                           blurRadius: 4,
@@ -161,7 +155,7 @@ class LoginScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 8,),
-                  Text("Enter Your information Below ",style: TextStyle(color: Colors.grey.shade400,fontSize:TextSize(context,isExtraSmallSize:10,isMobileSize: 17,isMobileLarge:19,isIpadSize: 26,isTabletSize: 25,isLargeTabletSize: 40,defaultSize: 15  )),)
+                  Text("Enter Your information Below ",style: TextStyle(color: Colors.grey.shade400,fontSize:Responsive.TextSize(context,isExtraSmallSize:10,isMobileSize: 17,isMobileLarge:19,isIpadSize: 26,isTabletSize: 25,isLargeTabletSize: 40,defaultSize: 15  )),)
                   ,Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Row(
@@ -181,11 +175,11 @@ class LoginScreen extends StatelessWidget {
                               child:  Row(
                                 children: [
                                   const SizedBox(width: 20),
-                                  Icon(Icons.facebook, color: Colors.blue,size: TextSize(context,isExtraSmallSize:30,isMobileSize: 35,isMobileLarge:40,isIpadSize: 60,isTabletSize: 80,isLargeTabletSize: 90,defaultSize: 35  ),), // 35// Added color to the icon
+                                  Icon(Icons.facebook, color: Colors.blue,size: Responsive.TextSize(context,isExtraSmallSize:30,isMobileSize: 35,isMobileLarge:40,isIpadSize: 60,isTabletSize: 80,isLargeTabletSize: 90,defaultSize: 35  ),), // 35// Added color to the icon
                                   const SizedBox(width: 8),
                                   Text(
                                     "Facebook",
-                                    style: TextStyle(color: Colors.black,fontSize:TextSize(context,isExtraSmallSize:17,isMobileSize: 19,isMobileLarge:26,isIpadSize: 54,isTabletSize: 64,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold),//17
+                                    style: TextStyle(color: Colors.black,fontSize:Responsive.TextSize(context,isExtraSmallSize:17,isMobileSize: 19,isMobileLarge:26,isIpadSize: 54,isTabletSize: 64,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold),//17
                                   ),
                                 ],
                               ),
@@ -209,11 +203,11 @@ class LoginScreen extends StatelessWidget {
                               child: Row(
                                 children: [
                                   const SizedBox(width: 10),
-                                  Image.asset("assets/images/Google-Symbol.png",width: TextSize(context,isExtraSmallSize:40,isMobileSize: 45,isMobileLarge:60,isIpadSize: 88,isTabletSize: 90,isLargeTabletSize: 130,defaultSize: 43  ),),
+                                  Image.asset("assets/images/Google-Symbol.png",width: Responsive.TextSize(context,isExtraSmallSize:40,isMobileSize: 45,isMobileLarge:60,isIpadSize: 88,isTabletSize: 90,isLargeTabletSize: 130,defaultSize: 43  ),),
                                   const SizedBox(width: 4),
                                    Text(
                                     "Google",
-                                    style: TextStyle(color: Colors.black,fontSize:TextSize(context,isExtraSmallSize:17,isMobileSize: 22,isMobileLarge:26,isIpadSize: 57,isTabletSize: 60,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold ),
+                                    style: TextStyle(color: Colors.black,fontSize:Responsive.TextSize(context,isExtraSmallSize:17,isMobileSize: 22,isMobileLarge:26,isIpadSize: 57,isTabletSize: 60,isLargeTabletSize: 70,defaultSize: 18  ),fontWeight: FontWeight.bold ),
                                   ),
                                 ],
                               ),
@@ -236,7 +230,7 @@ class LoginScreen extends StatelessWidget {
                       const SizedBox(width: 8), // Add some spacing
                        Text(
                         "Or Login With",
-                        style: TextStyle(color: Colors.black.withOpacity(0.6),fontSize:TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  ) ),
+                        style: TextStyle(color: Colors.black.withOpacity(0.6),fontSize:Responsive.TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  ) ),
                       ),
                       const SizedBox(width: 8), // Add some spacing
                       Expanded(
@@ -296,7 +290,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Row(children: [const Spacer(),InkWell(onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>const ResetPasswordScreen()));
-                  }, child:   Text("Forgot Password ?",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold,fontSize: TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  ))/*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/ ,))],)
+                  }, child:   Text("Forgot Password ?",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold,fontSize: Responsive.TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  ))/*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/ ,))],)
                   ,const SizedBox(height:40,),
                 GestureDetector(
                   onTap: (){
@@ -325,7 +319,7 @@ class LoginScreen extends StatelessWidget {
                               }
                             return  Center(
                               child: Text(
-                                "Login",style:TextStyle(fontSize: TextSize(context,isExtraSmallSize:25,isMobileSize: 30,isMobileLarge:35,isIpadSize: 70,isTabletSize: 90,isLargeTabletSize: 100,defaultSize: 40  ),color: Colors.white,) /*GoogleFonts.agbalumo(fontSize: 40,color: Colors.white)*/,),
+                                "Login",style:TextStyle(fontSize: Responsive.TextSize(context,isExtraSmallSize:25,isMobileSize: 30,isMobileLarge:35,isIpadSize: 70,isTabletSize: 90,isLargeTabletSize: 100,defaultSize: 40  ),color: Colors.white,) /*GoogleFonts.agbalumo(fontSize: 40,color: Colors.white)*/,),
                             );
 
 
@@ -339,14 +333,14 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
 
-                     Text("Dont have any account ? ",style: TextStyle(fontSize: TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  )),),
+                     Text("Dont have any account ? ",style: TextStyle(fontSize: Responsive.TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  )),),
                     InkWell(onTap: (){
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) => Signupscreen()),
                       );
 
-                    }, child:  Text("Register Now",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold,fontSize: TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  )) /*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/,))
+                    }, child:  Text("Register Now",style:TextStyle(color: Color(0xff0186c7),fontWeight: FontWeight.bold,fontSize: Responsive.TextSize(context,isExtraSmallSize:13,isMobileSize: 15,isMobileLarge:18,isIpadSize: 20,isTabletSize: 22,isLargeTabletSize: 30,defaultSize: 18  )) /*GoogleFonts.agbalumo(color: Color(0xff0186c7))*/,))
                   ],)
 
 

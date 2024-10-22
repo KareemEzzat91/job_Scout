@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import '../Home/Skeletonizer/SkeletonizerHelper.dart';
 import 'job_details_screen.dart';
 import 'job_location_screen.dart';
 import 'job_role_screen.dart';
@@ -120,7 +121,7 @@ class _JobSearchScreenState extends State<JobSearchScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => JobDetailsScreen( item:item ,
+                            builder: (context) => JobDetailsScreen( item:item ,image: logoDesigns[index%11],
                             ),
                           ),
                         );

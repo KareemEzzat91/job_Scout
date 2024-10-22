@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../Home/Skeletonizer/SkeletonizerHelper.dart';
 import '../JobsModel/JobsModel.dart';
 import '../Maincubit/main_cubit.dart';
 import 'job_details_screen.dart';
@@ -102,7 +103,7 @@ class _JobLocationInputScreenState extends State<JobLocationInputScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => JobDetailsScreen(item:item ,
+                            builder: (context) => JobDetailsScreen(item:item , image: logoDesigns[index%11],
                             ),
                           ),
                         );

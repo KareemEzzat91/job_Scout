@@ -10,8 +10,9 @@ import '../JobsModel/JobsModel.dart';
 
 class JobDetailsScreen extends StatelessWidget {
   final Job item;
+  final String image;
 
-  const JobDetailsScreen({super.key, required this.item});
+  const JobDetailsScreen({super.key, required this.item,required this.image });
 
   Future<void> _launchUrl(String url) async {
     final Uri url0 = Uri.parse(url); // Convert the string URL to a Uri
@@ -58,7 +59,7 @@ class JobDetailsScreen extends StatelessWidget {
                   transitionOnUserGestures: true,
                   tag: item.id,
                   child: CachedNetworkImage(
-                    imageUrl: checkImage(),
+                    imageUrl:image,
                     fit: BoxFit.fitWidth,
                     height: 350,
                     placeholder: (context, url) => Image.asset("assets/images/black.jpg", fit: BoxFit.cover),

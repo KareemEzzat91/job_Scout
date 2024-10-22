@@ -44,6 +44,12 @@ class Responsive extends StatelessWidget {
   static bool isExtraSmall(BuildContext context) {
     return MediaQuery.of(context).size.width < 375; // Define your criteria for extra small devices
   }
+  static double TextSize(context,{required double isExtraSmallSize , required double isMobileSize,required double isMobileLarge,required double isIpadSize,required double isTabletSize,required double isLargeTabletSize,required double defaultSize} ){ return Responsive.isExtraSmall(context) ? isExtraSmallSize :
+  Responsive.isMobile(context) ?isMobileSize:
+  Responsive.isMobileLarge(context) ? isMobileLarge:
+  Responsive.isIpad(context) ? isIpadSize:
+  Responsive.isTablet(context) ? isTabletSize :
+  Responsive.isLargeTablet(context) ? isLargeTabletSize : isLargeTabletSize;}
 
   @override
   Widget build(BuildContext context) {
