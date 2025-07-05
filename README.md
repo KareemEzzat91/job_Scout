@@ -60,12 +60,17 @@ Flutter Jobs Finder is a job hunting app built using Flutter. The app provides j
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/2caa115a-589b-4a90-bf1c-2ea493bf3b5d" width="23%">
-  <img src="https://github.com/user-attachments/assets/e6c19960-dae5-435b-b9f0-21ed922984bd" width="23%">
-  <img src="https://github.com/user-attachments/assets/cdc7ddbe-392b-468e-a0c7-523c7a2c1568" width="23%">
-  <img src="https://github.com/user-attachments/assets/2ecf8559-bc63-4fd2-98b7-fd0db8286499" width="23%">
-  <img src="https://github.com/user-attachments/assets/daa3ab16-0aaa-43dc-9002-5de5140b5bd1" width="23%">
+  <!-- صورة البانر أو العرض الرئيسي -->
+  <img src="https://github.com/user-attachments/assets/2caa115a-589b-4a90-bf1c-2ea493bf3b5d" width="100%" alt="App Preview Banner">
+  <br><br>
+
+  <!-- باقي السكرينات -->
+  <img src="https://github.com/user-attachments/assets/e6c19960-dae5-435b-b9f0-21ed922984bd" width="23%" alt="Screenshot 1">
+  <img src="https://github.com/user-attachments/assets/cdc7ddbe-392b-468e-a0c7-523c7a2c1568" width="23%" alt="Screenshot 2">
+  <img src="https://github.com/user-attachments/assets/2ecf8559-bc63-4fd2-98b7-fd0db8286499" width="23%" alt="Screenshot 3">
+  <img src="https://github.com/user-attachments/assets/daa3ab16-0aaa-43dc-9002-5de5140b5bd1" width="23%" alt="Screenshot 4">
 </div>
+
 
 ---
 
