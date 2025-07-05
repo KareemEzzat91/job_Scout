@@ -10,11 +10,11 @@
   <p align="center">
     A cross-platform mobile app to explore, search, and apply for jobs around you.
     <br />
-    <a href="https://github.com/devsadeq/JobsFlutterApp/">View Demo</a>
+    <a href="https://www.linkedin.com/posts/kareem-ezzat-21b99b220_flutter-firebase-hive-activity-7254872206717952000-IZPZ/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADes0HcB81YYjZc1O4o9F4iP8zaTQUA9eJ8/">View Demo</a>
     ·
-    <a href="https://github.com/devsadeq/JobsFlutterApp/issues">Report Bug</a>
+    <a href="kareemezzat1222@gmail.com">Report Bug</a>
     ·
-    <a href="https://github.com/devsadeq/JobsFlutterApp/issues">Request Feature</a>
+    <a href="kareemezzat1222@gmail.com">Request Feature</a>
   </p>
 </div>
 
