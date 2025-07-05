@@ -2,12 +2,13 @@
 <br />
 <div align="center">
   <a href="https://github.com/KareemEzzat91/job_Scout">
-    <img src="https://github.com/user-attachments/assets/fac7c400-2e12-4b29-bd22-2699b4ec138b" alt="Logo">
+    <img src="https://github.com/user-attachments/assets/fac7c400-2e12-4b29-bd22-2699b4ec138b" alt="Logo" width="120">
   </a>
-<h1 align="center">Flutter Jobs Finder</h1>
+
+  <h1 align="center">Flutter Jobs Finder</h1>
 
   <p align="center">
-    A Flutter App to find jobs in your area
+    A cross-platform mobile app to explore, search, and apply for jobs around you.
     <br />
     <a href="https://github.com/devsadeq/JobsFlutterApp/">View Demo</a>
     ·
@@ -17,160 +18,77 @@
   </p>
 </div>
 
+---
 
-<!-- ABOUT THE PROJECT -->
+## 📱 About The Project
 
-## About The Project
+Flutter Jobs Finder is a job hunting app built using Flutter. The app provides job seekers with tools to browse, search, and apply for jobs. Employers can post job listings and manage applicants (feature under development).
 
-Flutter Jobs Finder is a Flutter App to find jobs in your area.
+### ✨ Features
 
-- You can search for jobs, filter them by position and save them to your favorites list.
-- You can also view the details of each job and apply for it.
-- Companies can also post jobs and view the list of applicants (working on it).
-- The app is built with Flutter and Dart, MVC architecture with cubit state management.
+- 🔍 Search for jobs by title or keyword
+- 📂 Filter jobs by category/position
+- ❤️ Save jobs to your favorites
+- 📄 View detailed job descriptions
+- 📤 Apply for jobs directly in the app
+- 🏢 Company login to post and manage jobs (coming soon)
 
-It's MVP (Minimum Viable Product) and it's still under development.
+> 💡 This is an MVP (Minimum Viable Product) and is actively being developed.
 
-### Built With
+---
 
-It's built with the following technologies:
+## 🚀 Built With
 
-* [![Flutter][Flutter]][Flutter-url]
-* [![Dart][Dart]][Dart-url]
-* [![Dio][Dio]][Dio-url]
-* [![GetX][GetX]][GetX-url]
-* [![Get Storage][Get Storage]][Get Storage-url]
-* [![Get It][Get It]][Get It-url]
-* [![Google Fonts][Google Fonts]][Google Fonts-url]
-* [![Hero Icons][Hero Icons]][Hero Icons-url]
-* [![Lottie][Lottie]][Lottie-url]
-* [![Freezed][Freezed]][Freezed-url]
-* [![Url Launcher][Url Launcher]][Url Launcher-url]
-* [![Intl][Intl]][Intl-url]
+This project is powered by modern Flutter tools and libraries:
 
-### Screenshots
+| Tech Stack       | Description |
+|------------------|-------------|
+| [![Flutter][Flutter]][Flutter-url] | Cross-platform UI framework |
+| [![Dart][Dart]][Dart-url] | Programming language |
+| [![Dio][Dio]][Dio-url] | HTTP client |
+| [![GetX][GetX]][GetX-url] | State management & routing |
+| [![Freezed][Freezed]][Freezed-url] | Data classes with union support |
+| [![Get Storage][Get Storage]][Get Storage-url] | Local storage |
+| [![Get It][Get It]][Get It-url] | Dependency injection |
+| [![Lottie][Lottie]][Lottie-url] | Animations |
+| [![Google Fonts][Google Fonts]][Google Fonts-url] | Custom fonts |
+| [![Intl][Intl]][Intl-url] | Date & time formatting |
+| [![Url Launcher][Url Launcher]][Url Launcher-url] | Launch URLs |
+| [![Hero Icons][Hero Icons]][Hero Icons-url] | Icon set |
 
-  <a href="https://github.com/devsadeq/JobsFlutterApp">
-    <img src="assets/screenshots/screenshot (1).png" width="25%">
-   <img src="assets/screenshots/screenshot (2).png" width="25%">
-   <img src="assets/screenshots/screenshot (3).png" width="25%">
-   <img src="assets/screenshots/screenshot (4).png" width="25%">
-   <img src="assets/screenshots/screenshot (5).png" width="25%">
-   <img src="assets/screenshots/screenshot (6).png" width="25%">
-   <img src="assets/screenshots/screenshot (7).png" width="25%">
-   <img src="assets/screenshots/screenshot (8).png" width="25%">
-   <img src="assets/screenshots/screenshot (9).png" width="25%">
-   <img src="assets/screenshots/screenshot (10).png" width="25%">
-   <img src="assets/screenshots/screenshot (11).png" width="25%">
-   <img src="assets/screenshots/screenshot (12).png" width="25%">
-   <img src="assets/screenshots/screenshot (13).png" width="25%">
-  </a>
+---
 
+## 📸 Screenshots
 
-<!-- GETTING STARTED -->
+<div align="center">
+  <img src="assets/screenshots/screenshot (1).png" width="23%">
+  <img src="assets/screenshots/screenshot (2).png" width="23%">
+  <img src="assets/screenshots/screenshot (3).png" width="23%">
+  <img src="assets/screenshots/screenshot (4).png" width="23%">
+  <img src="assets/screenshots/screenshot (5).png" width="23%">
+  <img src="assets/screenshots/screenshot (6).png" width="23%">
+  <img src="assets/screenshots/screenshot (7).png" width="23%">
+  <img src="assets/screenshots/screenshot (8).png" width="23%">
+  <img src="assets/screenshots/screenshot (9).png" width="23%">
+  <img src="assets/screenshots/screenshot (10).png" width="23%">
+  <img src="assets/screenshots/screenshot (11).png" width="23%">
+  <img src="assets/screenshots/screenshot (12).png" width="23%">
+  <img src="assets/screenshots/screenshot (13).png" width="23%">
+</div>
 
-## Getting Started
+---
 
-_To get a local copy up and running follow these simple steps._
+## 🛠️ Getting Started
 
-### Prerequisites
+Follow these simple steps to run the project locally.
 
-_Make sure you have Flutter installed on your machine. If not, follow the instructions on the
-official Flutter website._
+### ✅ Prerequisites
 
-### Installation
+- Flutter SDK: [Install Flutter](https://docs.flutter.dev/get-started/install)
+- Android Studio / VS Code (with Flutter plugin)
 
-1. Download or clone this repo by using the link below:
+### 📦 Installation
 
-   ```sh
+1. **Clone the repository:**
+   ```bash
    git clone https://github.com/devsadeq/JobsFlutterApp.git
-   ```
-2. Go to project root and execute the following command in console to get the required dependencies:
-
-   ```sh
-   flutter pub get 
-   ```
-
-<!-- CONTACT -->
-
-## Contact
-
-Sadeq Al-Mhana - dev.sadeq@gmail.com
-
-LinkedIn: [https://www.linkedin.com/in/devsadeq/](https://www.linkedin.com/in/devsadeq/)
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-
-[contributors-url]: https://github.com/devsadeq/JobsFlutterApp/graphs/contributors
-
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-
-[forks-url]: https://github.com/devsadeq/JobsFlutterApp/network/members
-
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-
-[stars-url]: https://github.com/devsadeq/JobsFlutterApp/stargazers
-
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-
-[issues-url]: https://github.com/devsadeq/JobsFlutterApp/issues
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-
-[linkedin-url]: https://www.linkedin.com/in/devsadeq/
-
-[Flutter]: https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white
-
-[Flutter-url]: https://flutter.dev/
-
-[Dart]: https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white
-
-[Dart-url]: https://dart.dev/
-
-[Google Fonts]: https://img.shields.io/badge/Google_Fonts-4285F4?style=for-the-badge&logo=google-fonts&logoColor=white
-
-[Google Fonts-url]: https://fonts.google.com/
-
-[Lottie]: https://img.shields.io/badge/Lottie-FF6C37?style=for-the-badge&logo=lottie&logoColor=white
-
-[Lottie-url]: https://lottiefiles.com/
-
-[Dio]: https://img.shields.io/badge/Dio-0175C2?style=for-the-badge&logo=dio&logoColor=white
-
-[Dio-url]: https://pub.dev/packages/dio
-
-[GetX]: https://img.shields.io/badge/Get-0175C2?style=for-the-badge&logo=get&logoColor=white
-
-[GetX-url]: https://pub.dev/packages/get
-
-[Get Storage]: https://img.shields.io/badge/Get_Storage-0175C2?style=for-the-badge&logo=getstorage&logoColor=white
-
-[Get Storage-url]: https://pub.dev/packages/get_storage
-
-[Flutter Screenutil]: https://img.shields.io/badge/Flutter_Screenutil-0175C2?style=for-the-badge&logo=flutterscreenutil&logoColor=white
-
-[Flutter Screenutil-url]: https://pub.dev/packages/flutter_screenutil
-
-[Get It]: https://img.shields.io/badge/Get_It-0175C2?style=for-the-badge&logo=getit&logoColor=white
-
-[Get It-url]: https://pub.dev/packages/get_it
-
-[Freezed]: https://img.shields.io/badge/Freezed-0175C2?style=for-the-badge&logo=freezed&logoColor=white
-
-[Freezed-url]: https://pub.dev/packages/freezed
-
-[Intl]: https://img.shields.io/badge/Intl-0175C2?style=for-the-badge&logo=intl&logoColor=white
-
-[Intl-url]: https://pub.dev/packages/intl
-
-[Url Launcher]: https://img.shields.io/badge/Url_Launcher-0175C2?style=for-the-badge&logo=url_launcher&logoColor=white
-
-[Url Launcher-url]: https://pub.dev/packages/url_launcher
-
-[Hero Icons]: https://img.shields.io/badge/Hero_Icons-0175C2?style=for-the-badge&logo=heroicons&logoColor=white
-
-[Hero Icons-url]: https://heroicons.com/
