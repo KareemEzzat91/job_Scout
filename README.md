@@ -2,7 +2,8 @@
 <br />
 <div align="center">
   <a href="https://github.com/devsadeq/JobsFlutterApp">
-    <img src="assets/screenshots/cover.png" alt="Logo">
+    <img src="![photo_2024-09-16_15-28-23](https://github.com/user-attachments/assets/923b1851-e37d-41d0-a258-e0c359f77a9a)
+" alt="Logo">
   </a>
 <h1 align="center">Flutter Jobs Finder</h1>
 
