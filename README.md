@@ -39,22 +39,21 @@ Flutter Jobs Finder is a job hunting app built using Flutter. The app provides j
 
 ## 🚀 Built With
 
-This project is powered by modern Flutter tools and libraries:
+| Tech Stack | Description |
+|------------|-------------|
+| <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" height="28"/> | Cross-platform UI framework |
+| <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" height="28"/> | Programming language |
+| <img src="https://img.shields.io/badge/Dio-0175C2?style=for-the-badge&logo=dio&logoColor=white" height="28"/> | HTTP client |
+| <img src="https://img.shields.io/badge/GetX-0175C2?style=for-the-badge&logo=getx&logoColor=white" height="28"/> | State management & routing |
+| <img src="https://img.shields.io/badge/Freezed-0175C2?style=for-the-badge&logo=freezed&logoColor=white" height="28"/> | Data classes with union support |
+| <img src="https://img.shields.io/badge/Get_Storage-0175C2?style=for-the-badge&logo=getstorage&logoColor=white" height="28"/> | Local storage |
+| <img src="https://img.shields.io/badge/Get_It-0175C2?style=for-the-badge&logo=getit&logoColor=white" height="28"/> | Dependency injection |
+| <img src="https://img.shields.io/badge/Lottie-FF6C37?style=for-the-badge&logo=lottie&logoColor=white" height="28"/> | Animations |
+| <img src="https://img.shields.io/badge/Google_Fonts-4285F4?style=for-the-badge&logo=google-fonts&logoColor=white" height="28"/> | Custom fonts |
+| <img src="https://img.shields.io/badge/Intl-0175C2?style=for-the-badge&logo=intl&logoColor=white" height="28"/> | Date & time formatting |
+| <img src="https://img.shields.io/badge/Url_Launcher-0175C2?style=for-the-badge&logo=url_launcher&logoColor=white" height="28"/> | Launch URLs |
+| <img src="https://img.shields.io/badge/Hero_Icons-0175C2?style=for-the-badge&logo=heroicons&logoColor=white" height="28"/> | Icon set |
 
-| Tech Stack       | Description |
-|------------------|-------------|
-| [![Flutter][Flutter]][Flutter-url] | Cross-platform UI framework |
-| [![Dart][Dart]][Dart-url] | Programming language |
-| [![Dio][Dio]][Dio-url] | HTTP client |
-| [![GetX][GetX]][GetX-url] | State management & routing |
-| [![Freezed][Freezed]][Freezed-url] | Data classes with union support |
-| [![Get Storage][Get Storage]][Get Storage-url] | Local storage |
-| [![Get It][Get It]][Get It-url] | Dependency injection |
-| [![Lottie][Lottie]][Lottie-url] | Animations |
-| [![Google Fonts][Google Fonts]][Google Fonts-url] | Custom fonts |
-| [![Intl][Intl]][Intl-url] | Date & time formatting |
-| [![Url Launcher][Url Launcher]][Url Launcher-url] | Launch URLs |
-| [![Hero Icons][Hero Icons]][Hero Icons-url] | Icon set |
 
 ---
 
