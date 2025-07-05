@@ -27,8 +27,7 @@ Flutter Jobs Finder is a Flutter App to find jobs in your area.
 - You can search for jobs, filter them by position and save them to your favorites list.
 - You can also view the details of each job and apply for it.
 - Companies can also post jobs and view the list of applicants (working on it).
-- Backend is built with Django and MySQL.
-- The app is built with Flutter and Dart, MVC architecture with GetX state management.
+- The app is built with Flutter and Dart, MVC architecture with cubit state management.
 
 It's MVP (Minimum Viable Product) and it's still under development.
 
