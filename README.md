@@ -12,9 +12,9 @@
     <br />
     <a href="https://www.linkedin.com/posts/kareem-ezzat-21b99b220_flutter-firebase-hive-activity-7254872206717952000-IZPZ/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADes0HcB81YYjZc1O4o9F4iP8zaTQUA9eJ8/">View Demo</a>
     ·
-    <a href="kareemezzat1222@gmail.com">Report Bug</a>
+    <a href="mailto:kareemezzat1222@gmail.com?subject=Bug Report - JobScout App">Report Bug</a>
     ·
-    <a href="kareemezzat1222@gmail.com">Request Feature</a>
+    <a href="mailto:kareemezzat1222@gmail.com?subject=Feature Request - JobScout App">Request Feature</a>
   </p>
 </div>
 
